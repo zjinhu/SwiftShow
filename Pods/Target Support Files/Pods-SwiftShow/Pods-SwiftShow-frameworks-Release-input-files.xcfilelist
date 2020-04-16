@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-SwiftShow/Pods-SwiftShow-frameworks.sh
+${BUILT_PRODUCTS_DIR}/JHButton_Swift/JHButton_Swift.framework
+${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
+${BUILT_PRODUCTS_DIR}/SwiftBrick/SwiftBrick.framework
