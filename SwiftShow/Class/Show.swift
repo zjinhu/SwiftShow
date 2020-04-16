@@ -219,7 +219,7 @@ extension Show{
 extension Show{
     public typealias ConfigPop = ((_ config : ShowPopViewConfig) -> Void)
     
-    class func showPopView(contentView: UIView,
+    public class func showPopView(contentView: UIView,
                            config : ConfigPop? = nil) {
         
         getWindow().subviews.forEach { (view) in
@@ -241,7 +241,7 @@ extension Show{
         
     }
     
-    class func hidenPopView(_ complete : (() -> Void)? = nil ) {
+    public class func hidenPopView(_ complete : (() -> Void)? = nil ) {
         getWindow().subviews.forEach { (view) in
             if view.isKind(of: PopView.self){
                 let popView : PopView = view as! PopView
