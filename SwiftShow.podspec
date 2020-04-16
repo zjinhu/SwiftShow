@@ -17,6 +17,9 @@ Pod::Spec.new do |s|
   s.swift_versions     = ['5.2', '5.1', '5.0', '4.2']
   s.requires_arc = true
  
+  s.dependency 'JHButton_Swift'
+  s.dependency 'SnapKit'
+  
   s.source_files = 'SwiftShow/Class/**/*'  
  
 end
