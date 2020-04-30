@@ -1,35 +1,35 @@
 PODS:
-  - JHButton_Swift (1.0.0):
-    - SnapKit
   - SnapKit (5.0.1)
-  - SwiftBrick (0.6.0):
-    - SwiftBrick/BaseVC (= 0.6.0)
-    - SwiftBrick/Extensions (= 0.6.0)
-    - SwiftBrick/SnapKit (= 0.6.0)
-    - SwiftBrick/Utility (= 0.6.0)
-  - SwiftBrick/BaseVC (0.6.0):
+  - SwiftBrick (0.7.2):
+    - SwiftBrick/BaseVC (= 0.7.2)
+    - SwiftBrick/Extensions (= 0.7.2)
+    - SwiftBrick/Utility (= 0.7.2)
+    - SwiftBrick/ViewFactory (= 0.7.2)
+  - SwiftBrick/BaseVC (0.7.2):
     - SnapKit
     - SwiftBrick/Utility
-  - SwiftBrick/Extensions (0.6.0)
-  - SwiftBrick/SnapKit (0.6.0):
+  - SwiftBrick/Extensions (0.7.2)
+  - SwiftBrick/Utility (0.7.2)
+  - SwiftBrick/ViewFactory (0.7.2):
     - SnapKit
-  - SwiftBrick/Utility (0.6.0)
+  - SwiftButton (1.0.1):
+    - SnapKit
 
 DEPENDENCIES:
-  - JHButton_Swift
   - SwiftBrick
+  - SwiftButton
 
 SPEC REPOS:
   trunk:
-    - JHButton_Swift
     - SnapKit
     - SwiftBrick
+    - SwiftButton
 
 SPEC CHECKSUMS:
-  JHButton_Swift: 5fbcbd85ae3b16aef6519ed137b441a4ba27cb3e
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  SwiftBrick: 90fa0f903ae0925f725103589d482611e79208c4
+  SwiftBrick: 5b9b98b8ab36c204bcb8771366174713d133fa6f
+  SwiftButton: b7d87269b38d5a6a30c9493fcb45ce08d0b0b6fe
 
-PODFILE CHECKSUM: 79d5d09e7eea73f37ca79f0067c636cb325e9c49
+PODFILE CHECKSUM: 429c690a43b724e93e6ca5467b28ee74df337c6c
 
 COCOAPODS: 1.9.1

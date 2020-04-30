@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-import JHButton_Swift
+import SwiftButton
 
 public enum MaskType {
     case color
@@ -55,7 +55,7 @@ public class ShowToastConfig : NSObject{
     /// Toast文字字体颜色 默认白色
     public var textColor : UIColor = .white
     ///Toast图文混排样式 默认图片在左
-    public var imageType : JHImageButtonType = .imageButtonTypeLeft
+    public var imageType : ImageButtonType = .imageButtonTypeLeft
     ///Toast背景与内容之间的内边距 默认10
     public var padding : Float = 10
     ///Toast 在屏幕的位置（左右居中调节上下）默认100
@@ -99,7 +99,7 @@ public class ShowLoadingConfig : NSObject{
     ///图片动画时间 默认1.0
     public var animationTime : Double = 1.0
     ///loading图文混排样式  默认图片在上
-    public var imageType : JHImageButtonType = .imageButtonTypeTop
+    public var imageType : ImageButtonType = .imageButtonTypeTop
     ///loading背景与内容之间的上下边距 默认20
     public var verticalPadding : Float = 20
     ///loading背景与内容之间的左右边距 默认20
@@ -123,7 +123,7 @@ public class ShowAlertConfig : NSObject{
     ///alert圆角
     public var cornerRadius : CGFloat = 5
     ///alert图文混排样式
-    public var imageType : JHImageButtonType = .imageButtonTypeTop
+    public var imageType : ImageButtonType = .imageButtonTypeTop
     ///alert图文间距
     public var space : Float = 0
     ///alert标题字体

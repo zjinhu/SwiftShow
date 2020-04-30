@@ -1,6 +1,0 @@
-framework module JHButton_Swift {
-  umbrella header "JHButton_Swift-umbrella.h"
-
-  export *
-  module * { export * }
-}

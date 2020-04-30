@@ -7,15 +7,15 @@
 //
 
 import UIKit
-import JHButton_Swift
+import SwiftButton
 import SnapKit
 
 class LoadingView: UIView {
     
     private var loadingConfig : ShowLoadingConfig
     
-    private lazy var loadingView: JHButton = {
-        let loadingView = JHButton.init(loadingConfig.imageType, marginArr: [loadingConfig.space])
+    private lazy var loadingView: SwiftButton = {
+        let loadingView = SwiftButton.init(loadingConfig.imageType, marginArr: [loadingConfig.space])
         loadingView.backgroundColor = .clear
         loadingView.titleLabel.textColor = loadingConfig.textColor
         loadingView.titleLabel.font = loadingConfig.textFont

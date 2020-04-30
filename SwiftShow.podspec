@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftShow'
-  s.version          = '0.0.5'
+  s.version          = '0.1.0'
   s.summary          = '弹窗组件.'
  
   s.description      = <<-DESC
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.swift_versions     = ['5.2', '5.1', '5.0', '4.2']
   s.requires_arc = true
  
-  s.dependency 'JHButton_Swift'
+  s.dependency 'SwiftButton'
   s.dependency 'SnapKit'
   
   s.source_files = 'SwiftShow/Class/**/*'  

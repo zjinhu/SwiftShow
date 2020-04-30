@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double JHButton_SwiftVersionNumber;
-FOUNDATION_EXPORT const unsigned char JHButton_SwiftVersionString[];
+FOUNDATION_EXPORT double SwiftButtonVersionNumber;
+FOUNDATION_EXPORT const unsigned char SwiftButtonVersionString[];
 

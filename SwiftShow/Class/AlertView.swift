@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import JHButton_Swift
+import SwiftButton
 import SnapKit
 
 
@@ -23,8 +23,8 @@ class AlertView: UIView {
     var rightBlock : RightCallback?
     var dismissBlock : DismissCallback?
      
-    private lazy var titleView: JHButton = {
-        let titleView = JHButton.init(alertConfig.imageType, marginArr: [alertConfig.space])
+    private lazy var titleView: SwiftButton = {
+        let titleView = SwiftButton.init(alertConfig.imageType, marginArr: [alertConfig.space])
         titleView.backgroundColor = .clear
         titleView.titleLabel.textColor = alertConfig.titleColor
         titleView.titleLabel.font = alertConfig.titleFont

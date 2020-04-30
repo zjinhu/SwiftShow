@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-public enum JHImageButtonType {
+public enum ImageButtonType {
     ///按钮图片居左 文案居右 可以影响父布局的大小
     case imageButtonTypeLeft
     ///按钮图片居右 文案居左 可以影响父布局的大小
@@ -20,7 +20,7 @@ public enum JHImageButtonType {
     case imageButtonTypeBottom
 }
 
-public enum JHButtonState {
+public enum ButtonState {
     ///按钮状态 正常
     case buttonStateNormal
     ///按钮状态 高亮
@@ -32,10 +32,10 @@ public enum JHButtonState {
 }
 
 
-public class JHButton: UIControl {
+public class SwiftButton: UIControl {
     
     ///按钮的闭包回调
-    public typealias ActionBlock = (_ sender: JHButton) -> Void
+    public typealias ActionBlock = (_ sender: SwiftButton) -> Void
     ///title字符串
     public var title : String?{
         didSet{
@@ -55,11 +55,24 @@ public class JHButton: UIControl {
         }
     }
     ///内容文字视图
-    public var titleLabel = UILabel()
+    public lazy var titleLabel: UILabel = {
+        let titleLabel = UILabel()
+        titleLabel.textColor = .black
+        titleLabel.textAlignment = .center
+        titleLabel.font = UIFont.systemFont(ofSize: 15)
+        return titleLabel
+    }()
     ///图片视图
-    public var imageView = UIImageView()
+    public lazy var imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.setContentCompressionResistancePriority(.required, for: .horizontal)
+        return imageView
+    }()
     ///背景图片视图
-    public var backImageView = UIImageView()
+    public lazy var backImageView: UIImageView = {
+        let imageView = UIImageView()
+        return imageView
+    }()
     ///是否反转
     public var isNeedRotation : Bool = false{
         didSet{
@@ -95,7 +108,7 @@ public class JHButton: UIControl {
         }
     }
     ///当前按钮状态
-    public var currentState : JHButtonState = .buttonStateNormal
+    public var currentState : ButtonState = .buttonStateNormal
     
     //MARK: -- 以下内部参数
     ///默认间距
@@ -154,19 +167,19 @@ public class JHButton: UIControl {
     /**
      *  按钮类型
      */
-    private var buttonType : JHImageButtonType = .imageButtonTypeLeft
+    private var buttonType : ImageButtonType = .imageButtonTypeLeft
     
     private var actionBlock : ActionBlock?
     
 }
 
-extension JHButton{
+extension SwiftButton{
     
     /// 创建按钮
     /// - Parameters:
     ///   - type: 图文混排类型
     ///   - marginArr: 从左到右或者从上到下的间距数组
-    public convenience init(_ type : JHImageButtonType = .imageButtonTypeLeft, marginArr : [Float]? = [5]) {
+    public convenience init(_ type : ImageButtonType = .imageButtonTypeLeft, marginArr : [Float]? = [5]) {
         self.init()
         marginArray = marginArr
         buttonType = type
@@ -181,7 +194,7 @@ extension JHButton{
     }
     ///点击闭包
     @objc
-    func callActionBlock(_ sender: JHButton) {
+    func callActionBlock(_ sender: SwiftButton) {
         guard let action = actionBlock else {
             return
         }
@@ -199,30 +212,25 @@ extension JHButton{
         bottomOrRightView.isUserInteractionEnabled = false
         addSubview(bottomOrRightView)
         
-        titleLabel.textColor = .black
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.systemFont(ofSize: 15)
         titleLabel.text = title
         addSubview(titleLabel)
         
-        imageView.setContentCompressionResistancePriority(.required, for: .horizontal)
         imageView.image = image
         addSubview(imageView)
         
-        
         switch marginArray?.count {
         case 0:
-            marginMiddle = JHButton.imageButtonDefaultMargin
-            marginTopOrLeft = JHButton.imageButtonDefaultUnsetMargin
-            marginBottomOrRight = JHButton.imageButtonDefaultUnsetMargin
+            marginMiddle = SwiftButton.imageButtonDefaultMargin
+            marginTopOrLeft = SwiftButton.imageButtonDefaultUnsetMargin
+            marginBottomOrRight = SwiftButton.imageButtonDefaultUnsetMargin
         case 1:
             marginMiddle = marginArray?[0]
-            marginTopOrLeft = JHButton.imageButtonDefaultUnsetMargin
-            marginBottomOrRight = JHButton.imageButtonDefaultUnsetMargin
+            marginTopOrLeft = SwiftButton.imageButtonDefaultUnsetMargin
+            marginBottomOrRight = SwiftButton.imageButtonDefaultUnsetMargin
         case 2:
             marginTopOrLeft = marginArray?[0]
             marginMiddle = marginArray?[1]
-            marginBottomOrRight = JHButton.imageButtonDefaultUnsetMargin
+            marginBottomOrRight = SwiftButton.imageButtonDefaultUnsetMargin
         case 3:
             marginTopOrLeft = marginArray?[0]
             marginMiddle = marginArray?[1]
@@ -257,7 +265,7 @@ extension JHButton{
         topOrLeftView.snp.makeConstraints { (make) in
             make.top.left.right.equalToSuperview()
             make.bottom.equalTo(imageView.snp.top)
-            if marginTopOrLeft != JHButton.imageButtonDefaultUnsetMargin{
+            if marginTopOrLeft != SwiftButton.imageButtonDefaultUnsetMargin{
                 make.height.equalTo(marginTopOrLeft ?? 0)
             }
             if marginTopOrLeft == marginBottomOrRight{
@@ -278,7 +286,7 @@ extension JHButton{
         
         bottomOrRightView.snp.makeConstraints { (make) in
             make.left.bottom.right.equalToSuperview()
-            if marginBottomOrRight != JHButton.imageButtonDefaultUnsetMargin{
+            if marginBottomOrRight != SwiftButton.imageButtonDefaultUnsetMargin{
                 make.height.equalTo(marginBottomOrRight ?? 0)
             }
         }
@@ -295,7 +303,7 @@ extension JHButton{
         topOrLeftView.snp.makeConstraints { (make) in
             make.top.left.bottom.equalToSuperview()
             make.right.equalTo(imageView.snp.left)
-            if marginTopOrLeft != JHButton.imageButtonDefaultUnsetMargin{
+            if marginTopOrLeft != SwiftButton.imageButtonDefaultUnsetMargin{
                 make.width.equalTo(marginTopOrLeft ?? 0)
             }
             if marginTopOrLeft == marginBottomOrRight{
@@ -316,7 +324,7 @@ extension JHButton{
         
         bottomOrRightView.snp.makeConstraints { (make) in
             make.top.bottom.right.equalToSuperview()
-            if marginBottomOrRight != JHButton.imageButtonDefaultUnsetMargin{
+            if marginBottomOrRight != SwiftButton.imageButtonDefaultUnsetMargin{
                 make.width.equalTo(marginBottomOrRight ?? 0)
             }
         }
@@ -332,7 +340,7 @@ extension JHButton{
         topOrLeftView.snp.makeConstraints { (make) in
             make.top.left.right.equalToSuperview()
             make.bottom.equalTo(titleLabel.snp.top)
-            if marginTopOrLeft != JHButton.imageButtonDefaultUnsetMargin{
+            if marginTopOrLeft != SwiftButton.imageButtonDefaultUnsetMargin{
                 make.height.equalTo(marginTopOrLeft ?? 0)
             }
             if marginTopOrLeft == marginBottomOrRight{
@@ -353,7 +361,7 @@ extension JHButton{
         
         bottomOrRightView.snp.makeConstraints { (make) in
             make.left.bottom.right.equalToSuperview()
-            if marginBottomOrRight != JHButton.imageButtonDefaultUnsetMargin{
+            if marginBottomOrRight != SwiftButton.imageButtonDefaultUnsetMargin{
                 make.height.equalTo(marginBottomOrRight ?? 0)
             }
         }
@@ -370,7 +378,7 @@ extension JHButton{
         topOrLeftView.snp.makeConstraints { (make) in
             make.top.left.bottom.equalToSuperview()
             make.right.equalTo(titleLabel.snp.left)
-            if marginTopOrLeft != JHButton.imageButtonDefaultUnsetMargin{
+            if marginTopOrLeft != SwiftButton.imageButtonDefaultUnsetMargin{
                 make.width.equalTo(marginTopOrLeft ?? 0)
             }
             if marginTopOrLeft == marginBottomOrRight{
@@ -391,7 +399,7 @@ extension JHButton{
         
         bottomOrRightView.snp.makeConstraints { (make) in
             make.top.bottom.right.equalToSuperview()
-            if marginBottomOrRight != JHButton.imageButtonDefaultUnsetMargin{
+            if marginBottomOrRight != SwiftButton.imageButtonDefaultUnsetMargin{
                 make.width.equalTo(marginBottomOrRight ?? 0)
             }
         }

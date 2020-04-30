@@ -7,14 +7,14 @@
 //
 
 import UIKit
-import JHButton_Swift
+import SwiftButton
 import SnapKit
 class ToastView: UIView {
     
     private var toastConfig : ShowToastConfig
     
-    private lazy var toastView: JHButton = {
-        let toastView = JHButton.init(toastConfig.imageType, marginArr: [toastConfig.space])
+    private lazy var toastView: SwiftButton = {
+        let toastView = SwiftButton.init(toastConfig.imageType, marginArr: [toastConfig.space])
         toastView.backgroundColor = .clear
         toastView.titleLabel.textColor = toastConfig.textColor
         toastView.titleLabel.font = toastConfig.textFont
