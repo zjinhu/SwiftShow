@@ -73,24 +73,22 @@ echo "
 esac
 
 
-echo "
+echo "🎉  🎉  🎉  🎉  🎉  🎉  🎉  🎉  🎉  🎉  🎉  🎉
 
-🎉  🎉  🎉  🎉  🎉  🎉  🎉  🎉  🎉  🎉  🎉  🎉  
-
-"
+ "
 echo "是否发布pod到私有仓库？:
 "
 echo "(0) 不是
 "
 #查找文件
-  a=1
-  list=`ls ~/.cocoapods/repos`
-  for i in $list  
+  b=1
+  listRepo=`ls ~/.cocoapods/repos`
+  for i in $listRepo  
     do  
-    echo "($a) $i
+    echo "($b) $i
     "  
-    array[$a]=$i
-    a=$(($a+1)) 
+    arrayRepo[$b]=$i
+    b=$(($b+1)) 
   done  
 echo "
 🎉  🎉  🎉  🎉  🎉  🎉  🎉  🎉  🎉  🎉  🎉  🎉  
@@ -101,16 +99,17 @@ case $input in
   
     [1-99])
 
+     repo=${arrayRepo[$input]} 
     echo "
-🚀 已经选择Repo名称为：$input
+🚀 已经选择Repo名称为：$repo
     "
 
 echo "
 
-🚀 即将发布 V$user_tags 版本的 $podspec 到 $input
+🚀 即将发布 V$user_tags 版本的 $podspec 到 $repo 
 
 "
-    fastlane release_pod t:$user_tags p:$podspec r:$input
+    fastlane release_pod t:$user_tags p:$podspec r:$repo
     ;; 
 
     0)
