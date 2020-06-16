@@ -84,7 +84,7 @@ extension Show{
         guard let vc = currentViewController() else {
             return
         }
-        self.hiddenLoadingOnView(vc.view)
+        hiddenLoadingOnView(vc.view)
     }
     
     /// 在window中展示loading
@@ -99,7 +99,7 @@ extension Show{
     
     /// 隐藏window中loading
     public class func hiddenLoadingOnWindow() {
-        self.hiddenLoadingOnView(getWindow())
+        hiddenLoadingOnView(getWindow())
     }
     
     /// 在指定view中添加loading

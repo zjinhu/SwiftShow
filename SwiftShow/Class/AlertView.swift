@@ -81,10 +81,10 @@ class AlertView: UIView {
         switch alertConfig.maskType {
         case .effect:
             effectView.isHidden = false
-            self.backgroundColor = .clear
+            backgroundColor = .clear
         default:
             effectView.isHidden = true
-            self.backgroundColor = alertConfig.bgColor
+            backgroundColor = alertConfig.bgColor
         }
         
         let containerView = UIView.init() 

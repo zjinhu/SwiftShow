@@ -29,7 +29,7 @@ public enum PopViewShowType {
     case center
 }
 //MARK: -- Toast
-public class ShowToastConfig : NSObject{
+public class ShowToastConfig {
     ///执行动画时间 默认0.5
     public var animateDuration = 0.5
     ///Toast最大宽度  默认200
@@ -45,7 +45,7 @@ public class ShowToastConfig : NSObject{
     ///Toast字体  默认15
     public var textFont : UIFont = UIFont.systemFont(ofSize: 15)
     ///Toast背景颜色 默认黑色
-    public var bgColor : UIColor = .black
+    public var bgColor : UIColor = UIColor.bTwColor
     ///阴影颜色 默认clearcolor
     public var shadowColor : CGColor = UIColor.clear.cgColor
     ///阴影Opacity 默认0.5
@@ -53,7 +53,7 @@ public class ShowToastConfig : NSObject{
     ///阴影Radius 默认5
     public var shadowRadius : CGFloat = 5
     /// Toast文字字体颜色 默认白色
-    public var textColor : UIColor = .white
+    public var textColor : UIColor = UIColor.wTbColor
     ///Toast图文混排样式 默认图片在左
     public var imageType : ImageButtonType = .imageButtonTypeLeft
     ///Toast背景与内容之间的内边距 默认10
@@ -65,7 +65,7 @@ public class ShowToastConfig : NSObject{
 }
 
 //MARK: --Loading
-public class ShowLoadingConfig : NSObject{
+public class ShowLoadingConfig {
     /// 是否背景透传点击 默认false
     public var enableEvent: Bool = false
     ///背景蒙版 毛玻璃
@@ -77,11 +77,11 @@ public class ShowLoadingConfig : NSObject{
     ///圆角大小 默认5
     public var cornerRadius : CGFloat = 5
     ///加载框主体颜色 默认黑色
-    public var tintColor : UIColor = .black
+    public var tintColor : UIColor = UIColor.bTwColor
     ///文字字体大小 默认系统字体15
     public var textFont : UIFont = UIFont.systemFont(ofSize: 15)
     ///文字字体颜色 默认白色
-    public var textColor : UIColor = .white
+    public var textColor : UIColor = UIColor.wTbColor
     ///背景颜色 默认clear
     public var bgColor : UIColor = .clear
     ///默认蒙版类型 背景色
@@ -95,7 +95,7 @@ public class ShowLoadingConfig : NSObject{
     ///图片动画类型 所需要的图片数组
     public var imagesArray : [UIImage]?
     ///菊花颜色 不传递图片数组的时候默认使用菊花
-    public var activityColor : UIColor = .white
+    public var activityColor : UIColor = UIColor.wTbColor
     ///图片动画时间 默认1.0
     public var animationTime : Double = 1.0
     ///loading图文混排样式  默认图片在上
@@ -109,7 +109,7 @@ public class ShowLoadingConfig : NSObject{
 }
     
 //MARK: --Alert
-public class ShowAlertConfig : NSObject{
+public class ShowAlertConfig {
     ///背景蒙版 毛玻璃
     public var effectStyle = UIBlurEffect.Style.light
     ///执行动画时间
@@ -129,18 +129,18 @@ public class ShowAlertConfig : NSObject{
     ///alert标题字体
     public var titleFont : UIFont = UIFont.systemFont(ofSize: 18)
     /// alert标题字体颜色
-    public var titleColor : UIColor = .black
+    public var titleColor : UIColor = UIColor.bTwColor
     ///alert信息字体
     public var textFont : UIFont = UIFont.systemFont(ofSize: 14)
     /// alert信息字体颜色
-    public var textColor : UIColor = .black
+    public var textColor : UIColor = UIColor.bTwColor
     ///alert按钮字体
     public var buttonFont : UIFont = UIFont.systemFont(ofSize: 15)
     /// alert按钮字体颜色
-    public var leftColor : UIColor = .black
-    public var rightColor : UIColor = .black
+    public var leftColor : UIColor = UIColor.bTwColor
+    public var rightColor : UIColor = UIColor.bTwColor
     ///alert主体颜色 默认
-    public var tintColor : UIColor = .white
+    public var tintColor : UIColor = UIColor.wTbColor
     ///alert背景颜色
     public var bgColor : UIColor = UIColor.black.withAlphaComponent(0.5)
     ///alert分割线颜色
@@ -154,7 +154,7 @@ public class ShowAlertConfig : NSObject{
 }
 
 //MARK: --pop
-public class ShowPopViewConfig : NSObject{
+public class ShowPopViewConfig {
     ///背景蒙版 毛玻璃
     public var effectStyle = UIBlurEffect.Style.light
     ///点击其他地方是否消失 默认yes
@@ -171,4 +171,42 @@ public class ShowPopViewConfig : NSObject{
     public var isAnimate = true
     /// 弹出视图样式位置
     public var showAnimateType : PopViewShowType? = .center
+}
+
+
+extension UIColor {
+    
+    @available(iOS 13.0, *)
+    static let blackToWhiteColor = UIColor { (trainCollection) -> UIColor in
+        if trainCollection.userInterfaceStyle == .dark {
+            return UIColor.white
+        } else {
+            return UIColor.black
+        }
+    }
+
+    @available(iOS 13.0, *)
+    static let whiteToBlackColor = UIColor { (trainCollection) -> UIColor in
+        if trainCollection.userInterfaceStyle == .dark {
+            return UIColor.black
+        } else {
+            return UIColor.white
+        }
+    }
+
+    static var bTwColor: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor.blackToWhiteColor
+        }else{
+            return UIColor.black
+        }
+    }
+    
+    static var wTbColor: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor.whiteToBlackColor
+        }else{
+            return UIColor.white
+        }
+    }
 }

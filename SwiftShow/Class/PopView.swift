@@ -31,7 +31,7 @@ public class PopView: UIView {
         popViewConfig = config
         
         super.init(frame: UIScreen.main.bounds)
-        self.clipsToBounds = true
+        clipsToBounds = true
         
         contentVie = contentView
         contentSize = contentView.bounds.size
@@ -46,10 +46,10 @@ public class PopView: UIView {
         switch popViewConfig.maskType {
         case .effect:
             effectView.isHidden = false
-            self.backgroundColor = .clear
+            backgroundColor = .clear
         default:
             effectView.isHidden = true
-            self.backgroundColor = popViewConfig.bgColor
+            backgroundColor = popViewConfig.bgColor
         }
         
         addSubview(backCtl)
@@ -114,19 +114,19 @@ public class PopView: UIView {
         
         switch popViewConfig.showAnimateType {
         case .top:
-            self.contentVie?.snp.updateConstraints { (make) in
+            contentVie?.snp.updateConstraints { (make) in
                 make.top.equalTo(self.snp.top).offset(0)
             }
         case .left:
-            self.contentVie?.snp.updateConstraints { (make) in
+            contentVie?.snp.updateConstraints { (make) in
                 make.left.equalTo(self.snp.left).offset(0)
             }
         case .bottom:
-            self.contentVie?.snp.updateConstraints { (make) in
+            contentVie?.snp.updateConstraints { (make) in
                 make.bottom.equalTo(self.snp.bottom).offset(0)
             }
         case .right:
-            self.contentVie?.snp.updateConstraints { (make) in
+            contentVie?.snp.updateConstraints { (make) in
                 make.right.equalTo(self.snp.right).offset(0)
             }
         case .center:

@@ -47,10 +47,10 @@ class LoadingView: UIView {
         switch config.maskType {
         case .effect:
             effectView.isHidden = false
-            self.backgroundColor = .clear
+            backgroundColor = .clear
         default:
             effectView.isHidden = true
-            self.backgroundColor = config.bgColor
+            backgroundColor = config.bgColor
         }
         
         let containerView = UIView.init()
