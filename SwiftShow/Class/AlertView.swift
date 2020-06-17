@@ -65,7 +65,9 @@ class AlertView: UIView {
          message: String?  = nil,
          attributedMessage : NSAttributedString? = nil,
          leftBtnTitle: String? = nil,
+         leftBtnAttributedTitle: NSAttributedString? = nil,
          rightBtnTitle: String? = nil,
+         rightBtnAttributedTitle: NSAttributedString? = nil,
          config : ShowAlertConfig) {
         
         alertConfig = config
@@ -141,7 +143,11 @@ class AlertView: UIView {
             make.height.equalTo(1/UIScreen.main.scale)
         }
         
-        leftBtn.setTitle(leftBtnTitle, for: .normal)
+        if leftBtnAttributedTitle != nil {
+            leftBtn.setAttributedTitle(leftBtnAttributedTitle, for: .normal)
+        }else{
+            leftBtn.setTitle(leftBtnTitle, for: .normal)
+        }
         containerView.addSubview(leftBtn)
         leftBtn.snp.makeConstraints { (make) in
             make.top.equalTo(lineView.snp.bottom)
@@ -150,7 +156,11 @@ class AlertView: UIView {
             make.height.equalTo(alertConfig.buttonHeight)
         }
         
-        rightBtn.setTitle(rightBtnTitle, for: .normal)
+        if rightBtnAttributedTitle != nil {
+            rightBtn.setAttributedTitle(rightBtnAttributedTitle, for: .normal)
+        }else{
+            rightBtn.setTitle(rightBtnTitle, for: .normal)
+        }
         containerView.addSubview(rightBtn)
         rightBtn.snp.makeConstraints { (make) in
             make.top.equalTo(lineView.snp.bottom)

@@ -162,13 +162,29 @@ extension Show{
                   rightBlock: rightBlock)
     }
     
+    public class func showAttributedAlert(attributedTitle : NSAttributedString? = nil,
+                                          attributedMessage : NSAttributedString? = nil,
+                                          leftBtnAttributedTitle: NSAttributedString? = nil,
+                                          rightBtnAttributedTitle: NSAttributedString? = nil,
+                                          leftBlock: LeftCallBack? = nil,
+                                          rightBlock: RightCallback? = nil) {
+        showCustomAlert(attributedTitle: attributedTitle,
+                        attributedMessage: attributedMessage,
+                        leftBtnAttributedTitle: leftBtnAttributedTitle,
+                        rightBtnAttributedTitle: rightBtnAttributedTitle,
+                        leftBlock: leftBlock,
+                        rightBlock: rightBlock)
+    }
+    
     public class func showCustomAlert(title: String? = nil,
                          attributedTitle : NSAttributedString? = nil,
                          titleImage: UIImage? = nil,
                          message: String?  = nil,
                          attributedMessage : NSAttributedString? = nil,
                          leftBtnTitle: String? = nil,
+                         leftBtnAttributedTitle: NSAttributedString? = nil,
                          rightBtnTitle: String? = nil,
+                         rightBtnAttributedTitle: NSAttributedString? = nil,
                          leftBlock: LeftCallBack? = nil,
                          rightBlock: RightCallback? = nil,
                          config : ConfigAlert? = nil) {
@@ -186,7 +202,9 @@ extension Show{
                                        message: message,
                                        attributedMessage: attributedMessage,
                                        leftBtnTitle: leftBtnTitle,
+                                       leftBtnAttributedTitle: leftBtnAttributedTitle,
                                        rightBtnTitle: rightBtnTitle,
+                                       rightBtnAttributedTitle: rightBtnAttributedTitle,
                                        config: model)
         alertView.leftBlock = leftBlock
         alertView.rightBlock = rightBlock
