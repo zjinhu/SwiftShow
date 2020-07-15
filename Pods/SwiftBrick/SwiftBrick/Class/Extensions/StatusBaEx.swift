@@ -66,8 +66,8 @@ extension UIViewController {
     /// - Parameter hidden: 隐藏|显示状态栏
     func hideOrShowStatusBar(hidden: Bool = false) {
         
-        self.setHiddenStatusBar = hidden
-        self.setNeedsStatusBarAppearanceUpdate()
+        setHiddenStatusBar = hidden
+        setNeedsStatusBarAppearanceUpdate()
     }
     
     
@@ -75,8 +75,8 @@ extension UIViewController {
     /// - Parameter style: 信号栏样式
     func changeStatusBarStyle(style: UIStatusBarStyle = .default) {
         
-        self.setStyleStatusBar = style
-        self.setNeedsStatusBarAppearanceUpdate()
+        setStyleStatusBar = style
+        setNeedsStatusBarAppearanceUpdate()
     }
 }
 

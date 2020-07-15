@@ -82,8 +82,8 @@ public extension UIViewController {
     
 //    @_dynamicReplacement(for: viewWillAppear(_ : ))
     @objc func jh_viewWillAppear(_ animated: Bool) {
-        self.jh_viewWillAppear(animated)
-        guard let block = self.willAppearInjectBlock else {
+        jh_viewWillAppear(animated)
+        guard let block = willAppearInjectBlock else {
             return
         }
         block(self , animated)
@@ -141,20 +141,20 @@ public extension UINavigationController {
     }
 
     @objc func jh_pushViewController(_ viewController: UIViewController, animated: Bool) {
-        self.setupViewControllerBasedNavigationBarAppearanceIfNeeded(appearingViewController: viewController)
-        self.jh_pushViewController(viewController, animated: animated)
+        setupViewControllerBasedNavigationBarAppearanceIfNeeded(appearingViewController: viewController)
+        jh_pushViewController(viewController, animated: animated)
     }
 //
 //    @_dynamicReplacement(for: setViewControllers(_: animated:))
     @objc func jh_setViewControllers(_ viewControllers: [UIViewController], animated: Bool) {
         for  vc in viewControllers {
-            self.setupViewControllerBasedNavigationBarAppearanceIfNeeded(appearingViewController: vc)
+            setupViewControllerBasedNavigationBarAppearanceIfNeeded(appearingViewController: vc)
         }
-        self.jh_setViewControllers(viewControllers, animated: animated)
+        jh_setViewControllers(viewControllers, animated: animated)
     }
     
     func setupViewControllerBasedNavigationBarAppearanceIfNeeded(appearingViewController: UIViewController){
-        if self.viewControllerBasedNavigationBarAppearanceEnabled == false {
+        if viewControllerBasedNavigationBarAppearanceEnabled == false {
             return
         }
 
@@ -164,7 +164,7 @@ public extension UINavigationController {
         }
         
         // 因为不是所有的都是通过push的方式，把控制器压入stack中，也可能是"-setViewControllers:"的方式，所以需要对栈顶控制器做下判断并赋值。
-        guard let disappearingViewController = self.viewControllers.last, disappearingViewController.willAppearInjectBlock == nil else {
+        guard let disappearingViewController = viewControllers.last, disappearingViewController.willAppearInjectBlock == nil else {
             return
         }
         disappearingViewController.willAppearInjectBlock = { [weak self] (viewController: UIViewController, animated: Bool) in
