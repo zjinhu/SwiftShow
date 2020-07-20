@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftShow'
-  s.version          = '0.3.0'
+  s.version          = '0.3.1'
   s.summary          = '弹窗组件.'
  
   s.description      = <<-DESC
@@ -16,10 +16,19 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "11.0" 
   s.swift_versions     = ['5.2', '5.1', '5.0', '4.2']
   s.requires_arc = true
+
+  s.subspec 'Class' do |ss|
+      ss.source_files = 'SwiftShow/Class/**/*' 
  
-  s.dependency 'SwiftButton'
-  s.dependency 'SnapKit'
-  
-  s.source_files = 'SwiftShow/Class/**/*'  
+      ss.dependency 'SwiftButton'
+      ss.dependency 'SnapKit'
  
+    end
+
+  s.subspec 'Presentation' do |ss| 
+      ss.dependency 'SwiftShow/Presentation/**/*'
+      ss.dependency 'SwiftShow/Class'
+    end
+
+  s.default_subspec = 'Class'
 end

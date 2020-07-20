@@ -27,9 +27,9 @@ class ViewController: JHTableViewController{
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = JHTableViewCell.dequeueReusableCell(tableView: tableView)
-        cell?.textLabel?.text = self.mainDatas[indexPath.row] as? String
-        return cell ?? UITableViewCell.init()
+        let cell = tableView.dequeueReusableCell(JHTableViewCell.self)
+        cell.textLabel?.text = self.mainDatas[indexPath.row] as? String
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
