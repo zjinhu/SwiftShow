@@ -31,15 +31,15 @@ open class JHTableViewController: JHViewController ,UITableViewDelegate,UITableV
     }
     
     /// 子类继承时重写此方法可设置Table样式：self.tableViewStyleType =  .StyleGrouped，或者Init时候设置
-    open func configTableViewStyleType(){
+    open func setupTableViewStyleType(){
 //        tableViewStyleType = tableViewStyleType
     }
     
     // MARK: - 布局
     open override func viewDidLoad() {
         super.viewDidLoad()
-        
-        configTableViewStyleType()
+//        UITableViewDiffableDataSource
+        setupTableViewStyleType()
         
         switch tableViewStyleType {
         case .styleInsetGrouped:
