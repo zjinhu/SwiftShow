@@ -10,7 +10,7 @@ import UIKit
 //MARK: --Toast
 extension Show{
     public typealias ConfigToast = ((_ config : ShowToastConfig) -> Void)
-
+    
     /// 在屏幕中间展示toast
     /// - Parameters:
     ///   - text: 文案
@@ -23,7 +23,7 @@ extension Show{
         config?(model)
         toast(text: text, image: image, config: model)
     }
-
+    
     private class func toast(text: String, image: UIImage? = nil, config: ShowToastConfig){
         
         getWindow().subviews.forEach { (view) in
@@ -70,7 +70,7 @@ extension Show{
         guard let vc = currentViewController() else {
             return
         }
-
+        
         let model = ShowLoadingConfig()
         if let title = text , title.count > 0 {
             model.space = 10
@@ -141,7 +141,7 @@ extension Show{
             make.edges.equalTo(UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0))
         }
     }
-
+    
 }
 ////MARK: --Alert
 extension Show{
@@ -149,17 +149,17 @@ extension Show{
     public typealias ConfigAlert = ((_ config : ShowAlertConfig) -> Void)
     
     public class func showAlert(title: String? = nil,
-                         message: String?  = nil,
-                         leftBtnTitle: String? = nil,
-                         rightBtnTitle: String? = nil,
-                         leftBlock: LeftCallBack? = nil,
-                         rightBlock: RightCallback? = nil) {
+                                message: String?  = nil,
+                                leftBtnTitle: String? = nil,
+                                rightBtnTitle: String? = nil,
+                                leftBlock: LeftCallBack? = nil,
+                                rightBlock: RightCallback? = nil) {
         showCustomAlert(title: title,
-                  message: message,
-                  leftBtnTitle: leftBtnTitle,
-                  rightBtnTitle: rightBtnTitle,
-                  leftBlock: leftBlock,
-                  rightBlock: rightBlock)
+                        message: message,
+                        leftBtnTitle: leftBtnTitle,
+                        rightBtnTitle: rightBtnTitle,
+                        leftBlock: leftBlock,
+                        rightBlock: rightBlock)
     }
     
     public class func showAttributedAlert(attributedTitle : NSAttributedString? = nil,
@@ -177,17 +177,17 @@ extension Show{
     }
     
     public class func showCustomAlert(title: String? = nil,
-                         attributedTitle : NSAttributedString? = nil,
-                         titleImage: UIImage? = nil,
-                         message: String?  = nil,
-                         attributedMessage : NSAttributedString? = nil,
-                         leftBtnTitle: String? = nil,
-                         leftBtnAttributedTitle: NSAttributedString? = nil,
-                         rightBtnTitle: String? = nil,
-                         rightBtnAttributedTitle: NSAttributedString? = nil,
-                         leftBlock: LeftCallBack? = nil,
-                         rightBlock: RightCallback? = nil,
-                         config : ConfigAlert? = nil) {
+                                      attributedTitle : NSAttributedString? = nil,
+                                      titleImage: UIImage? = nil,
+                                      message: String?  = nil,
+                                      attributedMessage : NSAttributedString? = nil,
+                                      leftBtnTitle: String? = nil,
+                                      leftBtnAttributedTitle: NSAttributedString? = nil,
+                                      rightBtnTitle: String? = nil,
+                                      rightBtnAttributedTitle: NSAttributedString? = nil,
+                                      leftBlock: LeftCallBack? = nil,
+                                      rightBlock: RightCallback? = nil,
+                                      config : ConfigAlert? = nil) {
         hiddenAlert()
         
         let model = ShowAlertConfig()
@@ -238,7 +238,7 @@ extension Show{
     public typealias ConfigPop = ((_ config : ShowPopViewConfig) -> Void)
     
     public class func showPopView(contentView: UIView,
-                           config : ConfigPop? = nil) {
+                                  config : ConfigPop? = nil) {
         
         getWindow().subviews.forEach { (view) in
             if view.isKind(of: PopView.self){
@@ -277,9 +277,54 @@ extension Show{
     
 }
 
+//MARK: --DropDown
+extension Show{
+    
+    /// 弹出下拉视图,盖住Tabbar
+    /// - Parameters:
+    ///   - contentView: view
+    ///   - config: 配置
+    public class func showCoverTabbarView(contentView: UIView, config: ((_ config : ShowDropDownConfig) -> Void)? = nil) {
+        
+        getWindow().rootViewController?.view.subviews.forEach { (view) in
+            if view.isKind(of: PopView.self){
+                view.removeFromSuperview()
+            }
+        }
+        
+        let model = ShowDropDownConfig()
+        config?(model)
+        
+        let popView = DropDownView.init(contentView: contentView, config: model) {
+            hidenCoverTabbarView()
+        }
+        
+        getWindow().rootViewController?.view.addSubview(popView)
+        
+        popView.showAnimate()
+        
+    }
+    
+    public class func hidenCoverTabbarView(_ complete : (() -> Void)? = nil ) {
+        getWindow().rootViewController?.view.subviews.forEach { (view) in
+            if view.isKind(of: DropDownView.self){
+                let popView : DropDownView = view as! DropDownView
+                popView.hideAnimate {
+                    UIView.animate(withDuration: 0.1, animations: {
+                        view.alpha = 0
+                    }) { (_) in
+                        complete?()
+                        view.removeFromSuperview()
+                    }
+                }
+            }
+        }
+    }
+    
+}
 //MARK: -- 获取最上层视图
 public class Show{
-
+    
     private class func getWindow() -> UIWindow {
         var window = UIApplication.shared.keyWindow
         //是否为当前显示的window

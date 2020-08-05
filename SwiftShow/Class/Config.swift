@@ -173,6 +173,25 @@ public class ShowPopViewConfig {
     public var showAnimateType : PopViewShowType? = .center
 }
 
+//MARK: --pop
+public class ShowDropDownConfig {
+    ///背景蒙版 毛玻璃
+    public var effectStyle = UIBlurEffect.Style.light
+    ///点击其他地方是否消失 默认yes
+    public var clickOutHidden = true
+    ///默认蒙版类型
+    public var maskType : MaskType = .color
+    ///背景颜色 默认蒙版
+    public var bgColor : UIColor = UIColor.black.withAlphaComponent(0.3)
+    ///执行动画时间
+    public var animateDuration = 0.3
+    ///动画是否弹性
+    public var animateDamping = true
+    ///动画是否弹性
+    public var isAnimate = true
+    /// 弹出视图位置
+    public var fromY : CGFloat = 88
+}
 
 extension UIColor {
     

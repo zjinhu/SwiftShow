@@ -22,7 +22,7 @@ class ViewController: JHTableViewController{
         }
         
         self.title = "Show示例"
-        self.mainDatas = ["toast中间","toast中间带图片","toast下边","toast上边","toast自定义配置","loading不支持触摸透传","loading+文字不支持触摸透传","loading自定义配置","alert","alert自定义配置","popview","popview自定义配置"]
+        self.mainDatas = ["toast中间","toast中间带图片","toast下边","toast上边","toast自定义配置","loading不支持触摸透传","loading+文字不支持触摸透传","loading自定义配置","alert","alert自定义配置","popview","popview自定义配置","dropdown"]
         
     }
     
@@ -42,11 +42,11 @@ class ViewController: JHTableViewController{
             Show.showToast("toast", image: UIImage.init(named: "share_haoyou_btn")) { (config) in
                 config.offSetType = .bottom
                 config.offSet = 10
-                 //等等
-             }
+                //等等
+            }
         case 3:
             Show.showToast("toast", image: UIImage.init(named: "share_haoyou_btn")) { (config) in
-               config.offSetType = .top
+                config.offSetType = .top
                 config.offSet = 10
                 config.imageType = .imageButtonTypeBottom
                 //等等
@@ -62,12 +62,12 @@ class ViewController: JHTableViewController{
         case 5:
             Show.showLoading()
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-               Show.hiddenLoading()
+                Show.hiddenLoading()
             }
         case 6:
             Show.showLoading("loading...")
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-               Show.hiddenLoading()
+                Show.hiddenLoading()
             }
         case 7:
             Show.showLoading("触摸透传") { (config) in
@@ -93,14 +93,14 @@ class ViewController: JHTableViewController{
                 Show.showToast("点击done")
                 Show.hiddenAlert()
             }) { (config) in
-//                config.tintColor = .purple
+                //                config.tintColor = .purple
                 config.shadowColor = UIColor.red.cgColor
                 config.maskType = .effect
             }
         case 10:
             let content = UIImageView.init(frame: CGRect.init(x: 300, y: 100, width: 200, height: 200))
             content.image = UIImage.init(named: "timg")
-//            content.backgroundColor = .red
+            //            content.backgroundColor = .red
             Show.showPopView(contentView: content)
         case 11:
             let content = UIButton.init(frame: CGRect.init(x: 300, y: 100, width: 200, height: 200))
@@ -110,26 +110,35 @@ class ViewController: JHTableViewController{
                 config.showAnimateType = .bottom
                 config.clickOutHidden = false
             }
+        case 12:
+            let content = UIButton.init(frame: CGRect.init(x: 300, y: 100, width: 200, height: 200))
+            content.setImage(UIImage.init(named: "timg"), for: .normal)
+            content.addTarget(self, action: #selector(hideClick), for: .touchUpInside)
+            Show.showCoverTabbarView(contentView: content)
         default:
             print("1")
         }
     }
-
+    
     @objc
     func hideClick() {
         Show.hidenPopView {
             print("收起完成")
         }
+        
+        Show.hidenCoverTabbarView {
+            print("asdasdasdasd")
+        }
     }
     
     func getImages() -> [UIImage] {
         var loadingImages = [UIImage]()
- 
-            for index in 0...15 {
-                if let image = UIImage.init(named: "icon_kangaroo_global_loading_\(index)") {
-                    loadingImages.append(image)
-                }
+        
+        for index in 0...15 {
+            if let image = UIImage.init(named: "icon_kangaroo_global_loading_\(index)") {
+                loadingImages.append(image)
             }
+        }
         return loadingImages
     }
 }

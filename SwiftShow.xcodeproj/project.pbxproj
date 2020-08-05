@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		390E616542220F9678A47E0A /* Pods_SwiftShow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 203AE3449E482FF178CFB7D4 /* Pods_SwiftShow.framework */; };
+		812E677E24DA5E0A0077E785 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812E677D24DA5E0A0077E785 /* DropDownView.swift */; };
 		816B1CF924C56C750049DFAE /* PresentationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B1CEB24C56C750049DFAE /* PresentationAnimation.swift */; };
 		816B1CFB24C56C750049DFAE /* CrossZoomAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B1CED24C56C750049DFAE /* CrossZoomAnimation.swift */; };
 		816B1CFC24C56C750049DFAE /* CrossDissolveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B1CEE24C56C750049DFAE /* CrossDissolveAnimation.swift */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		203AE3449E482FF178CFB7D4 /* Pods_SwiftShow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftShow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43D2D768D42F5500D7D34E2F /* Pods-SwiftShow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftShow.debug.xcconfig"; path = "Target Support Files/Pods-SwiftShow/Pods-SwiftShow.debug.xcconfig"; sourceTree = "<group>"; };
+		812E677D24DA5E0A0077E785 /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		816B1CEB24C56C750049DFAE /* PresentationAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationAnimation.swift; sourceTree = "<group>"; };
 		816B1CED24C56C750049DFAE /* CrossZoomAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossZoomAnimation.swift; sourceTree = "<group>"; };
 		816B1CEE24C56C750049DFAE /* CrossDissolveAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossDissolveAnimation.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				81E1470E23EA61A100011CDB /* LoadingView.swift */,
 				81E1471723F13FA400011CDB /* AlertView.swift */,
 				81E1470C23EA61A100011CDB /* PopView.swift */,
+				812E677D24DA5E0A0077E785 /* DropDownView.swift */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				81F9C0262447F90200DA08E6 /* Config.swift in Sources */,
 				81E1471823F13FA400011CDB /* AlertView.swift in Sources */,
 				816B1CF924C56C750049DFAE /* PresentationAnimation.swift in Sources */,
+				812E677E24DA5E0A0077E785 /* DropDownView.swift in Sources */,
 				816B1CFC24C56C750049DFAE /* CrossDissolveAnimation.swift in Sources */,
 				816B1D0224C56C750049DFAE /* PresentationEnums.swift in Sources */,
 				81E1471023EA61A100011CDB /* Show.swift in Sources */,
