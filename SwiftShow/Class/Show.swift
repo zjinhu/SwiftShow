@@ -237,6 +237,10 @@ extension Show{
 extension Show{
     public typealias ConfigPop = ((_ config : ShowPopViewConfig) -> Void)
     
+    /// 弹出view
+    /// - Parameters:
+    ///   - contentView: 被弹出的view
+    ///   - config: 配置信息
     public class func showPopView(contentView: UIView,
                                   config : ConfigPop? = nil) {
         
