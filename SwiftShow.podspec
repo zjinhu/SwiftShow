@@ -25,11 +25,9 @@ Pod::Spec.new do |s|
  
     end
 
-  s.subspec 'Presentation' do |ss| 
-      ss.source_files = 'SwiftShow/Presentation/**/*'
-
-      ss.dependency 'SwiftShow/Class'
-    end
-
-  s.default_subspec = 'Class'
+  #s.subspec 'Presentation' do |ss| 
+  #    ss.source_files = 'SwiftShow/Presentation/**/*'
+  #    ss.dependency 'SwiftShow/Class'
+  #  end
+  #s.default_subspec = 'Class'
 end

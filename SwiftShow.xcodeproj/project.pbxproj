@@ -134,7 +134,6 @@
 		81E146F423EA60A900011CDB /* SwiftShow */ = {
 			isa = PBXGroup;
 			children = (
-				816B1CE924C56C3A0049DFAE /* Presentation */,
 				81E1470923EA618100011CDB /* Class */,
 				81E146F523EA60A900011CDB /* AppDelegate.swift */,
 				81E146F723EA60A900011CDB /* SceneDelegate.swift */,
@@ -150,6 +149,7 @@
 		81E1470923EA618100011CDB /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				816B1CE924C56C3A0049DFAE /* Presentation */,
 				81E1470A23EA61A100011CDB /* Show.swift */,
 				81F9C0252447F90200DA08E6 /* Config.swift */,
 				81E1470B23EA61A100011CDB /* ToastView.swift */,
