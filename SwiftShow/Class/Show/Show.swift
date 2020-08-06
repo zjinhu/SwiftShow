@@ -291,7 +291,7 @@ extension Show{
     public class func showCoverTabbarView(contentView: UIView, config: ((_ config : ShowDropDownConfig) -> Void)? = nil) {
         
         getWindow().rootViewController?.view.subviews.forEach { (view) in
-            if view.isKind(of: PopView.self){
+            if view.isKind(of: DropDownView.self){
                 view.removeFromSuperview()
             }
         }
