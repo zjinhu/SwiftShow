@@ -289,24 +289,30 @@ extension Show{
     ///   - contentView: view
     ///   - config: 配置
     public class func showCoverTabbarView(contentView: UIView, config: ((_ config : ShowDropDownConfig) -> Void)? = nil) {
+
+        if !isHaveCoverTabbarView() {
+            let model = ShowDropDownConfig()
+            config?(model)
+            
+            let popView = DropDownView.init(contentView: contentView, config: model) {
+                hidenCoverTabbarView()
+            }
+            
+            getWindow().rootViewController?.view.addSubview(popView)
+            
+            popView.showAnimate()
+        }
         
+    }
+    
+    public class func isHaveCoverTabbarView() -> Bool{
+        var isHave = false
         getWindow().rootViewController?.view.subviews.forEach { (view) in
             if view.isKind(of: DropDownView.self){
-                view.removeFromSuperview()
+                isHave = true
             }
         }
-        
-        let model = ShowDropDownConfig()
-        config?(model)
-        
-        let popView = DropDownView.init(contentView: contentView, config: model) {
-            hidenCoverTabbarView()
-        }
-        
-        getWindow().rootViewController?.view.addSubview(popView)
-        
-        popView.showAnimate()
-        
+        return isHave
     }
     
     public class func hidenCoverTabbarView(_ complete : (() -> Void)? = nil ) {
