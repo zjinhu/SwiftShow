@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		390E616542220F9678A47E0A /* Pods_SwiftShow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 203AE3449E482FF178CFB7D4 /* Pods_SwiftShow.framework */; };
-		812E677E24DA5E0A0077E785 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812E677D24DA5E0A0077E785 /* DropDownView.swift */; };
 		816B1CF924C56C750049DFAE /* PresentationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B1CEB24C56C750049DFAE /* PresentationAnimation.swift */; };
 		816B1CFB24C56C750049DFAE /* CrossZoomAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B1CED24C56C750049DFAE /* CrossZoomAnimation.swift */; };
 		816B1CFC24C56C750049DFAE /* CrossDissolveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B1CEE24C56C750049DFAE /* CrossDissolveAnimation.swift */; };
@@ -16,24 +15,25 @@
 		816B1D0224C56C750049DFAE /* PresentationEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B1CF424C56C750049DFAE /* PresentationEnums.swift */; };
 		816B1D0424C56C750049DFAE /* UIViewController+Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B1CF624C56C750049DFAE /* UIViewController+Presentation.swift */; };
 		816B1D0624C56C750049DFAE /* PresentedViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B1CF824C56C750049DFAE /* PresentedViewType.swift */; };
+		8171995424EBB3EB00C04D4F /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8171994D24EBB3EB00C04D4F /* DropDownView.swift */; };
+		8171995524EBB3EB00C04D4F /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8171994E24EBB3EB00C04D4F /* ToastView.swift */; };
+		8171995624EBB3EB00C04D4F /* PopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8171994F24EBB3EB00C04D4F /* PopView.swift */; };
+		8171995724EBB3EB00C04D4F /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8171995024EBB3EB00C04D4F /* Config.swift */; };
+		8171995824EBB3EB00C04D4F /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8171995124EBB3EB00C04D4F /* AlertView.swift */; };
+		8171995924EBB3EB00C04D4F /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8171995224EBB3EB00C04D4F /* Show.swift */; };
+		8171995A24EBB3EB00C04D4F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8171995324EBB3EB00C04D4F /* LoadingView.swift */; };
+		8171995C24EBC90500C04D4F /* LViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8171995B24EBC90500C04D4F /* LViewController.swift */; };
 		81E146F623EA60A900011CDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E146F523EA60A900011CDB /* AppDelegate.swift */; };
 		81E146F823EA60A900011CDB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E146F723EA60A900011CDB /* SceneDelegate.swift */; };
 		81E146FA23EA60A900011CDB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E146F923EA60A900011CDB /* ViewController.swift */; };
 		81E146FD23EA60A900011CDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81E146FB23EA60A900011CDB /* Main.storyboard */; };
 		81E146FF23EA60AD00011CDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81E146FE23EA60AD00011CDB /* Assets.xcassets */; };
 		81E1470223EA60AD00011CDB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81E1470023EA60AD00011CDB /* LaunchScreen.storyboard */; };
-		81E1471023EA61A100011CDB /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E1470A23EA61A100011CDB /* Show.swift */; };
-		81E1471123EA61A100011CDB /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E1470B23EA61A100011CDB /* ToastView.swift */; };
-		81E1471223EA61A100011CDB /* PopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E1470C23EA61A100011CDB /* PopView.swift */; };
-		81E1471423EA61A100011CDB /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E1470E23EA61A100011CDB /* LoadingView.swift */; };
-		81E1471823F13FA400011CDB /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E1471723F13FA400011CDB /* AlertView.swift */; };
-		81F9C0262447F90200DA08E6 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F9C0252447F90200DA08E6 /* Config.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		203AE3449E482FF178CFB7D4 /* Pods_SwiftShow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftShow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43D2D768D42F5500D7D34E2F /* Pods-SwiftShow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftShow.debug.xcconfig"; path = "Target Support Files/Pods-SwiftShow/Pods-SwiftShow.debug.xcconfig"; sourceTree = "<group>"; };
-		812E677D24DA5E0A0077E785 /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		816B1CEB24C56C750049DFAE /* PresentationAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationAnimation.swift; sourceTree = "<group>"; };
 		816B1CED24C56C750049DFAE /* CrossZoomAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossZoomAnimation.swift; sourceTree = "<group>"; };
 		816B1CEE24C56C750049DFAE /* CrossDissolveAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossDissolveAnimation.swift; sourceTree = "<group>"; };
@@ -41,6 +41,14 @@
 		816B1CF424C56C750049DFAE /* PresentationEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationEnums.swift; sourceTree = "<group>"; };
 		816B1CF624C56C750049DFAE /* UIViewController+Presentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Presentation.swift"; sourceTree = "<group>"; };
 		816B1CF824C56C750049DFAE /* PresentedViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentedViewType.swift; sourceTree = "<group>"; };
+		8171994D24EBB3EB00C04D4F /* DropDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
+		8171994E24EBB3EB00C04D4F /* ToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		8171994F24EBB3EB00C04D4F /* PopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopView.swift; sourceTree = "<group>"; };
+		8171995024EBB3EB00C04D4F /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		8171995124EBB3EB00C04D4F /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		8171995224EBB3EB00C04D4F /* Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
+		8171995324EBB3EB00C04D4F /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		8171995B24EBC90500C04D4F /* LViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LViewController.swift; sourceTree = "<group>"; };
 		81E146F223EA60A900011CDB /* SwiftShow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftShow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81E146F523EA60A900011CDB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81E146F723EA60A900011CDB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,12 +57,6 @@
 		81E146FE23EA60AD00011CDB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		81E1470123EA60AD00011CDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		81E1470323EA60AD00011CDB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		81E1470A23EA61A100011CDB /* Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
-		81E1470B23EA61A100011CDB /* ToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
-		81E1470C23EA61A100011CDB /* PopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopView.swift; sourceTree = "<group>"; };
-		81E1470E23EA61A100011CDB /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		81E1471723F13FA400011CDB /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
-		81F9C0252447F90200DA08E6 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		931E0F869142200241A76A04 /* Pods-SwiftDialog.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDialog.release.xcconfig"; path = "Target Support Files/Pods-SwiftDialog/Pods-SwiftDialog.release.xcconfig"; sourceTree = "<group>"; };
 		A601751F395990634DB11AF2 /* Pods-SwiftDialog.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftDialog.debug.xcconfig"; path = "Target Support Files/Pods-SwiftDialog/Pods-SwiftDialog.debug.xcconfig"; sourceTree = "<group>"; };
 		F77A17946B595C589C8ED85C /* Pods-SwiftShow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftShow.release.xcconfig"; path = "Target Support Files/Pods-SwiftShow/Pods-SwiftShow.release.xcconfig"; sourceTree = "<group>"; };
@@ -113,6 +115,20 @@
 			path = Animation;
 			sourceTree = "<group>";
 		};
+		8171994C24EBB3EB00C04D4F /* Show */ = {
+			isa = PBXGroup;
+			children = (
+				8171994D24EBB3EB00C04D4F /* DropDownView.swift */,
+				8171994E24EBB3EB00C04D4F /* ToastView.swift */,
+				8171994F24EBB3EB00C04D4F /* PopView.swift */,
+				8171995024EBB3EB00C04D4F /* Config.swift */,
+				8171995124EBB3EB00C04D4F /* AlertView.swift */,
+				8171995224EBB3EB00C04D4F /* Show.swift */,
+				8171995324EBB3EB00C04D4F /* LoadingView.swift */,
+			);
+			path = Show;
+			sourceTree = "<group>";
+		};
 		81E146E923EA60A900011CDB = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +154,7 @@
 				81E146F523EA60A900011CDB /* AppDelegate.swift */,
 				81E146F723EA60A900011CDB /* SceneDelegate.swift */,
 				81E146F923EA60A900011CDB /* ViewController.swift */,
+				8171995B24EBC90500C04D4F /* LViewController.swift */,
 				81E146FB23EA60A900011CDB /* Main.storyboard */,
 				81E146FE23EA60AD00011CDB /* Assets.xcassets */,
 				81E1470023EA60AD00011CDB /* LaunchScreen.storyboard */,
@@ -149,14 +166,8 @@
 		81E1470923EA618100011CDB /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				8171994C24EBB3EB00C04D4F /* Show */,
 				816B1CE924C56C3A0049DFAE /* Presentation */,
-				81E1470A23EA61A100011CDB /* Show.swift */,
-				81F9C0252447F90200DA08E6 /* Config.swift */,
-				81E1470B23EA61A100011CDB /* ToastView.swift */,
-				81E1470E23EA61A100011CDB /* LoadingView.swift */,
-				81E1471723F13FA400011CDB /* AlertView.swift */,
-				81E1470C23EA61A100011CDB /* PopView.swift */,
-				812E677D24DA5E0A0077E785 /* DropDownView.swift */,
 			);
 			path = Class;
 			sourceTree = "<group>";
@@ -276,22 +287,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8171995424EBB3EB00C04D4F /* DropDownView.swift in Sources */,
+				8171995C24EBC90500C04D4F /* LViewController.swift in Sources */,
 				81E146FA23EA60A900011CDB /* ViewController.swift in Sources */,
 				81E146F623EA60A900011CDB /* AppDelegate.swift in Sources */,
+				8171995724EBB3EB00C04D4F /* Config.swift in Sources */,
+				8171995A24EBB3EB00C04D4F /* LoadingView.swift in Sources */,
 				816B1CFB24C56C750049DFAE /* CrossZoomAnimation.swift in Sources */,
-				81F9C0262447F90200DA08E6 /* Config.swift in Sources */,
-				81E1471823F13FA400011CDB /* AlertView.swift in Sources */,
+				8171995824EBB3EB00C04D4F /* AlertView.swift in Sources */,
+				8171995924EBB3EB00C04D4F /* Show.swift in Sources */,
+				8171995524EBB3EB00C04D4F /* ToastView.swift in Sources */,
 				816B1CF924C56C750049DFAE /* PresentationAnimation.swift in Sources */,
-				812E677E24DA5E0A0077E785 /* DropDownView.swift in Sources */,
 				816B1CFC24C56C750049DFAE /* CrossDissolveAnimation.swift in Sources */,
+				8171995624EBB3EB00C04D4F /* PopView.swift in Sources */,
 				816B1D0224C56C750049DFAE /* PresentationEnums.swift in Sources */,
-				81E1471023EA61A100011CDB /* Show.swift in Sources */,
 				81E146F823EA60A900011CDB /* SceneDelegate.swift in Sources */,
 				816B1D0424C56C750049DFAE /* UIViewController+Presentation.swift in Sources */,
 				816B1D0624C56C750049DFAE /* PresentedViewType.swift in Sources */,
-				81E1471423EA61A100011CDB /* LoadingView.swift in Sources */,
-				81E1471223EA61A100011CDB /* PopView.swift in Sources */,
-				81E1471123EA61A100011CDB /* ToastView.swift in Sources */,
 				816B1CFE24C56C750049DFAE /* PresentationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
