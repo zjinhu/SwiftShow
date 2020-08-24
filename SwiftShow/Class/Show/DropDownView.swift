@@ -21,10 +21,10 @@ class DropDownView: UIView {
         return backCtl
     }()
     
-    typealias HiddenDropDown = () -> Void
-    private var hiddenDrop : HiddenDropDown?
+    typealias CallBack = () -> Void
+    private var hiddenDrop : CallBack?
     
-    init(contentView: UIView, config : ShowDropDownConfig, hiden : HiddenDropDown? = nil) {
+    init(contentView: UIView, config : ShowDropDownConfig, hiden : CallBack? = nil) {
         dropDownConfig = config
         let frame = CGRect.init(x: 0, y: config.fromY, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - config.fromY)
         super.init(frame: frame)
@@ -73,7 +73,7 @@ class DropDownView: UIView {
         }
     }
     
-    func showAnimate(){
+    func showAnimate(_ block: CallBack?){
         
         contentVie?.snp.updateConstraints { (make) in
             make.top.equalTo(self.snp.top).offset(0)
@@ -83,16 +83,19 @@ class DropDownView: UIView {
             UIView.animate(withDuration: dropDownConfig.animateDuration, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: [], animations: {
                 self.layoutIfNeeded()
             }) { (finished) in
-                
+                block?()
             }
         }else{
             UIView.animate(withDuration: dropDownConfig.animateDuration) {
                 self.layoutIfNeeded()
+            } completion: { (finished) in
+                block?()
             }
+
         }
     }
     
-    func hideAnimate(_ block: HiddenDropDown?){
+    func hideAnimate(_ block: CallBack?){
         
         contentVie?.snp.updateConstraints { (make) in
             make.top.equalTo(self.snp.top).offset( -contentSize.height)

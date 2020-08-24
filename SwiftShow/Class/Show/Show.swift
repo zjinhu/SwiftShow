@@ -242,13 +242,20 @@ extension Show{
     ///   - contentView: 被弹出的view
     ///   - config: 配置信息
     public class func showPopView(contentView: UIView,
-                                  config : ConfigPop? = nil) {
+                                  config : ConfigPop? = nil,
+                                  showClosure: CallBack? = nil,
+                                  hideClosure: CallBack? = nil) {
+        
+
         
         getWindow().subviews.forEach { (view) in
             if view.isKind(of: PopView.self){
                 view.removeFromSuperview()
             }
         }
+        
+        showPopCallBack = showClosure
+        hidePopCallBack = hideClosure
         
         let model = ShowPopViewConfig()
         config?(model)
@@ -260,7 +267,8 @@ extension Show{
         getWindow().addSubview(popView)
         
         popView.showAnimate()
-        
+     
+        showPopCallBack?()
     }
     
     public class func hidenPopView(_ complete : (() -> Void)? = nil ) {
@@ -273,6 +281,7 @@ extension Show{
                     }) { (_) in
                         complete?()
                         view.removeFromSuperview()
+                        hidePopCallBack?()
                     }
                 }
             }
@@ -288,9 +297,21 @@ extension Show{
     /// - Parameters:
     ///   - contentView: view
     ///   - config: 配置
-    public class func showCoverTabbarView(contentView: UIView, config: ((_ config : ShowDropDownConfig) -> Void)? = nil) {
+    public class func showCoverTabbarView(contentView: UIView,
+                                          config: ((_ config : ShowDropDownConfig) -> Void)? = nil,
+                                          showClosure: CallBack? = nil,
+                                          hideClosure: CallBack? = nil,
+                                          willShowClosure: CallBack? = nil,
+                                          willHideClosure: CallBack? = nil) {
 
         if !isHaveCoverTabbarView() {
+            
+            showCoverCallBack = showClosure
+            hideCoverCallBack = hideClosure
+            willShowCoverCallBack = willShowClosure
+            willHideCoverCallBack = willHideClosure
+            
+            willShowCoverCallBack?()
             let model = ShowDropDownConfig()
             config?(model)
             
@@ -300,7 +321,10 @@ extension Show{
             
             getWindow().rootViewController?.view.addSubview(popView)
             
-            popView.showAnimate()
+            popView.showAnimate {
+                showCoverCallBack?()
+            }
+            
         }
         
     }
@@ -319,12 +343,14 @@ extension Show{
         getWindow().rootViewController?.view.subviews.forEach { (view) in
             if view.isKind(of: DropDownView.self){
                 let popView : DropDownView = view as! DropDownView
+                willHideCoverCallBack?()
                 popView.hideAnimate {
                     UIView.animate(withDuration: 0.1, animations: {
                         view.alpha = 0
                     }) { (_) in
                         complete?()
                         view.removeFromSuperview()
+                        hideCoverCallBack?()
                     }
                 }
             }
@@ -335,6 +361,16 @@ extension Show{
 
 //MARK: -- 获取最上层视图
 public class Show{
+    
+    public typealias CallBack = () -> Void
+    
+    private static var showCoverCallBack : CallBack?
+    private static var hideCoverCallBack : CallBack?
+    private static var willShowCoverCallBack : CallBack?
+    private static var willHideCoverCallBack : CallBack?
+    
+    private static var showPopCallBack : CallBack?
+    private static var hidePopCallBack : CallBack?
     
     private class func getWindow() -> UIWindow {
         var window = UIApplication.shared.keyWindow

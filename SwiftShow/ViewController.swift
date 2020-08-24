@@ -114,7 +114,16 @@ class ViewController: JHTableViewController{
             let content = UIButton.init(frame: CGRect.init(x: 300, y: 100, width: 200, height: 200))
             content.setImage(UIImage.init(named: "timg"), for: .normal)
             content.addTarget(self, action: #selector(hideClick), for: .touchUpInside)
-            Show.showCoverTabbarView(contentView: content)
+            Show.showCoverTabbarView(contentView: content) {_ in
+                print("已经展示")
+            } hideClosure: {
+                print("已经隐藏")
+            } willShowClosure: {
+                print("将要展示")
+            } willHideClosure: {
+                print("将要隐藏")
+            }
+
         default:
             print("1")
         }
