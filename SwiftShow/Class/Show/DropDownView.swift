@@ -86,9 +86,9 @@ class DropDownView: UIView {
                 block?()
             }
         }else{
-            UIView.animate(withDuration: dropDownConfig.animateDuration) {
+            UIView.animate(withDuration: dropDownConfig.animateDuration, animations: {
                 self.layoutIfNeeded()
-            } completion: { (finished) in
+            }) { (finished) in
                 block?()
             }
 
