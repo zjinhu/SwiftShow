@@ -28,6 +28,11 @@ open class JHViewController: UIViewController {
         return rightBarButton
     }()
     
+    /// 移除左侧导航栏返回按钮默认的返回事件
+    public func removeLeftBarButtonTarget(){
+        leftBarButton.removeTarget(self, action: #selector(goBack), for: .touchUpInside)
+    }
+    
     // MARK: - 布局
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +45,6 @@ open class JHViewController: UIViewController {
         if let viewControllers: [UIViewController] = navigationController?.viewControllers , viewControllers.count > 1{
             addDefaultBackBarButton()
         }
-        
-        // Do any additional setup after loading the view.
     }
     
     // MARK: - Navigation 关闭手势返回
@@ -110,8 +113,8 @@ open class JHViewController: UIViewController {
     ///   - normalColor: normalColor
     ///   - highlightColor: highlightColor
     public func addLeftBarButton(text: String,
-                                 normalColor: UIColor? = UIColor.BaseUI.textTitleColor,
-                                 highlightColor: UIColor? = UIColor.BaseUI.textDesColor){
+                                 normalColor: UIColor? = .textTitleColor,
+                                 highlightColor: UIColor? = .textDesColor){
         
         comfigLeftBarButton(text: text, normalColor: normalColor, highlightColor: highlightColor)
         let btnItem = UIBarButtonItem.init(customView: leftBarButton)
@@ -137,8 +140,8 @@ open class JHViewController: UIViewController {
     ///   - normalColor: normalColor
     ///   - highlightColor: highlightColor
     public func addRightBarButton(text: String,
-                                  normalColor: UIColor? = UIColor.BaseUI.textTitleColor,
-                                  highlightColor: UIColor? = UIColor.BaseUI.textDesColor){
+                                  normalColor: UIColor? = .textTitleColor,
+                                  highlightColor: UIColor? = .textDesColor){
 
         comfigRightBarButton(text: text, normalColor: normalColor, highlightColor: highlightColor)
         let btnItem = UIBarButtonItem.init(customView: rightBarButton)
@@ -156,8 +159,8 @@ open class JHViewController: UIViewController {
     ///   - highLightImage: highLightImage
     public func comfigLeftBarButton(text: String? = nil,
                                     font: UIFont? = Font16,
-                                    normalColor: UIColor? = UIColor.BaseUI.textTitleColor,
-                                    highlightColor: UIColor? = UIColor.BaseUI.textDesColor,
+                                    normalColor: UIColor? = .textTitleColor,
+                                    highlightColor: UIColor? = .textDesColor,
                                     normalImage: UIImage? = nil,
                                     highLightImage: UIImage? = nil){
         
