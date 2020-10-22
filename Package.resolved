@@ -14,9 +14,9 @@
         "package": "SwiftButton",
         "repositoryURL": "https://github.com/jackiehu/SwiftButton.git",
         "state": {
-          "branch": "master",
-          "revision": "8cf9705b3ff7fc781ba909bb3b07db7443e060fe",
-          "version": null
+          "branch": null,
+          "revision": "f187fb608de39da4365d4c4d97564f01818844d8",
+          "version": "1.1.0"
         }
       }
     ]

@@ -8,20 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		390E616542220F9678A47E0A /* Pods_SwiftShow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 203AE3449E482FF178CFB7D4 /* Pods_SwiftShow.framework */; };
-		816B1CF924C56C750049DFAE /* PresentationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B1CEB24C56C750049DFAE /* PresentationAnimation.swift */; };
-		816B1CFB24C56C750049DFAE /* CrossZoomAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B1CED24C56C750049DFAE /* CrossZoomAnimation.swift */; };
-		816B1CFC24C56C750049DFAE /* CrossDissolveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B1CEE24C56C750049DFAE /* CrossDissolveAnimation.swift */; };
-		816B1CFE24C56C750049DFAE /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B1CF024C56C750049DFAE /* PresentationController.swift */; };
-		816B1D0224C56C750049DFAE /* PresentationEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B1CF424C56C750049DFAE /* PresentationEnums.swift */; };
-		816B1D0424C56C750049DFAE /* UIViewController+Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B1CF624C56C750049DFAE /* UIViewController+Presentation.swift */; };
-		816B1D0624C56C750049DFAE /* PresentedViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816B1CF824C56C750049DFAE /* PresentedViewType.swift */; };
-		8171995424EBB3EB00C04D4F /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8171994D24EBB3EB00C04D4F /* DropDownView.swift */; };
-		8171995524EBB3EB00C04D4F /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8171994E24EBB3EB00C04D4F /* ToastView.swift */; };
-		8171995624EBB3EB00C04D4F /* PopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8171994F24EBB3EB00C04D4F /* PopView.swift */; };
-		8171995724EBB3EB00C04D4F /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8171995024EBB3EB00C04D4F /* Config.swift */; };
-		8171995824EBB3EB00C04D4F /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8171995124EBB3EB00C04D4F /* AlertView.swift */; };
-		8171995924EBB3EB00C04D4F /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8171995224EBB3EB00C04D4F /* Show.swift */; };
-		8171995A24EBB3EB00C04D4F /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8171995324EBB3EB00C04D4F /* LoadingView.swift */; };
+		811293CF25417369009F8856 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293BF25417369009F8856 /* DropDownView.swift */; };
+		811293D025417369009F8856 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293C025417369009F8856 /* ToastView.swift */; };
+		811293D125417369009F8856 /* PopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293C125417369009F8856 /* PopView.swift */; };
+		811293D225417369009F8856 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293C225417369009F8856 /* Config.swift */; };
+		811293D325417369009F8856 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293C325417369009F8856 /* AlertView.swift */; };
+		811293D425417369009F8856 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293C425417369009F8856 /* Show.swift */; };
+		811293D525417369009F8856 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293C525417369009F8856 /* LoadingView.swift */; };
+		811293D625417369009F8856 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293C725417369009F8856 /* PresentationController.swift */; };
+		811293D725417369009F8856 /* UIViewController+Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293C825417369009F8856 /* UIViewController+Presentation.swift */; };
+		811293D825417369009F8856 /* PresentationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293CA25417369009F8856 /* PresentationAnimation.swift */; };
+		811293D925417369009F8856 /* CrossZoomAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293CB25417369009F8856 /* CrossZoomAnimation.swift */; };
+		811293DA25417369009F8856 /* CrossDissolveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293CC25417369009F8856 /* CrossDissolveAnimation.swift */; };
+		811293DB25417369009F8856 /* PresentedViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293CD25417369009F8856 /* PresentedViewType.swift */; };
+		811293DC25417369009F8856 /* PresentationEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293CE25417369009F8856 /* PresentationEnums.swift */; };
 		8171995C24EBC90500C04D4F /* LViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8171995B24EBC90500C04D4F /* LViewController.swift */; };
 		81E146F623EA60A900011CDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E146F523EA60A900011CDB /* AppDelegate.swift */; };
 		81E146F823EA60A900011CDB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E146F723EA60A900011CDB /* SceneDelegate.swift */; };
@@ -34,20 +34,20 @@
 /* Begin PBXFileReference section */
 		203AE3449E482FF178CFB7D4 /* Pods_SwiftShow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftShow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43D2D768D42F5500D7D34E2F /* Pods-SwiftShow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftShow.debug.xcconfig"; path = "Target Support Files/Pods-SwiftShow/Pods-SwiftShow.debug.xcconfig"; sourceTree = "<group>"; };
-		816B1CEB24C56C750049DFAE /* PresentationAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationAnimation.swift; sourceTree = "<group>"; };
-		816B1CED24C56C750049DFAE /* CrossZoomAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossZoomAnimation.swift; sourceTree = "<group>"; };
-		816B1CEE24C56C750049DFAE /* CrossDissolveAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossDissolveAnimation.swift; sourceTree = "<group>"; };
-		816B1CF024C56C750049DFAE /* PresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
-		816B1CF424C56C750049DFAE /* PresentationEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationEnums.swift; sourceTree = "<group>"; };
-		816B1CF624C56C750049DFAE /* UIViewController+Presentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Presentation.swift"; sourceTree = "<group>"; };
-		816B1CF824C56C750049DFAE /* PresentedViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentedViewType.swift; sourceTree = "<group>"; };
-		8171994D24EBB3EB00C04D4F /* DropDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
-		8171994E24EBB3EB00C04D4F /* ToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
-		8171994F24EBB3EB00C04D4F /* PopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopView.swift; sourceTree = "<group>"; };
-		8171995024EBB3EB00C04D4F /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
-		8171995124EBB3EB00C04D4F /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
-		8171995224EBB3EB00C04D4F /* Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
-		8171995324EBB3EB00C04D4F /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		811293BF25417369009F8856 /* DropDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
+		811293C025417369009F8856 /* ToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		811293C125417369009F8856 /* PopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopView.swift; sourceTree = "<group>"; };
+		811293C225417369009F8856 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		811293C325417369009F8856 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
+		811293C425417369009F8856 /* Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
+		811293C525417369009F8856 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		811293C725417369009F8856 /* PresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
+		811293C825417369009F8856 /* UIViewController+Presentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Presentation.swift"; sourceTree = "<group>"; };
+		811293CA25417369009F8856 /* PresentationAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationAnimation.swift; sourceTree = "<group>"; };
+		811293CB25417369009F8856 /* CrossZoomAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossZoomAnimation.swift; sourceTree = "<group>"; };
+		811293CC25417369009F8856 /* CrossDissolveAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossDissolveAnimation.swift; sourceTree = "<group>"; };
+		811293CD25417369009F8856 /* PresentedViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentedViewType.swift; sourceTree = "<group>"; };
+		811293CE25417369009F8856 /* PresentationEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationEnums.swift; sourceTree = "<group>"; };
 		8171995B24EBC90500C04D4F /* LViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LViewController.swift; sourceTree = "<group>"; };
 		81E146F223EA60A900011CDB /* SwiftShow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftShow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81E146F523EA60A900011CDB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -93,40 +93,50 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		816B1CE924C56C3A0049DFAE /* Presentation */ = {
+		811293BD25417369009F8856 /* SwiftShow */ = {
 			isa = PBXGroup;
 			children = (
-				816B1CEA24C56C750049DFAE /* Animation */,
-				816B1CF024C56C750049DFAE /* PresentationController.swift */,
-				816B1CF424C56C750049DFAE /* PresentationEnums.swift */,
-				816B1CF824C56C750049DFAE /* PresentedViewType.swift */,
-				816B1CF624C56C750049DFAE /* UIViewController+Presentation.swift */,
+				811293BE25417369009F8856 /* Show */,
+				811293C625417369009F8856 /* Presentation */,
+			);
+			name = SwiftShow;
+			path = Sources/SwiftShow;
+			sourceTree = SOURCE_ROOT;
+		};
+		811293BE25417369009F8856 /* Show */ = {
+			isa = PBXGroup;
+			children = (
+				811293BF25417369009F8856 /* DropDownView.swift */,
+				811293C025417369009F8856 /* ToastView.swift */,
+				811293C125417369009F8856 /* PopView.swift */,
+				811293C225417369009F8856 /* Config.swift */,
+				811293C325417369009F8856 /* AlertView.swift */,
+				811293C425417369009F8856 /* Show.swift */,
+				811293C525417369009F8856 /* LoadingView.swift */,
+			);
+			path = Show;
+			sourceTree = "<group>";
+		};
+		811293C625417369009F8856 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				811293C925417369009F8856 /* Animation */,
+				811293C725417369009F8856 /* PresentationController.swift */,
+				811293C825417369009F8856 /* UIViewController+Presentation.swift */,
+				811293CD25417369009F8856 /* PresentedViewType.swift */,
+				811293CE25417369009F8856 /* PresentationEnums.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
 		};
-		816B1CEA24C56C750049DFAE /* Animation */ = {
+		811293C925417369009F8856 /* Animation */ = {
 			isa = PBXGroup;
 			children = (
-				816B1CEB24C56C750049DFAE /* PresentationAnimation.swift */,
-				816B1CED24C56C750049DFAE /* CrossZoomAnimation.swift */,
-				816B1CEE24C56C750049DFAE /* CrossDissolveAnimation.swift */,
+				811293CA25417369009F8856 /* PresentationAnimation.swift */,
+				811293CB25417369009F8856 /* CrossZoomAnimation.swift */,
+				811293CC25417369009F8856 /* CrossDissolveAnimation.swift */,
 			);
 			path = Animation;
-			sourceTree = "<group>";
-		};
-		8171994C24EBB3EB00C04D4F /* Show */ = {
-			isa = PBXGroup;
-			children = (
-				8171994D24EBB3EB00C04D4F /* DropDownView.swift */,
-				8171994E24EBB3EB00C04D4F /* ToastView.swift */,
-				8171994F24EBB3EB00C04D4F /* PopView.swift */,
-				8171995024EBB3EB00C04D4F /* Config.swift */,
-				8171995124EBB3EB00C04D4F /* AlertView.swift */,
-				8171995224EBB3EB00C04D4F /* Show.swift */,
-				8171995324EBB3EB00C04D4F /* LoadingView.swift */,
-			);
-			path = Show;
 			sourceTree = "<group>";
 		};
 		81E146E923EA60A900011CDB = {
@@ -150,7 +160,7 @@
 		81E146F423EA60A900011CDB /* SwiftShow */ = {
 			isa = PBXGroup;
 			children = (
-				81E1470923EA618100011CDB /* Class */,
+				811293BD25417369009F8856 /* SwiftShow */,
 				81E146F523EA60A900011CDB /* AppDelegate.swift */,
 				81E146F723EA60A900011CDB /* SceneDelegate.swift */,
 				81E146F923EA60A900011CDB /* ViewController.swift */,
@@ -161,15 +171,6 @@
 				81E1470323EA60AD00011CDB /* Info.plist */,
 			);
 			path = SwiftShow;
-			sourceTree = "<group>";
-		};
-		81E1470923EA618100011CDB /* Class */ = {
-			isa = PBXGroup;
-			children = (
-				8171994C24EBB3EB00C04D4F /* Show */,
-				816B1CE924C56C3A0049DFAE /* Presentation */,
-			);
-			path = Class;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,24 +288,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8171995424EBB3EB00C04D4F /* DropDownView.swift in Sources */,
+				811293D825417369009F8856 /* PresentationAnimation.swift in Sources */,
 				8171995C24EBC90500C04D4F /* LViewController.swift in Sources */,
+				811293D925417369009F8856 /* CrossZoomAnimation.swift in Sources */,
+				811293CF25417369009F8856 /* DropDownView.swift in Sources */,
+				811293D325417369009F8856 /* AlertView.swift in Sources */,
+				811293D525417369009F8856 /* LoadingView.swift in Sources */,
 				81E146FA23EA60A900011CDB /* ViewController.swift in Sources */,
+				811293D725417369009F8856 /* UIViewController+Presentation.swift in Sources */,
+				811293DC25417369009F8856 /* PresentationEnums.swift in Sources */,
 				81E146F623EA60A900011CDB /* AppDelegate.swift in Sources */,
-				8171995724EBB3EB00C04D4F /* Config.swift in Sources */,
-				8171995A24EBB3EB00C04D4F /* LoadingView.swift in Sources */,
-				816B1CFB24C56C750049DFAE /* CrossZoomAnimation.swift in Sources */,
-				8171995824EBB3EB00C04D4F /* AlertView.swift in Sources */,
-				8171995924EBB3EB00C04D4F /* Show.swift in Sources */,
-				8171995524EBB3EB00C04D4F /* ToastView.swift in Sources */,
-				816B1CF924C56C750049DFAE /* PresentationAnimation.swift in Sources */,
-				816B1CFC24C56C750049DFAE /* CrossDissolveAnimation.swift in Sources */,
-				8171995624EBB3EB00C04D4F /* PopView.swift in Sources */,
-				816B1D0224C56C750049DFAE /* PresentationEnums.swift in Sources */,
+				811293D125417369009F8856 /* PopView.swift in Sources */,
+				811293DA25417369009F8856 /* CrossDissolveAnimation.swift in Sources */,
+				811293DB25417369009F8856 /* PresentedViewType.swift in Sources */,
+				811293D225417369009F8856 /* Config.swift in Sources */,
+				811293D025417369009F8856 /* ToastView.swift in Sources */,
+				811293D425417369009F8856 /* Show.swift in Sources */,
 				81E146F823EA60A900011CDB /* SceneDelegate.swift in Sources */,
-				816B1D0424C56C750049DFAE /* UIViewController+Presentation.swift in Sources */,
-				816B1D0624C56C750049DFAE /* PresentedViewType.swift in Sources */,
-				816B1CFE24C56C750049DFAE /* PresentationController.swift in Sources */,
+				811293D625417369009F8856 /* PresentationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
