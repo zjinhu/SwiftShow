@@ -45,7 +45,7 @@ public class ShowToastConfig {
     ///Toast字体  默认15
     public var textFont : UIFont = UIFont.systemFont(ofSize: 15)
     ///Toast背景颜色 默认黑色
-    public var bgColor : UIColor = UIColor.bTwColor
+    public var bgColor : UIColor = UIColor.blackBGColor
     ///阴影颜色 默认clearcolor
     public var shadowColor : CGColor = UIColor.clear.cgColor
     ///阴影Opacity 默认0.5
@@ -53,7 +53,7 @@ public class ShowToastConfig {
     ///阴影Radius 默认5
     public var shadowRadius : CGFloat = 5
     /// Toast文字字体颜色 默认白色
-    public var textColor : UIColor = UIColor.wTbColor
+    public var textColor : UIColor = .white
     ///Toast图文混排样式 默认图片在左
     public var imageType : ImageButtonType = .imageButtonTypeLeft
     ///Toast背景与内容之间的内边距 默认10
@@ -77,11 +77,11 @@ public class ShowLoadingConfig {
     ///圆角大小 默认5
     public var cornerRadius : CGFloat = 5
     ///加载框主体颜色 默认黑色
-    public var tintColor : UIColor = UIColor.bTwColor
+    public var tintColor : UIColor = UIColor.blackBGColor
     ///文字字体大小 默认系统字体15
     public var textFont : UIFont = UIFont.systemFont(ofSize: 15)
     ///文字字体颜色 默认白色
-    public var textColor : UIColor = UIColor.wTbColor
+    public var textColor : UIColor = .white
     ///背景颜色 默认clear
     public var bgColor : UIColor = .clear
     ///默认蒙版类型 背景色
@@ -95,7 +95,7 @@ public class ShowLoadingConfig {
     ///图片动画类型 所需要的图片数组
     public var imagesArray : [UIImage]?
     ///菊花颜色 不传递图片数组的时候默认使用菊花
-    public var activityColor : UIColor = UIColor.wTbColor
+    public var activityColor : UIColor = .white
     ///图片动画时间 默认1.0
     public var animationTime : Double = 1.0
     ///loading图文混排样式  默认图片在上
@@ -127,20 +127,20 @@ public class ShowAlertConfig {
     ///alert图文间距
     public var space : Float = 0
     ///alert标题字体
-    public var titleFont : UIFont = UIFont.systemFont(ofSize: 18)
+    public var titleFont : UIFont = UIFont.systemFont(ofSize: 21)
     /// alert标题字体颜色
-    public var titleColor : UIColor = UIColor.bTwColor
+    public var titleColor : UIColor = UIColor.textColor
     ///alert信息字体
     public var textFont : UIFont = UIFont.systemFont(ofSize: 14)
     /// alert信息字体颜色
-    public var textColor : UIColor = UIColor.bTwColor
+    public var textColor : UIColor = UIColor.textColor
     ///alert按钮字体
     public var buttonFont : UIFont = UIFont.systemFont(ofSize: 15)
     /// alert按钮字体颜色
-    public var leftColor : UIColor = UIColor.bTwColor
-    public var rightColor : UIColor = UIColor.bTwColor
+    public var leftColor : UIColor = UIColor.textColor
+    public var rightColor : UIColor = UIColor.textColor
     ///alert主体颜色 默认
-    public var tintColor : UIColor = UIColor.wTbColor
+    public var tintColor : UIColor = UIColor.whiteBGColor
     ///alert背景颜色
     public var bgColor : UIColor = UIColor.black.withAlphaComponent(0.5)
     ///alert分割线颜色
@@ -196,36 +196,53 @@ public class ShowDropDownConfig {
 extension UIColor {
     
     @available(iOS 13.0, *)
-    static let blackToWhiteColor = UIColor { (trainCollection) -> UIColor in
+    static let blackChangeColor = UIColor { (trainCollection) -> UIColor in
         if trainCollection.userInterfaceStyle == .dark {
-            return UIColor.white
+            return UIColor(red: 0.110, green: 0.110, blue: 0.110, alpha: 1.0)
         } else {
             return UIColor.black
         }
     }
 
     @available(iOS 13.0, *)
-    static let whiteToBlackColor = UIColor { (trainCollection) -> UIColor in
+    static let whiteChangeColor = UIColor { (trainCollection) -> UIColor in
         if trainCollection.userInterfaceStyle == .dark {
-            return UIColor.black
+            return UIColor(red: 0.110, green: 0.110, blue: 0.110, alpha: 1.0)
         } else {
             return UIColor.white
         }
     }
 
-    static var bTwColor: UIColor {
+    @available(iOS 13.0, *)
+    static let textChangeColor = UIColor { (trainCollection) -> UIColor in
+        if trainCollection.userInterfaceStyle == .dark {
+            return UIColor.white
+        } else {
+            return UIColor.black
+        }
+    }
+    
+    static var blackBGColor: UIColor {
         if #available(iOS 13.0, *) {
-            return UIColor.blackToWhiteColor
+            return UIColor.blackChangeColor
         }else{
             return UIColor.black
         }
     }
     
-    static var wTbColor: UIColor {
+    static var whiteBGColor: UIColor {
         if #available(iOS 13.0, *) {
-            return UIColor.whiteToBlackColor
+            return UIColor.whiteChangeColor
         }else{
             return UIColor.white
+        }
+    }
+    
+    static var textColor: UIColor {
+        if #available(iOS 13.0, *) {
+            return UIColor.textChangeColor
+        }else{
+            return UIColor.black
         }
     }
 }
