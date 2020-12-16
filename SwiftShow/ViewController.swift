@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import SwiftBrick
+import SwiftyAttributes
 class ViewController: JHTableViewController{
     
     override func viewDidLoad() {
@@ -22,7 +23,7 @@ class ViewController: JHTableViewController{
         }
         
         self.title = "Show示例"
-        self.mainDatas = ["toast中间","toast中间带图片","toast下边","toast上边","toast自定义配置","loading不支持触摸透传","loading+文字不支持触摸透传","loading自定义配置","alert","alert自定义配置","popview","popview自定义配置","dropdown"]
+        self.mainDatas = ["toast中间","toast中间带图片","toast下边","toast上边","toast自定义配置","loading不支持触摸透传","loading+文字不支持触摸透传","loading自定义配置","alert","alert自定义配置","popview","popview自定义配置","dropdown","富文本alert"]
         
     }
     
@@ -123,7 +124,13 @@ class ViewController: JHTableViewController{
             } willHideClosure: {
                 print("将要隐藏")
             }
-
+        case 13:
+            Show.showAttributedAlert(attributedTitle: "温馨提醒".withFont(Font15),
+                                  attributedMessage: "当前学期内共有".withFont(Font13),
+                                  leftBtnAttributedTitle: "我再想想".withTextColor(.orange),
+                                  rightBtnAttributedTitle: "好的".withTextColor(.red), rightBlock:  {
+                                    
+                                  })
         default:
             print("1")
         }

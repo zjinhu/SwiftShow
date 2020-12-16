@@ -79,8 +79,8 @@ class LoadingView: UIView {
             make.right.equalToSuperview().offset(-config.horizontalPadding)
         }
         
-        if config.imagesArray != nil {
-            guard let image = config.imagesArray!.first else {
+        if let array = config.imagesArray{
+            guard let image = array.first else {
                 return
             }
             loadingView.image = image

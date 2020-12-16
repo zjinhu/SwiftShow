@@ -127,10 +127,10 @@ extension Show{
         let loadingView = LoadingView.init(config)
         loadingView.title = text
         loadingView.isUserInteractionEnabled = !config.enableEvent
-        if onView != nil {
-            hiddenLoadingOnView(onView!)
-            onView?.addSubview(loadingView)
-            onView?.bringSubviewToFront(loadingView)
+        if let base = onView{
+            hiddenLoadingOnView(base)
+            base.addSubview(loadingView)
+            base.bringSubviewToFront(loadingView)
             loadingView.layer.zPosition = CGFloat(MAXFLOAT)
         }else{
             hiddenLoadingOnWindow()

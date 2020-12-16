@@ -8,4 +8,5 @@ target 'SwiftShow' do
   # Pods for SwiftDialog
 pod 'SwiftButton'
 pod 'SwiftBrick'
+pod 'SwiftyAttributes'
 end

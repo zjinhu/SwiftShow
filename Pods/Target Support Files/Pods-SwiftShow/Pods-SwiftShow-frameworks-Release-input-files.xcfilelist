@@ -2,3 +2,4 @@ ${PODS_ROOT}/Target Support Files/Pods-SwiftShow/Pods-SwiftShow-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
 ${BUILT_PRODUCTS_DIR}/SwiftBrick/SwiftBrick.framework
 ${BUILT_PRODUCTS_DIR}/SwiftButton/SwiftButton.framework
+${BUILT_PRODUCTS_DIR}/SwiftyAttributes/SwiftyAttributes.framework

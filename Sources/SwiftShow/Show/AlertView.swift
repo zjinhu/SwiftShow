@@ -106,8 +106,8 @@ class AlertView: UIView {
         }
         
 
-        if attributedTitle != nil {
-            titleView.titleLabel.attributedText = attributedTitle
+        if let att = attributedTitle{
+            titleView.titleLabel.attributedText = att
         }else{
             titleView.title = title
         }
@@ -121,8 +121,8 @@ class AlertView: UIView {
         titleView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         
 
-        if attributedMessage != nil {
-            messageLabel.attributedText = attributedTitle
+        if let att = attributedMessage{
+            messageLabel.attributedText = att
         }else{
             messageLabel.text = message
         }
@@ -143,8 +143,8 @@ class AlertView: UIView {
             make.height.equalTo(1/UIScreen.main.scale)
         }
         
-        if leftBtnAttributedTitle != nil {
-            leftBtn.setAttributedTitle(leftBtnAttributedTitle, for: .normal)
+        if let att = leftBtnAttributedTitle{
+            leftBtn.setAttributedTitle(att, for: .normal)
         }else{
             leftBtn.setTitle(leftBtnTitle, for: .normal)
         }
@@ -156,15 +156,15 @@ class AlertView: UIView {
             make.height.equalTo(alertConfig.buttonHeight)
         }
         
-        if rightBtnAttributedTitle != nil {
-            rightBtn.setAttributedTitle(rightBtnAttributedTitle, for: .normal)
+        if let att = rightBtnAttributedTitle{
+            rightBtn.setAttributedTitle(att, for: .normal)
         }else{
             rightBtn.setTitle(rightBtnTitle, for: .normal)
         }
         containerView.addSubview(rightBtn)
         rightBtn.snp.makeConstraints { (make) in
             make.top.equalTo(lineView.snp.bottom)
-            make.left.equalTo(leftBtnTitle != nil ? containerView.snp.centerX : containerView.snp.left)
+            make.left.equalTo(leftBtnTitle != nil || leftBtnAttributedTitle != nil ? containerView.snp.centerX : containerView.snp.left)
             make.right.equalToSuperview()
             make.height.equalTo(alertConfig.buttonHeight)
             make.bottom.equalToSuperview()
@@ -179,7 +179,8 @@ class AlertView: UIView {
             make.centerX.equalToSuperview()
             make.width.equalTo(1/UIScreen.main.scale)
         }
-        if leftBtnTitle != nil {
+        
+        if leftBtnTitle != nil || leftBtnAttributedTitle != nil  {
             leftBtn.isHidden = false
             vLineView.isHidden = false
         }else{

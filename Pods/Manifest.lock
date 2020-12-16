@@ -1,47 +1,51 @@
 PODS:
   - SnapKit (5.0.1)
-  - SwiftBrick (1.5.2):
+  - SwiftBrick (1.7.8):
     - SnapKit
-    - SwiftBrick/BaseCell (= 1.5.2)
-    - SwiftBrick/BaseVC (= 1.5.2)
-    - SwiftBrick/Extensions (= 1.5.2)
-    - SwiftBrick/Util (= 1.5.2)
-    - SwiftBrick/ViewFactory (= 1.5.2)
-  - SwiftBrick/BaseCell (1.5.2):
+    - SwiftBrick/BaseCell (= 1.7.8)
+    - SwiftBrick/BaseVC (= 1.7.8)
+    - SwiftBrick/Extensions (= 1.7.8)
+    - SwiftBrick/Util (= 1.7.8)
+    - SwiftBrick/ViewFactory (= 1.7.8)
+  - SwiftBrick/BaseCell (1.7.8):
     - SnapKit
     - SwiftBrick/Extensions
-  - SwiftBrick/BaseVC (1.5.2):
+  - SwiftBrick/BaseVC (1.7.8):
     - SnapKit
     - SwiftBrick/BaseCell
     - SwiftBrick/Extensions
     - SwiftBrick/Util
-  - SwiftBrick/Extensions (1.5.2):
+  - SwiftBrick/Extensions (1.7.8):
     - SnapKit
     - SwiftBrick/Util
-  - SwiftBrick/Util (1.5.2):
+  - SwiftBrick/Util (1.7.8):
     - SnapKit
-  - SwiftBrick/ViewFactory (1.5.2):
+  - SwiftBrick/ViewFactory (1.7.8):
     - SnapKit
     - SwiftBrick/Extensions
     - SwiftBrick/Util
-  - SwiftButton (1.0.2):
+  - SwiftButton (1.1.0):
     - SnapKit
+  - SwiftyAttributes (5.1.1)
 
 DEPENDENCIES:
   - SwiftBrick
   - SwiftButton
+  - SwiftyAttributes
 
 SPEC REPOS:
   trunk:
     - SnapKit
     - SwiftBrick
     - SwiftButton
+    - SwiftyAttributes
 
 SPEC CHECKSUMS:
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
-  SwiftBrick: 8c12d7f0307b841956b62e314ee04b643d7afb2b
-  SwiftButton: 10ef7a38c71f9c299a53428d4536e321fd1e31f4
+  SwiftBrick: 7b190b5b1ef8d7d13be16ca3d4682a3b3882a956
+  SwiftButton: d6313f6082ffa5a86e27b6da09f2e1700441e420
+  SwiftyAttributes: e3e13891ddac3c62b3d7798d5c3969cea88e62bb
 
-PODFILE CHECKSUM: 429c690a43b724e93e6ca5467b28ee74df337c6c
+PODFILE CHECKSUM: faea63462ec6ac15ec87d7282a0839e494bc2d61
 
-COCOAPODS: 1.10.0.rc.1
+COCOAPODS: 1.10.0
