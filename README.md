@@ -312,7 +312,7 @@
    ```
 
    ```swift
-       /// 从NavBar或VC的view中弹出下拉视图,可以盖住Tabbar
+       /// 从NavBar或VC的view中弹出下拉视图,可以盖住Tabbar，但不遮挡NavBar
        /// - Parameters:
        ///   - contentView: 被弹出的view
        ///   - config: 适配器回调
