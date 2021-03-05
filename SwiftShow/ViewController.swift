@@ -96,7 +96,7 @@ class ViewController: JHTableViewController{
             }) { (config) in
                 //                config.tintColor = .purple
                 config.shadowColor = UIColor.red.cgColor
-                config.maskType = .effect
+                config.maskType = .color
             }
         case 10:
             let content = UIImageView.init(frame: CGRect.init(x: 300, y: 100, width: 200, height: 200))

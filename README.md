@@ -12,6 +12,16 @@
 
 1. Toast
 
+   ![](toast1.png)
+
+   ![](toast2.png)
+
+   ![](toast3.png)
+
+   ![](toast4.png)
+
+   ![](toast5.png)
+
    ```swift
    ///Toast适配器，主要处理Toast样式
    public class ShowToastConfig {
@@ -62,6 +72,12 @@
    ```
 
 2. Loading
+
+   ![](Loading1.png)
+
+   ![](Loading2.png)
+
+   ![](Loading3.png)
 
    ```swift
    ///Loading适配器
@@ -141,6 +157,12 @@
    ```
 
 3. Alert
+
+   ![](Alert1.png)
+
+   ![](Alert2.png)
+
+   ![](Alert3.png)
 
    ```swift
    ///Alert适配器
@@ -250,6 +272,10 @@
 
 4. pop
 
+   ![](Pop1.gif)
+
+   ![](Pop2.gif)
+
    ```swift
    public class ShowPopViewConfig {
        ///背景蒙版 毛玻璃
@@ -290,6 +316,8 @@
 
 5. DropDown
 
+   ![](DropDown.gif)
+
    ```swift
    public class ShowDropDownConfig {
        ///背景蒙版 毛玻璃
@@ -312,7 +340,7 @@
    ```
 
    ```swift
-       /// 从NavBar或VC的view中弹出下拉视图,可以盖住Tabbar
+       /// 从NavBar或VC的view中弹出下拉视图,可以盖住Tabbar，但不遮挡NavBar
        /// - Parameters:
        ///   - contentView: 被弹出的view
        ///   - config: 适配器回调
