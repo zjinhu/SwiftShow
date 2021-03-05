@@ -376,6 +376,10 @@
 
 #### cocoapods导入
 
+`pod 'SwiftShow'`
+
 #### SPM导入
+
+`https://github.com/jackiehu/SwiftShow`
 
 #### 手动导入
