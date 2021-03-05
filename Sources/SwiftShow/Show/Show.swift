@@ -9,12 +9,14 @@
 import UIKit
 //MARK: --Toast
 extension Show{
+    ///适配器回调,用于给适配器参数赋值
     public typealias ConfigToast = ((_ config : ShowToastConfig) -> Void)
     
-    /// 在屏幕中间展示toast
+    /// 展示toast
     /// - Parameters:
-    ///   - text: 文案
+    ///   - text: 文本
     ///   - image: 图片
+    ///   - config: toast适配器
     public class func showToast(_ text: String, image: UIImage? = nil, config : ConfigToast? = nil){
         let model = ShowToastConfig()
         if let _ = image{
@@ -60,12 +62,13 @@ extension Show{
 }
 ////MARK: --Loading
 extension Show{
+    ///适配器回调,用于给适配器参数赋值
     public typealias ConfigLoading = ((_ config : ShowLoadingConfig) -> Void)
     
     /// 在当前VC中展示loading
     /// - Parameters:
     ///   - text: 文本
-    ///   - config: 配置
+    ///   - config: loading适配器
     public class func showLoading(_ text : String? = nil, config : ConfigLoading? = nil) {
         guard let vc = currentViewController() else {
             return
@@ -79,7 +82,7 @@ extension Show{
         loading(text, onView: vc.view, config: model)
     }
     
-    /// 隐藏上层VC中的loading
+    /// 手动隐藏上层VC中的loading
     public class func hiddenLoading() {
         guard let vc = currentViewController() else {
             return
@@ -97,7 +100,7 @@ extension Show{
         loading(text, onView: getWindow(), config: model)
     }
     
-    /// 隐藏window中loading
+    /// 手动隐藏window中loading
     public class func hiddenLoadingOnWindow() {
         hiddenLoadingOnView(getWindow())
     }
@@ -113,7 +116,7 @@ extension Show{
         loading(text, onView: onView, config: model)
     }
     
-    /// 隐藏指定view中loading
+    /// 手动隐藏指定view中loading
     /// - Parameter onView: view
     public class func hiddenLoadingOnView(_ onView: UIView) {
         onView.subviews.forEach { (view) in
@@ -145,9 +148,17 @@ extension Show{
 }
 ////MARK: --Alert
 extension Show{
-    
+    ///适配器回调,用于给适配器参数赋值
     public typealias ConfigAlert = ((_ config : ShowAlertConfig) -> Void)
     
+    /// 默认样式Alert
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - message: 信息
+    ///   - leftBtnTitle: 左侧按钮标题
+    ///   - rightBtnTitle: 右侧按钮标题
+    ///   - leftBlock: 左侧按钮回调
+    ///   - rightBlock: 右侧按钮回调
     public class func showAlert(title: String? = nil,
                                 message: String?  = nil,
                                 leftBtnTitle: String? = nil,
@@ -162,6 +173,14 @@ extension Show{
                         rightBlock: rightBlock)
     }
     
+    /// 富文本样式Alert
+    /// - Parameters:
+    ///   - attributedTitle: 富文本标题
+    ///   - attributedMessage: 富文本信息
+    ///   - leftBtnAttributedTitle: 富文本左侧按钮标题
+    ///   - rightBtnAttributedTitle: 富文本右侧按钮标题
+    ///   - leftBlock: 左侧按钮回调
+    ///   - rightBlock: 右侧按钮回调
     public class func showAttributedAlert(attributedTitle : NSAttributedString? = nil,
                                           attributedMessage : NSAttributedString? = nil,
                                           leftBtnAttributedTitle: NSAttributedString? = nil,
@@ -176,6 +195,20 @@ extension Show{
                         rightBlock: rightBlock)
     }
     
+    /// 自定义Alert
+    /// - Parameters:
+    ///   - title: 标题
+    ///   - attributedTitle: 富文本标题
+    ///   - titleImage: 顶图
+    ///   - message: 信息
+    ///   - attributedMessage: 富文本信息
+    ///   - leftBtnTitle: 左侧按钮标题
+    ///   - leftBtnAttributedTitle: 富文本左侧按钮标题
+    ///   - rightBtnTitle: 右侧按钮标题
+    ///   - rightBtnAttributedTitle: 富文本右侧按钮标题
+    ///   - leftBlock:  左侧按钮回调
+    ///   - rightBlock: 右侧按钮回调
+    ///   - config: Alert适配器，不传为默认样式
     public class func showCustomAlert(title: String? = nil,
                                       attributedTitle : NSAttributedString? = nil,
                                       titleImage: UIImage? = nil,
@@ -218,6 +251,7 @@ extension Show{
         
     }
     
+    /// 手动隐藏Alert
     public class func hiddenAlert() {
         getWindow().subviews.forEach { (view) in
             if view.isKind(of: AlertView.self){
@@ -235,18 +269,20 @@ extension Show{
 
 //MARK: --pop
 extension Show{
+    ///适配器回调,用于给适配器参数赋值
     public typealias ConfigPop = ((_ config : ShowPopViewConfig) -> Void)
+    
     
     /// 弹出view
     /// - Parameters:
-    ///   - contentView: 被弹出的view
-    ///   - config: 配置信息
+    ///   - contentView: 被弹出的View
+    ///   - config: popview适配器
+    ///   - showClosure: 弹出回调
+    ///   - hideClosure: 收起回调
     public class func showPopView(contentView: UIView,
                                   config : ConfigPop? = nil,
                                   showClosure: CallBack? = nil,
                                   hideClosure: CallBack? = nil) {
-        
-
         
         getWindow().subviews.forEach { (view) in
             if view.isKind(of: PopView.self){
@@ -271,6 +307,8 @@ extension Show{
         showPopCallBack?()
     }
     
+    /// 手动收起popview
+    /// - Parameter complete: 完成回调
     public class func hidenPopView(_ complete : (() -> Void)? = nil ) {
         getWindow().subviews.forEach { (view) in
             if view.isKind(of: PopView.self){
@@ -293,10 +331,14 @@ extension Show{
 //MARK: --DropDown
 extension Show{
     
-    /// 弹出下拉视图,盖住Tabbar
+    /// 从NavBar或VC的view中弹出下拉视图,可以盖住Tabbar
     /// - Parameters:
-    ///   - contentView: view
-    ///   - config: 配置
+    ///   - contentView: 被弹出的view
+    ///   - config: 适配器回调
+    ///   - showClosure: 展示回调
+    ///   - hideClosure: 隐藏回调
+    ///   - willShowClosure: 即将展示回调
+    ///   - willHideClosure: 即将收起回调
     public class func showCoverTabbarView(contentView: UIView,
                                           config: ((_ config : ShowDropDownConfig) -> Void)? = nil,
                                           showClosure: CallBack? = nil,
@@ -329,6 +371,8 @@ extension Show{
         
     }
     
+    /// 当前是否正在展示DropDown
+    /// - Returns: true/false
     public class func isHaveCoverTabbarView() -> Bool{
         var isHave = false
         getWindow().rootViewController?.view.subviews.forEach { (view) in
@@ -339,6 +383,8 @@ extension Show{
         return isHave
     }
     
+    /// 手动隐藏DropDown
+    /// - Parameter complete: 完成回调
     public class func hidenCoverTabbarView(_ complete : (() -> Void)? = nil ) {
         getWindow().rootViewController?.view.subviews.forEach { (view) in
             if view.isKind(of: DropDownView.self){
@@ -360,8 +406,9 @@ extension Show{
 }
 
 //MARK: -- 获取最上层视图
+
 public class Show{
-    
+    /// 通用回调
     public typealias CallBack = () -> Void
     
     private static var showCoverCallBack : CallBack?
@@ -388,7 +435,7 @@ public class Show{
     }
     
     /// 获取顶层VC 根据window
-    public class func currentViewController() -> (UIViewController?) {
+    public class func currentViewController() -> UIViewController? {
         let vc = getWindow().rootViewController
         return getCurrentViewController(withCurrentVC: vc)
     }
