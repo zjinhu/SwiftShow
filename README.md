@@ -3,9 +3,6 @@
 
 详见demo。
 
-
-![](show.gif)
-
 ### 使用
 
 基本弹窗API全部都在Show.swift，其中包括多个种类
