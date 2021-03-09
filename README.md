@@ -9,16 +9,19 @@
 
 1. Toast
 
-   | ![](toast1.png) | ![](toast2.png) | ![](toast3.png) |
-| --------------- | --------------- | --------------- |
-   | ![](toast4.png) | ![](toast5.png) |                 |
-
    
 
-   ```swift
-///Toast适配器，主要处理Toast样式
+   |                 |                 |                 |
+| --------------- | --------------- | --------------- |
+   | ![](toast1.png) | ![](toast2.png) | ![](toast3.png) |
+| ![](toast4.png) | ![](toast5.png) |                 |
+   
+
+   
+```swift
+   ///Toast适配器，主要处理Toast样式
    public class ShowToastConfig {
-    ///执行动画时间 默认0.5
+       ///执行动画时间 默认0.5
        public var animateDuration = 0.5
        ///Toast最大宽度  默认200
        public var maxWidth : Float = 200
@@ -53,12 +56,12 @@
    }
    ```
    
+
    
-   
-   ```swift
-    /// 展示toast
+```swift
+       /// 展示toast
        /// - Parameters:
-    ///   - text: 文本
+       ///   - text: 文本
        ///   - image: 图片 （可选参数）
        ///   - config: toast适配器，不传为默认样式
        public class func showToast(_ text: String, image: UIImage? = nil, config : ConfigToast? = nil)
