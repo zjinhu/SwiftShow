@@ -13,10 +13,10 @@
    
    ```
 
-   |                 |                 |                 |
-   | --------------- | --------------- | --------------- |
-   | ![](toast1.png) | ![](toast2.png) | ![](toast3.png) |
-   | ![](toast4.png) | ![](toast5.png) |                 |
+   |                       |                       |                       |
+   | --------------------- | --------------------- | --------------------- |
+   | ![](Image/toast1.png) | ![](Image/toast2.png) | ![](Image/toast3.png) |
+   | ![](Image/toast4.png) | ![](Image/toast5.png) |                       |
 
    ```swift
    ///Toast适配器，主要处理Toast样式
@@ -69,9 +69,9 @@
 
 2. Loading
 
-   | ![](Loading1.png) | ![](Loading2.png) | ![](Loading3.png) |
-   | ----------------- | ----------------- | ----------------- |
-   |                   |                   |                   |
+   | ![](Image/Loading1.png) | ![](Image/Loading2.png) | ![](Image/Loading3.png) |
+   | ----------------------- | ----------------------- | ----------------------- |
+   | 默认样式                | 可图文                  | 可添加阴影，遮罩        |
 
    ```swift
    ///Loading适配器
@@ -152,9 +152,9 @@
 
 3. Alert
 
-   | ![](Alert1.png) | ![](Alert2.png) | ![](Alert3.png) |
-   | --------------- | --------------- | --------------- |
-   |                 |                 |                 |
+   | ![](Image/Alert1.png) | ![](Image/Alert2.png) | ![](Image/Alert3.png) |
+   | --------------------- | --------------------- | --------------------- |
+   | 默认弹窗              | 可修改弹窗遮罩、阴影  | 可使用富文本          |
 
    ```swift
    ///Alert适配器
@@ -264,9 +264,9 @@
 
 4. pop
 
-   | ![](Pop1.gif) | ![](Pop2.gif) |
-   | ------------- | ------------- |
-   |               |               |
+   | ![](Image/Pop1.gif) | ![](Image/Pop2.gif) |
+   | ------------------- | ------------------- |
+   |                     |                     |
 
    ```swift
    public class ShowPopViewConfig {
@@ -308,7 +308,7 @@
 
 5. DropDown
 
-   ![](DropDown.gif)
+   ![](Image/DropDown.gif)
 
    ```swift
    public class ShowDropDownConfig {
