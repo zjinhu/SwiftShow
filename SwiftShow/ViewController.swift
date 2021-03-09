@@ -101,7 +101,6 @@ class ViewController: JHTableViewController{
         case 10:
             let content = UIImageView.init(frame: CGRect.init(x: 300, y: 100, width: 200, height: 200))
             content.image = UIImage.init(named: "timg")
-            //            content.backgroundColor = .red
             Show.showPopView(contentView: content)
         case 11:
             let content = UIButton.init(frame: CGRect.init(x: 300, y: 100, width: 200, height: 200))
