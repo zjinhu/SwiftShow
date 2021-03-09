@@ -9,16 +9,16 @@
 
 1. Toast
 
+   ```
    
+   ```
 
    |                 |                 |                 |
-| --------------- | --------------- | --------------- |
+   | --------------- | --------------- | --------------- |
    | ![](toast1.png) | ![](toast2.png) | ![](toast3.png) |
-| ![](toast4.png) | ![](toast5.png) |                 |
-   
+   | ![](toast4.png) | ![](toast5.png) |                 |
 
-   
-```swift
+   ```swift
    ///Toast适配器，主要处理Toast样式
    public class ShowToastConfig {
        ///执行动画时间 默认0.5
@@ -55,10 +55,10 @@
        public var offSetType : ToastOffset = .center
    }
    ```
-   
 
    
-```swift
+
+   ```swift
        /// 展示toast
        /// - Parameters:
        ///   - text: 文本
@@ -66,14 +66,12 @@
        ///   - config: toast适配器，不传为默认样式
        public class func showToast(_ text: String, image: UIImage? = nil, config : ConfigToast? = nil)
    ```
-   
+
 2. Loading
 
    | ![](Loading1.png) | ![](Loading2.png) | ![](Loading3.png) |
    | ----------------- | ----------------- | ----------------- |
    |                   |                   |                   |
-
-   
 
    ```swift
    ///Loading适配器
@@ -157,8 +155,6 @@
    | ![](Alert1.png) | ![](Alert2.png) | ![](Alert3.png) |
    | --------------- | --------------- | --------------- |
    |                 |                 |                 |
-
-   
 
    ```swift
    ///Alert适配器
@@ -271,8 +267,6 @@
    | ![](Pop1.gif) | ![](Pop2.gif) |
    | ------------- | ------------- |
    |               |               |
-
-   
 
    ```swift
    public class ShowPopViewConfig {
