@@ -8,11 +8,12 @@
 
 import UIKit
 import SwiftBrick
-class LViewController: UIViewController, CAAnimationDelegate {
+class LViewController: UIViewController, CAAnimationDelegate, PresentedViewType{
+    var presentedViewComponent: PresentedViewComponent?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = .white
         // Do any additional setup after loading the view.
         let colors = [UIColor.clear,UIColor.purple]
         let imageView = UIImageView(frame: .init(x: 0, y: 0, width: 200, height: 200))

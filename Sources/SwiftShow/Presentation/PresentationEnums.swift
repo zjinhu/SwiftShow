@@ -141,6 +141,7 @@ public enum TransitionType: Equatable {
     case translation(origin: PresentationOrigin)
     case crossDissolve
     case crossZoom
+    case flipHorizontal
     case custom(animation: PresentationAnimation)
     
     var animation: PresentationAnimation {
@@ -151,6 +152,8 @@ public enum TransitionType: Equatable {
             return CrossDissolveAnimation()
         case .crossZoom:
             return CrossZoomAnimation(scale: 0.1)
+        case .flipHorizontal:
+            return FlipHorizontalAnimation()
         case .custom(let animation):
             return animation
         }
@@ -162,6 +165,8 @@ public enum TransitionType: Equatable {
         case (.translation(let lhsOrigin), .translation(let rhsOrigin)):
             return lhsOrigin == rhsOrigin
         case (.crossDissolve, .crossDissolve):
+            return true
+        case (.flipHorizontal, .flipHorizontal):
             return true
         case (.crossZoom, .crossZoom):
             return true

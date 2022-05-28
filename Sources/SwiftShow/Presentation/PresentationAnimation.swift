@@ -39,7 +39,7 @@ open class PresentationAnimation: NSObject {
     
     public var options: AnimationOptions
     public var origin: PresentationOrigin?
-
+    
     public init(options: AnimationOptions = .normal(duration: 0.3), origin: PresentationOrigin? = nil) {
         self.options = options
         self.origin = origin
@@ -70,7 +70,7 @@ open class PresentationAnimation: NSObject {
         }
         return initialFrame
     }
-
+    
     /// 动画开始前（做动画开始前的准备工作，子类可覆写）
     ///
     /// - Parameter animationContext: 动画上下文
@@ -81,7 +81,7 @@ open class PresentationAnimation: NSObject {
         }
         animationContext.animatingView?.frame = initialFrame
     }
-
+    
     /// 动画执行（做动画的具体执行动作，子类可覆写）
     ///
     /// - Parameter animationContext:  动画上下文
@@ -92,12 +92,12 @@ open class PresentationAnimation: NSObject {
         }
         animationContext.animatingView?.frame = finalFrame
     }
-
+    
     /// 动画完成后（做动画完成的清理工作，子类可覆写）
     ///
     /// - Parameter animationContext: 动画上下文
     open func afterAnimation(animationContext: AnimationContext) {
-
+        
     }
     
 }
@@ -184,6 +184,81 @@ extension PresentationAnimation: UIViewControllerAnimatedTransitioning {
             self.afterAnimation(animationContext: animationContext)
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
+    }
+    
+}
+
+public class FlipHorizontalAnimation: PresentationAnimation {
+    
+    public override func performAnimation(animationContext: AnimationContext) {
+        animationContext.toView?.layer.zPosition = 999
+        animationContext.fromView?.layer.zPosition = 999
+        
+        var fromViewRotationPerspectiveTrans = CATransform3DIdentity
+        fromViewRotationPerspectiveTrans.m34 = -0.003
+        fromViewRotationPerspectiveTrans = CATransform3DRotate(fromViewRotationPerspectiveTrans, .pi / 2.0, 0.0, -1.0, 0.0)
+        
+        var toViewRotationPerspectiveTrans = CATransform3DIdentity
+        toViewRotationPerspectiveTrans.m34 = -0.003
+        toViewRotationPerspectiveTrans = CATransform3DRotate(toViewRotationPerspectiveTrans, .pi / 2.0, 0.0, 1.0, 0.0)
+        
+        animationContext.toView?.layer.transform = toViewRotationPerspectiveTrans
+        
+        UIView.animate(withDuration: options.duration, delay: 0, options: .curveLinear, animations: {
+            animationContext.fromView?.layer.transform = fromViewRotationPerspectiveTrans
+        }) { (_) in
+            UIView.animate(withDuration: self.options.duration, delay: 0, options: .curveLinear, animations: {
+                animationContext.toView?.layer.transform = CATransform3DMakeRotation(.pi / 2.0, 0.0, 0.0, 0.0)
+            }, completion: nil)
+        }
+        
+    }
+}
+
+public class CrossZoomAnimation: PresentationAnimation {
+    
+    private var scale: CGFloat
+    
+    public init(scale: CGFloat, options: AnimationOptions = .normal(duration: 0.3), origin: PresentationOrigin? = nil) {
+        self.scale = scale
+        super.init(options: options, origin: origin)
+    }
+    
+    public override func beforeAnimation(animationContext: AnimationContext) {
+        animationContext.animatingView?.frame = animationContext.finalFrame
+        let translate = calculateTranslate(animationContext: animationContext)
+        animationContext.animatingView?.transform = animationContext.isPresenting ? CGAffineTransform(translationX: translate.x, y: translate.y).scaledBy(x: scale, y: scale) : .identity
+    }
+    
+    public override func performAnimation(animationContext: AnimationContext) {
+        let translate = calculateTranslate(animationContext: animationContext)
+        animationContext.animatingView?.transform = animationContext.isPresenting ? .identity : CGAffineTransform(translationX: translate.x, y: translate.y).scaledBy(x: scale, y: scale)
+    }
+    
+    private func calculateTranslate(animationContext: AnimationContext) -> CGPoint {
+        let finalFrame = animationContext.finalFrame
+        let initialFrame = transformInitialFrame(containerFrame: animationContext.containerView.frame, finalFrame: finalFrame)
+        let translate = CGPoint(x: initialFrame.minX - finalFrame.minX , y: initialFrame.minY - finalFrame.minY)
+        return translate
+    }
+    
+}
+
+public class CrossDissolveAnimation: PresentationAnimation {
+    
+    public override func beforeAnimation(animationContext: AnimationContext) {
+        super.beforeAnimation(animationContext: animationContext)
+        animationContext.animatingView?.alpha = animationContext.isPresenting ? 0.0 : 1.0
+    }
+    
+    public override func performAnimation(animationContext: AnimationContext) {
+        super.performAnimation(animationContext: animationContext)
+        animationContext.animatingView?.alpha = animationContext.isPresenting ? 1.0 : 0.0
+    }
+    
+    public override func afterAnimation(animationContext: AnimationContext) {
+        super.afterAnimation(animationContext: animationContext)
+        animationContext.animatingView?.alpha = 1.0
     }
     
 }

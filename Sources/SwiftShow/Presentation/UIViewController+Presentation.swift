@@ -20,7 +20,6 @@ extension UIViewController {
         viewController.transitioningDelegate = self
         present(viewController, animated: animated, completion: nil)
     }
-    
 }
 
 // MARK: -  UIViewControllerTransitioningDelegate

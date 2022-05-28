@@ -23,7 +23,7 @@ class ViewController: JHTableViewController{
         }
         
         self.title = "Show示例"
-        self.mainDatas = ["toast中间","toast中间带图片","toast下边","toast上边","toast自定义配置","loading不支持触摸透传","loading+文字不支持触摸透传","loading自定义配置","alert","alert自定义配置","popview","popview自定义配置","dropdown","富文本alert"]
+        self.mainDatas = ["toast中间","toast中间带图片","toast下边","toast上边","toast自定义配置","loading不支持触摸透传","loading+文字不支持触摸透传","loading自定义配置","alert","alert自定义配置","popview","popview自定义配置","dropdown","富文本alert","Present"]
         
     }
     
@@ -131,7 +131,13 @@ class ViewController: JHTableViewController{
                                     
                                   })
         default:
-            print("1")
+            let inputVC = LViewController()
+            var component = PresentedViewComponent(contentSize: CGSize(width: view.bounds.width, height: 300))
+            component.contentSize = CGSize(width: view.bounds.width, height: 300)
+            component.presentTransitionType = .translation(origin: .bottomOutOfLine)
+            component.destination = .bottomBaseline
+            inputVC.presentedViewComponent = component
+            presentViewController(inputVC)
         }
     }
     

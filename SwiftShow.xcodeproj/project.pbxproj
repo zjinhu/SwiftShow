@@ -18,8 +18,6 @@
 		811293D625417369009F8856 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293C725417369009F8856 /* PresentationController.swift */; };
 		811293D725417369009F8856 /* UIViewController+Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293C825417369009F8856 /* UIViewController+Presentation.swift */; };
 		811293D825417369009F8856 /* PresentationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293CA25417369009F8856 /* PresentationAnimation.swift */; };
-		811293D925417369009F8856 /* CrossZoomAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293CB25417369009F8856 /* CrossZoomAnimation.swift */; };
-		811293DA25417369009F8856 /* CrossDissolveAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293CC25417369009F8856 /* CrossDissolveAnimation.swift */; };
 		811293DB25417369009F8856 /* PresentedViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293CD25417369009F8856 /* PresentedViewType.swift */; };
 		811293DC25417369009F8856 /* PresentationEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293CE25417369009F8856 /* PresentationEnums.swift */; };
 		8171995C24EBC90500C04D4F /* LViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8171995B24EBC90500C04D4F /* LViewController.swift */; };
@@ -44,8 +42,6 @@
 		811293C725417369009F8856 /* PresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
 		811293C825417369009F8856 /* UIViewController+Presentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Presentation.swift"; sourceTree = "<group>"; };
 		811293CA25417369009F8856 /* PresentationAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationAnimation.swift; sourceTree = "<group>"; };
-		811293CB25417369009F8856 /* CrossZoomAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossZoomAnimation.swift; sourceTree = "<group>"; };
-		811293CC25417369009F8856 /* CrossDissolveAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrossDissolveAnimation.swift; sourceTree = "<group>"; };
 		811293CD25417369009F8856 /* PresentedViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentedViewType.swift; sourceTree = "<group>"; };
 		811293CE25417369009F8856 /* PresentationEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationEnums.swift; sourceTree = "<group>"; };
 		8171995B24EBC90500C04D4F /* LViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LViewController.swift; sourceTree = "<group>"; };
@@ -120,23 +116,13 @@
 		811293C625417369009F8856 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				811293C925417369009F8856 /* Animation */,
 				811293C725417369009F8856 /* PresentationController.swift */,
+				811293CA25417369009F8856 /* PresentationAnimation.swift */,
 				811293C825417369009F8856 /* UIViewController+Presentation.swift */,
 				811293CD25417369009F8856 /* PresentedViewType.swift */,
 				811293CE25417369009F8856 /* PresentationEnums.swift */,
 			);
 			path = Presentation;
-			sourceTree = "<group>";
-		};
-		811293C925417369009F8856 /* Animation */ = {
-			isa = PBXGroup;
-			children = (
-				811293CA25417369009F8856 /* PresentationAnimation.swift */,
-				811293CB25417369009F8856 /* CrossZoomAnimation.swift */,
-				811293CC25417369009F8856 /* CrossDissolveAnimation.swift */,
-			);
-			path = Animation;
 			sourceTree = "<group>";
 		};
 		81E146E923EA60A900011CDB = {
@@ -290,7 +276,6 @@
 			files = (
 				811293D825417369009F8856 /* PresentationAnimation.swift in Sources */,
 				8171995C24EBC90500C04D4F /* LViewController.swift in Sources */,
-				811293D925417369009F8856 /* CrossZoomAnimation.swift in Sources */,
 				811293CF25417369009F8856 /* DropDownView.swift in Sources */,
 				811293D325417369009F8856 /* AlertView.swift in Sources */,
 				811293D525417369009F8856 /* LoadingView.swift in Sources */,
@@ -299,7 +284,6 @@
 				811293DC25417369009F8856 /* PresentationEnums.swift in Sources */,
 				81E146F623EA60A900011CDB /* AppDelegate.swift in Sources */,
 				811293D125417369009F8856 /* PopView.swift in Sources */,
-				811293DA25417369009F8856 /* CrossDissolveAnimation.swift in Sources */,
 				811293DB25417369009F8856 /* PresentedViewType.swift in Sources */,
 				811293D225417369009F8856 /* Config.swift in Sources */,
 				811293D025417369009F8856 /* ToastView.swift in Sources */,
