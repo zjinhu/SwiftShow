@@ -17,16 +17,19 @@ extension Show{
     ///   - text: 文本
     ///   - image: 图片
     ///   - config: toast适配器
-    public class func showToast(_ text: String, image: UIImage? = nil, config : ConfigToast? = nil){
+    public class func toast(_ title: String,
+                            subTitle: String? = nil,
+                            image: UIImage? = nil,
+                            config : ConfigToast? = nil){
         let model = ShowToastConfig()
-        if let _ = image{
-            model.space = 10
-        }
         config?(model)
-        toast(text: text, image: image, config: model)
+        showToast(title: title, subTitle: subTitle, image: image, config: model)
     }
     
-    private class func toast(text: String, image: UIImage? = nil, config: ShowToastConfig){
+    private class func showToast(title: String,
+                                 subTitle: String? = nil,
+                                 image: UIImage? = nil,
+                                 config: ShowToastConfig){
         
         getWindow().subviews.forEach { (view) in
             if view.isKind(of: ToastView.self){
@@ -34,9 +37,7 @@ extension Show{
             }
         }
         
-        let toast = ToastView.init(config)
-        toast.title = text
-        toast.image = image
+        let toast = ToastView(title: title, subTitle: subTitle, image: image, config: config)
         getWindow().addSubview(toast)
         toast.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
@@ -69,40 +70,41 @@ extension Show{
     /// - Parameters:
     ///   - text: 文本
     ///   - config: loading适配器
-    public class func showLoading(_ text : String? = nil, config : ConfigLoading? = nil) {
+    public class func loading(_ title : String? = nil,
+                              subTitle: String? = nil,
+                              config : ConfigLoading? = nil) {
         guard let vc = currentViewController() else {
             return
         }
         
         let model = ShowLoadingConfig()
-        if let title = text , title.count > 0 {
-            model.space = 10
-        }
         config?(model)
-        loading(text, onView: vc.view, config: model)
+        loading(title: title, subTitle: subTitle, onView: vc.view, config: model)
     }
     
     /// 手动隐藏上层VC中的loading
-    public class func hiddenLoading() {
+    public class func hideLoading() {
         guard let vc = currentViewController() else {
             return
         }
-        hiddenLoadingOnView(vc.view)
+        hideLoadingOnView(vc.view)
     }
     
     /// 在window中展示loading
     /// - Parameters:
     ///   - text: 文本
     ///   - config: 配置
-    public class func showLoadingOnWindow(_ text : String? = nil, config : ConfigLoading? = nil){
+    public class func loadingOnWindow(_ title : String? = nil,
+                                      subTitle: String? = nil,
+                                      config : ConfigLoading? = nil){
         let model = ShowLoadingConfig()
         config?(model)
-        loading(text, onView: getWindow(), config: model)
+        loading(title: title, subTitle: subTitle, onView: getWindow(), config: model)
     }
     
     /// 手动隐藏window中loading
-    public class func hiddenLoadingOnWindow() {
-        hiddenLoadingOnView(getWindow())
+    public class func hideLoadingOnWindow() {
+        hideLoadingOnView(getWindow())
     }
     
     /// 在指定view中添加loading
@@ -110,15 +112,18 @@ extension Show{
     ///   - onView: view
     ///   - text: 文本
     ///   - config: 配置
-    public class func showLoadingOnView(_ onView: UIView, text : String? = nil, config : ConfigLoading? = nil){
+    public class func loadingOnView(_ onView: UIView,
+                                    title : String? = nil,
+                                    subTitle: String? = nil,
+                                    config : ConfigLoading? = nil){
         let model = ShowLoadingConfig()
         config?(model)
-        loading(text, onView: onView, config: model)
+        loading(title: title, subTitle: subTitle, onView: onView, config: model)
     }
     
     /// 手动隐藏指定view中loading
     /// - Parameter onView: view
-    public class func hiddenLoadingOnView(_ onView: UIView) {
+    public class func hideLoadingOnView(_ onView: UIView) {
         onView.subviews.forEach { (view) in
             if view.isKind(of: LoadingView.self){
                 view.removeFromSuperview()
@@ -126,17 +131,19 @@ extension Show{
         }
     }
     
-    private class func loading(_ text: String? = nil, onView: UIView? = nil, config : ShowLoadingConfig) {
-        let loadingView = LoadingView.init(config)
-        loadingView.title = text
+    private class func loading(title: String? = nil,
+                               subTitle: String? = nil,
+                               onView: UIView? = nil,
+                               config : ShowLoadingConfig) {
+        let loadingView = LoadingView(title: title, subTitle: subTitle, config: config)
         loadingView.isUserInteractionEnabled = !config.enableEvent
         if let base = onView{
-            hiddenLoadingOnView(base)
+            hideLoadingOnView(base)
             base.addSubview(loadingView)
             base.bringSubviewToFront(loadingView)
             loadingView.layer.zPosition = CGFloat(MAXFLOAT)
         }else{
-            hiddenLoadingOnWindow()
+            hideLoadingOnWindow()
             getWindow().addSubview(loadingView)
         }
         
@@ -146,7 +153,7 @@ extension Show{
     }
     
 }
-////MARK: --Alert
+//////MARK: --Alert
 extension Show{
     ///适配器回调,用于给适配器参数赋值
     public typealias ConfigAlert = ((_ config : ShowAlertConfig) -> Void)
@@ -159,18 +166,18 @@ extension Show{
     ///   - rightBtnTitle: 右侧按钮标题
     ///   - leftBlock: 左侧按钮回调
     ///   - rightBlock: 右侧按钮回调
-    public class func showAlert(title: String? = nil,
-                                message: String?  = nil,
-                                leftBtnTitle: String? = nil,
-                                rightBtnTitle: String? = nil,
-                                leftBlock: LeftCallBack? = nil,
-                                rightBlock: RightCallback? = nil) {
-        showCustomAlert(title: title,
-                        message: message,
-                        leftBtnTitle: leftBtnTitle,
-                        rightBtnTitle: rightBtnTitle,
-                        leftBlock: leftBlock,
-                        rightBlock: rightBlock)
+    public class func alert(title: String? = nil,
+                            message: String?  = nil,
+                            leftBtnTitle: String? = nil,
+                            rightBtnTitle: String? = nil,
+                            leftBlock: LeftCallBack? = nil,
+                            rightBlock: RightCallback? = nil) {
+        customAlert(title: title,
+                    message: message,
+                    leftBtnTitle: leftBtnTitle,
+                    rightBtnTitle: rightBtnTitle,
+                    leftBlock: leftBlock,
+                    rightBlock: rightBlock)
     }
     
     /// 富文本样式Alert
@@ -181,18 +188,18 @@ extension Show{
     ///   - rightBtnAttributedTitle: 富文本右侧按钮标题
     ///   - leftBlock: 左侧按钮回调
     ///   - rightBlock: 右侧按钮回调
-    public class func showAttributedAlert(attributedTitle : NSAttributedString? = nil,
-                                          attributedMessage : NSAttributedString? = nil,
-                                          leftBtnAttributedTitle: NSAttributedString? = nil,
-                                          rightBtnAttributedTitle: NSAttributedString? = nil,
-                                          leftBlock: LeftCallBack? = nil,
-                                          rightBlock: RightCallback? = nil) {
-        showCustomAlert(attributedTitle: attributedTitle,
-                        attributedMessage: attributedMessage,
-                        leftBtnAttributedTitle: leftBtnAttributedTitle,
-                        rightBtnAttributedTitle: rightBtnAttributedTitle,
-                        leftBlock: leftBlock,
-                        rightBlock: rightBlock)
+    public class func attributedAlert(attributedTitle : NSAttributedString? = nil,
+                                      attributedMessage : NSAttributedString? = nil,
+                                      leftBtnAttributedTitle: NSAttributedString? = nil,
+                                      rightBtnAttributedTitle: NSAttributedString? = nil,
+                                      leftBlock: LeftCallBack? = nil,
+                                      rightBlock: RightCallback? = nil) {
+        customAlert(attributedTitle: attributedTitle,
+                    attributedMessage: attributedMessage,
+                    leftBtnAttributedTitle: leftBtnAttributedTitle,
+                    rightBtnAttributedTitle: rightBtnAttributedTitle,
+                    leftBlock: leftBlock,
+                    rightBlock: rightBlock)
     }
     
     /// 自定义Alert
@@ -209,40 +216,37 @@ extension Show{
     ///   - leftBlock:  左侧按钮回调
     ///   - rightBlock: 右侧按钮回调
     ///   - config: Alert适配器，不传为默认样式
-    public class func showCustomAlert(title: String? = nil,
-                                      attributedTitle : NSAttributedString? = nil,
-                                      titleImage: UIImage? = nil,
-                                      message: String?  = nil,
-                                      attributedMessage : NSAttributedString? = nil,
-                                      leftBtnTitle: String? = nil,
-                                      leftBtnAttributedTitle: NSAttributedString? = nil,
-                                      rightBtnTitle: String? = nil,
-                                      rightBtnAttributedTitle: NSAttributedString? = nil,
-                                      leftBlock: LeftCallBack? = nil,
-                                      rightBlock: RightCallback? = nil,
-                                      config : ConfigAlert? = nil) {
-        hiddenAlert()
+    public class func customAlert(title: String? = nil,
+                                  attributedTitle : NSAttributedString? = nil,
+                                  image: UIImage? = nil,
+                                  message: String?  = nil,
+                                  attributedMessage : NSAttributedString? = nil,
+                                  leftBtnTitle: String? = nil,
+                                  leftBtnAttributedTitle: NSAttributedString? = nil,
+                                  rightBtnTitle: String? = nil,
+                                  rightBtnAttributedTitle: NSAttributedString? = nil,
+                                  leftBlock: LeftCallBack? = nil,
+                                  rightBlock: RightCallback? = nil,
+                                  config : ConfigAlert? = nil) {
+        hideAlert()
         
         let model = ShowAlertConfig()
-        if let _ = titleImage{
-            model.space = 10
-        }
         config?(model)
         
-        let alertView = AlertView.init(title: title,
-                                       attributedTitle: attributedTitle,
-                                       titleImage: titleImage,
-                                       message: message,
-                                       attributedMessage: attributedMessage,
-                                       leftBtnTitle: leftBtnTitle,
-                                       leftBtnAttributedTitle: leftBtnAttributedTitle,
-                                       rightBtnTitle: rightBtnTitle,
-                                       rightBtnAttributedTitle: rightBtnAttributedTitle,
-                                       config: model)
+        let alertView = AlertView(title: title,
+                                  attributedTitle: attributedTitle,
+                                  image: image,
+                                  message: message,
+                                  attributedMessage: attributedMessage,
+                                  leftBtnTitle: leftBtnTitle,
+                                  leftBtnAttributedTitle: leftBtnAttributedTitle,
+                                  rightBtnTitle: rightBtnTitle,
+                                  rightBtnAttributedTitle: rightBtnAttributedTitle,
+                                  config: model)
         alertView.leftBlock = leftBlock
         alertView.rightBlock = rightBlock
         alertView.dismissBlock = {
-            hiddenAlert()
+            hideAlert()
         }
         getWindow().addSubview(alertView)
         alertView.snp.makeConstraints { (make) in
@@ -252,7 +256,7 @@ extension Show{
     }
     
     /// 手动隐藏Alert
-    public class func hiddenAlert() {
+    public class func hideAlert() {
         getWindow().subviews.forEach { (view) in
             if view.isKind(of: AlertView.self){
                 
@@ -279,10 +283,10 @@ extension Show{
     ///   - config: popview适配器
     ///   - showClosure: 弹出回调
     ///   - hideClosure: 收起回调
-    public class func showPopView(contentView: UIView,
-                                  config : ConfigPop? = nil,
-                                  showClosure: CallBack? = nil,
-                                  hideClosure: CallBack? = nil) {
+    public class func pop(_ contentView: UIView,
+                          config : ConfigPop? = nil,
+                          showClosure: CallBack? = nil,
+                          hideClosure: CallBack? = nil) {
         
         getWindow().subviews.forEach { (view) in
             if view.isKind(of: PopView.self){
@@ -297,19 +301,19 @@ extension Show{
         config?(model)
         
         let popView = PopView.init(contentView: contentView, config: model) {
-            hidenPopView()
+            hidePop()
         }
         
         getWindow().addSubview(popView)
         
         popView.showAnimate()
-     
+        
         showPopCallBack?()
     }
     
     /// 手动收起popview
     /// - Parameter complete: 完成回调
-    public class func hidenPopView(_ complete : (() -> Void)? = nil ) {
+    public class func hidePop(_ complete : (() -> Void)? = nil ) {
         getWindow().subviews.forEach { (view) in
             if view.isKind(of: PopView.self){
                 let popView : PopView = view as! PopView
@@ -339,13 +343,13 @@ extension Show{
     ///   - hideClosure: 隐藏回调
     ///   - willShowClosure: 即将展示回调
     ///   - willHideClosure: 即将收起回调
-    public class func showCoverTabbarView(contentView: UIView,
-                                          config: ((_ config : ShowDropDownConfig) -> Void)? = nil,
-                                          showClosure: CallBack? = nil,
-                                          hideClosure: CallBack? = nil,
-                                          willShowClosure: CallBack? = nil,
-                                          willHideClosure: CallBack? = nil) {
-
+    public class func coverTabbar(_ contentView: UIView,
+                                  config: ((_ config : ShowDropDownConfig) -> Void)? = nil,
+                                  showClosure: CallBack? = nil,
+                                  hideClosure: CallBack? = nil,
+                                  willShowClosure: CallBack? = nil,
+                                  willHideClosure: CallBack? = nil) {
+        
         if !isHaveCoverTabbarView() {
             
             showCoverCallBack = showClosure
@@ -358,7 +362,7 @@ extension Show{
             config?(model)
             
             let popView = DropDownView.init(contentView: contentView, config: model) {
-                hidenCoverTabbarView()
+                hideCoverTabbar()
             }
             
             getWindow().rootViewController?.view.addSubview(popView)
@@ -385,7 +389,7 @@ extension Show{
     
     /// 手动隐藏DropDown
     /// - Parameter complete: 完成回调
-    public class func hidenCoverTabbarView(_ complete : (() -> Void)? = nil ) {
+    public class func hideCoverTabbar(_ complete : (() -> Void)? = nil ) {
         getWindow().rootViewController?.view.subviews.forEach { (view) in
             if view.isKind(of: DropDownView.self){
                 let popView : DropDownView = view as! DropDownView

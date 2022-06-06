@@ -6,7 +6,7 @@ target 'SwiftShow' do
   use_frameworks!
 
   # Pods for SwiftDialog
-pod 'SwiftButton'
+#pod 'SwiftButton'
 pod 'SwiftBrick'
 pod 'SwiftyAttributes'
 end

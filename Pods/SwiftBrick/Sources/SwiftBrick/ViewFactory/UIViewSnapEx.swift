@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+// MARK: ===================================工厂类:UIView SnapKit=========================================
 public extension UIView {
     
     struct AssociatedKeys {
@@ -94,5 +95,29 @@ public extension UIView {
 //    public func config(_ config: (T) -> Void) -> T {
 //        config(makerValue)
 //        return makerValue
+//    }
+//}
+
+//public struct Brick<Base> {
+//    let base: Base
+//    init(_ base: Base) {
+//        self.base = base
+//    }
+//}
+//
+//public protocol BrickCompatible {
+//
+//}
+//
+//public extension BrickCompatible {
+//
+//    static var jh: Brick<Self>.Type {
+//        get{ Brick<Self>.self }
+//        set {}
+//    }
+//
+//    var jh: Brick<Self> {
+//        get { Brick(self) }
+//        set {}
 //    }
 //}

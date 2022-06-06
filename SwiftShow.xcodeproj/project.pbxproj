@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		390E616542220F9678A47E0A /* Pods_SwiftShow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 203AE3449E482FF178CFB7D4 /* Pods_SwiftShow.framework */; };
+		6027E3B5284E0A6A00E2A347 /* PresentationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6027E3B0284E0A6A00E2A347 /* PresentationAnimation.swift */; };
+		6027E3B6284E0A6A00E2A347 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6027E3B1284E0A6A00E2A347 /* PresentationController.swift */; };
+		6027E3B7284E0A6A00E2A347 /* UIViewController+Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6027E3B2284E0A6A00E2A347 /* UIViewController+Presentation.swift */; };
+		6027E3B8284E0A6A00E2A347 /* PresentedViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6027E3B3284E0A6A00E2A347 /* PresentedViewType.swift */; };
+		6027E3B9284E0A6A00E2A347 /* PresentationEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6027E3B4284E0A6A00E2A347 /* PresentationEnums.swift */; };
+		6027E3BB284E0AA200E2A347 /* CommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6027E3BA284E0AA200E2A347 /* CommonView.swift */; };
 		811293CF25417369009F8856 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293BF25417369009F8856 /* DropDownView.swift */; };
 		811293D025417369009F8856 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293C025417369009F8856 /* ToastView.swift */; };
 		811293D125417369009F8856 /* PopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293C125417369009F8856 /* PopView.swift */; };
@@ -15,11 +21,6 @@
 		811293D325417369009F8856 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293C325417369009F8856 /* AlertView.swift */; };
 		811293D425417369009F8856 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293C425417369009F8856 /* Show.swift */; };
 		811293D525417369009F8856 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293C525417369009F8856 /* LoadingView.swift */; };
-		811293D625417369009F8856 /* PresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293C725417369009F8856 /* PresentationController.swift */; };
-		811293D725417369009F8856 /* UIViewController+Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293C825417369009F8856 /* UIViewController+Presentation.swift */; };
-		811293D825417369009F8856 /* PresentationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293CA25417369009F8856 /* PresentationAnimation.swift */; };
-		811293DB25417369009F8856 /* PresentedViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293CD25417369009F8856 /* PresentedViewType.swift */; };
-		811293DC25417369009F8856 /* PresentationEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811293CE25417369009F8856 /* PresentationEnums.swift */; };
 		8171995C24EBC90500C04D4F /* LViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8171995B24EBC90500C04D4F /* LViewController.swift */; };
 		81E146F623EA60A900011CDB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E146F523EA60A900011CDB /* AppDelegate.swift */; };
 		81E146F823EA60A900011CDB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E146F723EA60A900011CDB /* SceneDelegate.swift */; };
@@ -32,6 +33,12 @@
 /* Begin PBXFileReference section */
 		203AE3449E482FF178CFB7D4 /* Pods_SwiftShow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftShow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43D2D768D42F5500D7D34E2F /* Pods-SwiftShow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftShow.debug.xcconfig"; path = "Target Support Files/Pods-SwiftShow/Pods-SwiftShow.debug.xcconfig"; sourceTree = "<group>"; };
+		6027E3B0284E0A6A00E2A347 /* PresentationAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationAnimation.swift; sourceTree = "<group>"; };
+		6027E3B1284E0A6A00E2A347 /* PresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
+		6027E3B2284E0A6A00E2A347 /* UIViewController+Presentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Presentation.swift"; sourceTree = "<group>"; };
+		6027E3B3284E0A6A00E2A347 /* PresentedViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentedViewType.swift; sourceTree = "<group>"; };
+		6027E3B4284E0A6A00E2A347 /* PresentationEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationEnums.swift; sourceTree = "<group>"; };
+		6027E3BA284E0AA200E2A347 /* CommonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonView.swift; sourceTree = "<group>"; };
 		811293BF25417369009F8856 /* DropDownView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 		811293C025417369009F8856 /* ToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		811293C125417369009F8856 /* PopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopView.swift; sourceTree = "<group>"; };
@@ -39,11 +46,6 @@
 		811293C325417369009F8856 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		811293C425417369009F8856 /* Show.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		811293C525417369009F8856 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
-		811293C725417369009F8856 /* PresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationController.swift; sourceTree = "<group>"; };
-		811293C825417369009F8856 /* UIViewController+Presentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Presentation.swift"; sourceTree = "<group>"; };
-		811293CA25417369009F8856 /* PresentationAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationAnimation.swift; sourceTree = "<group>"; };
-		811293CD25417369009F8856 /* PresentedViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentedViewType.swift; sourceTree = "<group>"; };
-		811293CE25417369009F8856 /* PresentationEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationEnums.swift; sourceTree = "<group>"; };
 		8171995B24EBC90500C04D4F /* LViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LViewController.swift; sourceTree = "<group>"; };
 		81E146F223EA60A900011CDB /* SwiftShow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftShow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81E146F523EA60A900011CDB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -89,11 +91,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6027E3AF284E0A6A00E2A347 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				6027E3B0284E0A6A00E2A347 /* PresentationAnimation.swift */,
+				6027E3B1284E0A6A00E2A347 /* PresentationController.swift */,
+				6027E3B2284E0A6A00E2A347 /* UIViewController+Presentation.swift */,
+				6027E3B3284E0A6A00E2A347 /* PresentedViewType.swift */,
+				6027E3B4284E0A6A00E2A347 /* PresentationEnums.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
 		811293BD25417369009F8856 /* SwiftShow */ = {
 			isa = PBXGroup;
 			children = (
 				811293BE25417369009F8856 /* Show */,
-				811293C625417369009F8856 /* Presentation */,
 			);
 			name = SwiftShow;
 			path = Sources/SwiftShow;
@@ -102,6 +115,7 @@
 		811293BE25417369009F8856 /* Show */ = {
 			isa = PBXGroup;
 			children = (
+				6027E3BA284E0AA200E2A347 /* CommonView.swift */,
 				811293BF25417369009F8856 /* DropDownView.swift */,
 				811293C025417369009F8856 /* ToastView.swift */,
 				811293C125417369009F8856 /* PopView.swift */,
@@ -111,18 +125,6 @@
 				811293C525417369009F8856 /* LoadingView.swift */,
 			);
 			path = Show;
-			sourceTree = "<group>";
-		};
-		811293C625417369009F8856 /* Presentation */ = {
-			isa = PBXGroup;
-			children = (
-				811293C725417369009F8856 /* PresentationController.swift */,
-				811293CA25417369009F8856 /* PresentationAnimation.swift */,
-				811293C825417369009F8856 /* UIViewController+Presentation.swift */,
-				811293CD25417369009F8856 /* PresentedViewType.swift */,
-				811293CE25417369009F8856 /* PresentationEnums.swift */,
-			);
-			path = Presentation;
 			sourceTree = "<group>";
 		};
 		81E146E923EA60A900011CDB = {
@@ -146,6 +148,7 @@
 		81E146F423EA60A900011CDB /* SwiftShow */ = {
 			isa = PBXGroup;
 			children = (
+				6027E3AF284E0A6A00E2A347 /* Presentation */,
 				811293BD25417369009F8856 /* SwiftShow */,
 				81E146F523EA60A900011CDB /* AppDelegate.swift */,
 				81E146F723EA60A900011CDB /* SceneDelegate.swift */,
@@ -274,22 +277,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				811293D825417369009F8856 /* PresentationAnimation.swift in Sources */,
 				8171995C24EBC90500C04D4F /* LViewController.swift in Sources */,
 				811293CF25417369009F8856 /* DropDownView.swift in Sources */,
+				6027E3B5284E0A6A00E2A347 /* PresentationAnimation.swift in Sources */,
 				811293D325417369009F8856 /* AlertView.swift in Sources */,
 				811293D525417369009F8856 /* LoadingView.swift in Sources */,
 				81E146FA23EA60A900011CDB /* ViewController.swift in Sources */,
-				811293D725417369009F8856 /* UIViewController+Presentation.swift in Sources */,
-				811293DC25417369009F8856 /* PresentationEnums.swift in Sources */,
+				6027E3B9284E0A6A00E2A347 /* PresentationEnums.swift in Sources */,
 				81E146F623EA60A900011CDB /* AppDelegate.swift in Sources */,
 				811293D125417369009F8856 /* PopView.swift in Sources */,
-				811293DB25417369009F8856 /* PresentedViewType.swift in Sources */,
 				811293D225417369009F8856 /* Config.swift in Sources */,
+				6027E3B8284E0A6A00E2A347 /* PresentedViewType.swift in Sources */,
+				6027E3B6284E0A6A00E2A347 /* PresentationController.swift in Sources */,
+				6027E3BB284E0AA200E2A347 /* CommonView.swift in Sources */,
 				811293D025417369009F8856 /* ToastView.swift in Sources */,
 				811293D425417369009F8856 /* Show.swift in Sources */,
+				6027E3B7284E0A6A00E2A347 /* UIViewController+Presentation.swift in Sources */,
 				81E146F823EA60A900011CDB /* SceneDelegate.swift in Sources */,
-				811293D625417369009F8856 /* PresentationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

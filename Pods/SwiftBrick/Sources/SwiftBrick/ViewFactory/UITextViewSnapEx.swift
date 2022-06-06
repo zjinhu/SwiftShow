@@ -8,13 +8,12 @@
 
 import UIKit
 import SnapKit
-
+// MARK: ===================================工厂类:UITextView SnapKit=========================================
 fileprivate var kTextViewPlaceholderLabel: Int = 0x2019_00
 fileprivate var kTextViewPlaceholder     : Int = 0x2019_01
 fileprivate var kTextViewPlaceholderColor: Int = 0x2019_02
 fileprivate var kTextViewPlaceholderFont : Int = 0x2019_03
 fileprivate var kTextViewPlaceholderKeys : Int = 0x2019_04
-
 
 public extension UITextView {
     

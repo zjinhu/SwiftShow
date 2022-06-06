@@ -7,68 +7,56 @@
 //
 
 import UIKit
-import SwiftButton
 import SnapKit
+
+
 class ToastView: UIView {
-    
-    private var toastConfig : ShowToastConfig
-    
-    private lazy var toastView: SwiftButton = {
-        let toastView = SwiftButton.init(toastConfig.imageType, marginArr: [toastConfig.space])
-        toastView.backgroundColor = .clear
-        toastView.titleLabel.textColor = toastConfig.textColor
-        toastView.titleLabel.font = toastConfig.textFont
-        toastView.titleLabel.numberOfLines = 0
-        toastView.titleLabel.textAlignment = .center
-        return toastView
-    }()
-    
-    var title : String?{
-        didSet{
-            toastView.title = title
-        }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-    var image : UIImage?{
-        didSet{
-            toastView.image = image
-        }
-    }
-    
-    init(_ config : ShowToastConfig) {
-        toastConfig = config
-        
+    init(title: String,
+         subTitle: String? = nil,
+         image: UIImage? = nil,
+         config : ShowToastConfig) {
+
         super.init(frame: CGRect.zero)
         
-        let containerView = UIView.init()
+        let containerView = UIView()
         addSubview(containerView)
-        containerView.backgroundColor = toastConfig.bgColor
-        containerView.layer.cornerRadius = toastConfig.cornerRadius
-        if toastConfig.shadowColor != UIColor.clear.cgColor {
-            containerView.layer.shadowColor = toastConfig.shadowColor
-            containerView.layer.shadowOpacity = toastConfig.shadowOpacity
-            containerView.layer.shadowRadius = toastConfig.shadowRadius
+        containerView.backgroundColor = config.bgColor
+        containerView.layer.cornerRadius = config.cornerRadius
+        if config.shadowColor != UIColor.clear.cgColor {
+            containerView.layer.shadowColor = config.shadowColor
+            containerView.layer.shadowOpacity = config.shadowOpacity
+            containerView.layer.shadowRadius = config.shadowRadius
             containerView.layer.shadowOffset = CGSize.zero
         }
         containerView.snp.makeConstraints { (make) in
             make.top.left.right.bottom.equalToSuperview()
         }
+        let view = CommonView(title: title,
+                              subtitle: subTitle,
+                              image: image,
+                              imageType: config.imageType,
+                              spaceImage: config.spaceImage,
+                              spaceText: config.spaceText)
         
-        containerView.addSubview(toastView)
-        toastView.titleLabel.snp.makeConstraints { (make) in
-            make.width.lessThanOrEqualTo(toastConfig.maxWidth)
-            make.height.lessThanOrEqualTo(toastConfig.maxHeight)
-        }
-        toastView.snp.makeConstraints { (make) in
-            make.top.left.equalToSuperview().offset(toastConfig.padding)
-            make.bottom.right.equalToSuperview().offset(-toastConfig.padding)
-        }
+        view.titleLabel.textColor = config.titleColor
+        view.titleLabel.font = config.titleFont
         
+        view.subtitleLabel.textColor = config.subTitleColor
+        view.subtitleLabel.font = config.subTitleFont
+        
+        containerView.addSubview(view)
+
+        view.snp.makeConstraints { (make) in
+            make.top.left.equalToSuperview().offset(config.padding)
+            make.bottom.right.equalToSuperview().offset(-config.padding)
+            make.width.lessThanOrEqualTo(config.maxWidth)
+            make.height.lessThanOrEqualTo(config.maxHeight)
+        }
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
+
 }

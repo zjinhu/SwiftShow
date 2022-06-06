@@ -7,35 +7,14 @@
 //
 
 import UIKit
-import SwiftButton
 import SnapKit
 
 class LoadingView: UIView {
-    
-    private var loadingConfig : ShowLoadingConfig
-    
-    private lazy var loadingView: SwiftButton = {
-        let loadingView = SwiftButton.init(loadingConfig.imageType, marginArr: [loadingConfig.space])
-        loadingView.backgroundColor = .clear
-        loadingView.titleLabel.textColor = loadingConfig.textColor
-        loadingView.titleLabel.font = loadingConfig.textFont
-        loadingView.titleLabel.numberOfLines = 0
-        loadingView.titleLabel.textAlignment = .center
-//        loadingView.titleLabel.backgroundColor = .purple
-//        loadingView.backgroundColor = .cyan
-        return loadingView
-    }()
-    
-    var title : String?{
-        didSet{
-            loadingView.title = title
-        }
-    }
-    
-    init(_ config : ShowLoadingConfig) {
-        
-        loadingConfig = config
-        
+ 
+    init(title: String? = nil,
+         subTitle: String? = nil, 
+         config : ShowLoadingConfig) {
+ 
         super.init(frame: CGRect.zero)
         
         let effectView = UIVisualEffectView(effect: UIBlurEffect(style: config.effectStyle))
@@ -68,22 +47,34 @@ class LoadingView: UIView {
             make.center.equalToSuperview()
         }
 
+        let loadingView = CommonView(title: title,
+                              subtitle: subTitle,
+                              image: UIImage(),
+                              imageType: config.imageType,
+                              spaceImage: config.spaceImage,
+                              spaceText: config.spaceText)
+        
+        loadingView.titleLabel.textColor = config.titleColor
+        loadingView.titleLabel.font = config.titleFont
+        
+        loadingView.subtitleLabel.textColor = config.subTitleColor
+        loadingView.subtitleLabel.font = config.subTitleFont
+        
         containerView.addSubview(loadingView)
-        loadingView.titleLabel.snp.makeConstraints { (make) in
-            make.width.lessThanOrEqualTo(config.maxWidth)
-        }
+
         loadingView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(config.verticalPadding)
             make.bottom.equalToSuperview().offset(-config.verticalPadding)
             make.left.equalToSuperview().offset(config.horizontalPadding)
             make.right.equalToSuperview().offset(-config.horizontalPadding)
+            make.width.lessThanOrEqualTo(config.maxWidth)
         }
         
         if let array = config.imagesArray{
             guard let image = array.first else {
                 return
             }
-            loadingView.image = image
+            loadingView.imageView.image = image
             loadingView.imageView.animationImages = config.imagesArray
             loadingView.imageView.animationDuration = config.animationTime
             loadingView.imageView.animationRepeatCount = 0

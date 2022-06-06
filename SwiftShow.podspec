@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftShow'
-  s.version          = '0.7.1'
+  s.version          = '0.7.3'
   s.summary          = '弹窗组件.'
  
   s.description      = <<-DESC
@@ -14,17 +14,16 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/jackiehu/SwiftShow.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = "11.0" 
-  s.swift_versions     = ['5.2', '5.1', '5.0', '4.2']
+  s.swift_versions     = ['5.5','5.4','5.3','5.2','5.1','5.0','4.2']
   s.requires_arc = true
 
   s.subspec 'Class' do |ss|
       ss.source_files = 'Sources/SwiftShow/Show/**/*'
-      ss.dependency 'SwiftButton'
       ss.dependency 'SnapKit'
     end
 
   s.subspec 'Presentation' do |ss|
-      ss.source_files = 'Sources/SwiftShow/Presentation/**/*'
+      ss.source_files = 'SwiftShow/Presentation/**/*'
       ss.dependency 'SwiftShow/Class'
     end
     

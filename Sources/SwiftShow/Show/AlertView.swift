@@ -7,9 +7,7 @@
 //
 
 import UIKit
-import SwiftButton
 import SnapKit
-
 
 public typealias LeftCallBack = () -> Void
 public typealias RightCallback = () -> Void
@@ -22,23 +20,21 @@ class AlertView: UIView {
     var leftBlock : LeftCallBack?
     var rightBlock : RightCallback?
     var dismissBlock : DismissCallback?
-     
-    private lazy var titleView: SwiftButton = {
-        let titleView = SwiftButton.init(alertConfig.imageType, marginArr: [alertConfig.space])
-        titleView.backgroundColor = .clear
-        titleView.titleLabel.textColor = alertConfig.titleColor
-        titleView.titleLabel.font = alertConfig.titleFont
-        titleView.titleLabel.numberOfLines = 0
-        titleView.titleLabel.textAlignment = .center
-        return titleView
+
+    
+    lazy var imageView: UIImageView = {
+        let vi = UIImageView()
+        vi.contentMode = .scaleAspectFit
+        return vi
     }()
     
-    private lazy var rightBtn : UIButton = {
-        let rightBtn = UIButton.init(type: .custom)
-         rightBtn.titleLabel?.font = alertConfig.buttonFont
-         rightBtn.setTitleColor(alertConfig.rightColor, for: .normal)
-         rightBtn.addTarget(self, action: #selector(rightClick), for: .touchUpInside)
-        return rightBtn
+    lazy var titleLabel: UILabel = {
+        let lab = UILabel()
+        lab.textColor = alertConfig.titleColor
+        lab.font = alertConfig.titleFont
+        lab.numberOfLines = 0
+        lab.textAlignment = .center
+        return lab
     }()
     
     private lazy var messageLabel : UILabel = {
@@ -58,10 +54,18 @@ class AlertView: UIView {
         leftBtn.addTarget(self, action: #selector(leftClick), for: .touchUpInside)
         return leftBtn
     }()
+    
+    private lazy var rightBtn : UIButton = {
+        let rightBtn = UIButton.init(type: .custom)
+         rightBtn.titleLabel?.font = alertConfig.buttonFont
+         rightBtn.setTitleColor(alertConfig.rightColor, for: .normal)
+         rightBtn.addTarget(self, action: #selector(rightClick), for: .touchUpInside)
+        return rightBtn
+    }()
 
     init(title: String? = nil,
          attributedTitle : NSAttributedString? = nil,
-         titleImage: UIImage? = nil,
+         image: UIImage? = nil,
          message: String?  = nil,
          attributedMessage : NSAttributedString? = nil,
          leftBtnTitle: String? = nil,
@@ -105,20 +109,30 @@ class AlertView: UIView {
             make.height.lessThanOrEqualTo(alertConfig.maxHeight)
         }
         
-
-        if let att = attributedTitle{
-            titleView.titleLabel.attributedText = att
-        }else{
-            titleView.title = title
-        }
-        
-        titleView.image = titleImage
-        containerView.addSubview(titleView)
-        titleView.snp.makeConstraints { (make) in
+ 
+        imageView.image = image
+        containerView.addSubview(imageView)
+        imageView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(10)
             make.left.right.equalToSuperview()
         }
-        titleView.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        
+        if let att = attributedTitle{
+            titleLabel.attributedText = att
+        }else{
+            titleLabel.text = title
+        }
+         
+        containerView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { (make) in
+            if let _ = image{
+                make.top.equalTo(imageView.snp.bottom).offset(config.space)
+            }else{
+                make.top.equalToSuperview().offset(10)
+            }
+            make.left.right.equalToSuperview()
+        }
+        titleLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         
 
         if let att = attributedMessage{
@@ -128,7 +142,7 @@ class AlertView: UIView {
         }
         containerView.addSubview(messageLabel)
         messageLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(titleView.snp.bottom).offset(10)
+            make.top.equalTo(titleLabel.snp.bottom).offset(config.space)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
          }
@@ -192,6 +206,7 @@ class AlertView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     
     @objc
     func leftClick() {
