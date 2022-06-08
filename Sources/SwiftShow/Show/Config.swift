@@ -51,7 +51,7 @@ public class ShowToastConfig {
 
     
     ///Toast背景颜色 默认黑色
-    public var bgColor : UIColor = UIColor.blackBGColor
+    public var bgColor : UIColor = .blackBGColor
     ///阴影颜色 默认clearcolor
     public var shadowColor : CGColor = UIColor.clear.cgColor
     ///阴影Opacity 默认0.5
@@ -75,7 +75,7 @@ public class ShowToastConfig {
     ///Toast title字体  默认15
     public var titleFont : UIFont = UIFont.systemFont(ofSize: 15)
     /// Toast subTitle文字字体颜色 默认白色
-    public var subTitleColor : UIColor = .gray
+    public var subTitleColor : UIColor = .lightGray
     ///Toast subTitle字体  默认15
     public var subTitleFont : UIFont = UIFont.systemFont(ofSize: 12)
     
@@ -102,7 +102,7 @@ public class ShowLoadingConfig {
     ///文字字体大小 默认系统字体15
     public var subTitleFont : UIFont = UIFont.systemFont(ofSize: 12)
     ///文字字体颜色 默认白色
-    public var subTitleColor : UIColor = .white
+    public var subTitleColor : UIColor = .lightGray
     
     
     /// 是否背景透传点击 默认false
@@ -110,7 +110,7 @@ public class ShowLoadingConfig {
     ///背景蒙版 毛玻璃
     public var effectStyle = UIBlurEffect.Style.light
     ///加载框主体颜色 默认黑色
-    public var tintColor : UIColor = UIColor.blackBGColor
+    public var tintColor : UIColor = .blackBGColor
     ///背景颜色 默认clear
     public var bgColor : UIColor = .clear
     ///默认蒙版类型 背景色
@@ -163,7 +163,7 @@ public class ShowAlertConfig {
     public var space : Float = 5
     
     ///alert主体颜色 默认
-    public var tintColor : UIColor = UIColor.whiteBGColor
+    public var tintColor : UIColor = .whiteBGColor
     ///alert背景颜色
     public var bgColor : UIColor = UIColor.black.withAlphaComponent(0.5)
     ///alert分割线颜色
@@ -178,16 +178,16 @@ public class ShowAlertConfig {
     ///alert标题字体
     public var titleFont : UIFont = UIFont.systemFont(ofSize: 21)
     /// alert标题字体颜色
-    public var titleColor : UIColor = UIColor.textColor
+    public var titleColor : UIColor = .textColor
     ///alert信息字体
     public var textFont : UIFont = UIFont.systemFont(ofSize: 14)
     /// alert信息字体颜色
-    public var textColor : UIColor = UIColor.textColor
+    public var textColor : UIColor = .textColor
     ///alert按钮字体
     public var buttonFont : UIFont = UIFont.systemFont(ofSize: 15)
     /// alert按钮字体颜色
-    public var leftColor : UIColor = UIColor.textColor
-    public var rightColor : UIColor = UIColor.textColor
+    public var leftColor : UIColor = .textColor
+    public var rightColor : UIColor = .textColor
 
 }
 
