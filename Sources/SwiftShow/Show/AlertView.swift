@@ -152,7 +152,7 @@ class AlertView: UIView {
         lineView.backgroundColor = alertConfig.lineColor
         containerView.addSubview(lineView)
         lineView.snp.makeConstraints { (make) in
-            make.top.equalTo(messageLabel.snp.bottom).offset(20)
+            make.top.equalTo(messageLabel.snp.bottom).offset(10)
             make.left.right.equalToSuperview()
             make.height.equalTo(1/UIScreen.main.scale)
         }

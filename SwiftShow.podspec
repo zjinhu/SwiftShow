@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SwiftShow'
-  s.version          = '0.7.4'
+  s.version          = '0.7.5'
   s.summary          = '弹窗组件.'
  
   s.description      = <<-DESC
