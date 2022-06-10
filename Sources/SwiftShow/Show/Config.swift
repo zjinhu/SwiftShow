@@ -39,7 +39,7 @@ public class ShowToastConfig {
     ///执行动画时间 默认0.5
     public var animateDuration = 0.5
     ///Toast默认停留时间 默认2秒
-    public var showTime : Double = 2.0
+    public var showTime : Double = 3.0
     
     
     ///Toast最大宽度  默认200
@@ -189,6 +189,10 @@ public class ShowAlertConfig {
     public var leftColor : UIColor = .textColor
     public var rightColor : UIColor = .textColor
 
+    ///alert背景与内容之间的上下边距 默认10
+    public var verticalPadding : Float = 10
+    ///alert背景与内容之间的左右边距 默认10
+    public var horizontalPadding : Float = 10
 }
 
 //MARK: --pop

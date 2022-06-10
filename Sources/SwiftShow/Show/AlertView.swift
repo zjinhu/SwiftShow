@@ -113,7 +113,7 @@ class AlertView: UIView {
         imageView.image = image
         containerView.addSubview(imageView)
         imageView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(config.verticalPadding)
             make.left.right.equalToSuperview()
         }
         
@@ -128,9 +128,10 @@ class AlertView: UIView {
             if let _ = image{
                 make.top.equalTo(imageView.snp.bottom).offset(config.space)
             }else{
-                make.top.equalToSuperview().offset(10)
+                make.top.equalToSuperview().offset(config.verticalPadding)
             }
-            make.left.right.equalToSuperview()
+            make.left.equalToSuperview().offset(config.horizontalPadding)
+            make.right.equalToSuperview().offset(-config.horizontalPadding)
         }
         titleLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         
@@ -143,8 +144,8 @@ class AlertView: UIView {
         containerView.addSubview(messageLabel)
         messageLabel.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(config.space)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
+            make.left.equalToSuperview().offset(config.horizontalPadding)
+            make.right.equalToSuperview().offset(-config.horizontalPadding)
          }
         messageLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         
@@ -152,7 +153,7 @@ class AlertView: UIView {
         lineView.backgroundColor = alertConfig.lineColor
         containerView.addSubview(lineView)
         lineView.snp.makeConstraints { (make) in
-            make.top.equalTo(messageLabel.snp.bottom).offset(10)
+            make.top.equalTo(messageLabel.snp.bottom).offset(config.verticalPadding)
             make.left.right.equalToSuperview()
             make.height.equalTo(1/UIScreen.main.scale)
         }
