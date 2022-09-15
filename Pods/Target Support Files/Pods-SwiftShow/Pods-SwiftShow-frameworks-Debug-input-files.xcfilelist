@@ -1,4 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-SwiftShow/Pods-SwiftShow-frameworks.sh
+${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework
+${BUILT_PRODUCTS_DIR}/KeyboardListener/KeyboardListener.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
 ${BUILT_PRODUCTS_DIR}/SwiftBrick/SwiftBrick.framework
 ${BUILT_PRODUCTS_DIR}/SwiftyAttributes/SwiftyAttributes.framework

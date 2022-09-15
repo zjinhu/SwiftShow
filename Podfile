@@ -6,7 +6,8 @@ target 'SwiftShow' do
   use_frameworks!
 
   # Pods for SwiftDialog
-#pod 'SwiftButton'
+  pod 'KeyboardListener'
+pod 'IQKeyboardManagerSwift'
 pod 'SwiftBrick'
 pod 'SwiftyAttributes'
 end

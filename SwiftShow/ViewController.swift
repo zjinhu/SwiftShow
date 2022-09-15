@@ -112,6 +112,11 @@ class ViewController: JHTableViewController{
             let content = UIButton.init(frame: CGRect.init(x: 300, y: 100, width: 200, height: 200))
             content.setImage(UIImage.init(named: "timg"), for: .normal)
             content.addTarget(self, action: #selector(hideClick), for: .touchUpInside)
+            
+            let text = UITextField(frame: CGRect.init(x: 0, y: 100, width: 200, height: 100))
+            text.text = "sdfgsdfgsdfgs"
+            content.addSubview(text)
+            
             Show.pop(content) { (config) in
                 config.showAnimateType = .bottom
                 config.clickOutHidden = false
