@@ -17,15 +17,15 @@ Pod::Spec.new do |s|
   s.swift_versions     = ['5.5','5.4','5.3','5.2','5.1','5.0','4.2']
   s.requires_arc = true
 
-  s.subspec 'Class' do |ss|
+  s.subspec 'Show' do |ss|
       ss.source_files = 'Sources/SwiftShow/Show/**/*'
       ss.dependency 'SnapKit'
     end
 
   s.subspec 'Presentation' do |ss|
-      ss.source_files = 'SwiftShow/Presentation/**/*'
-      ss.dependency 'SwiftShow/Class'
+      ss.source_files = 'Sources/SwiftShow/Presentation/**/*'
+      ss.dependency 'SwiftShow/Show'
     end
     
-  s.default_subspec = 'Class'
+  s.default_subspec = 'Show'
 end

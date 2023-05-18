@@ -1,0 +1,64 @@
+PODS:
+  - IQKeyboardManagerSwift (6.5.11)
+  - KeyboardListener (1.0.0)
+  - SnapKit (5.6.0)
+  - SwiftBrick (2.1.3):
+    - SnapKit
+    - SwiftBrick/BaseCell (= 2.1.3)
+    - SwiftBrick/BaseVC (= 2.1.3)
+    - SwiftBrick/Extensions (= 2.1.3)
+    - SwiftBrick/Util (= 2.1.3)
+    - SwiftBrick/ViewFactory (= 2.1.3)
+  - SwiftBrick/BaseCell (2.1.3):
+    - SnapKit
+    - SwiftBrick/Extensions
+  - SwiftBrick/BaseVC (2.1.3):
+    - SnapKit
+    - SwiftBrick/BaseCell
+    - SwiftBrick/Extensions
+    - SwiftBrick/Util
+  - SwiftBrick/Extensions (2.1.3):
+    - SnapKit
+    - SwiftBrick/Util
+  - SwiftBrick/Util (2.1.3):
+    - SnapKit
+  - SwiftBrick/ViewFactory (2.1.3):
+    - SnapKit
+    - SwiftBrick/Extensions
+    - SwiftBrick/Util
+  - SwiftShow/Presentation (0.7.6):
+    - SwiftShow/Show
+  - SwiftShow/Show (0.7.6):
+    - SnapKit
+  - SwiftyAttributes (5.3.0)
+
+DEPENDENCIES:
+  - IQKeyboardManagerSwift
+  - KeyboardListener
+  - SwiftBrick
+  - SwiftShow/Presentation (from `../`)
+  - SwiftyAttributes
+
+SPEC REPOS:
+  trunk:
+    - IQKeyboardManagerSwift
+    - KeyboardListener
+    - SnapKit
+    - SwiftBrick
+    - SwiftyAttributes
+
+EXTERNAL SOURCES:
+  SwiftShow:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
+  KeyboardListener: c1a795cde8f7ce0d137d3c58763890c5e8ac1d72
+  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SwiftBrick: 8bc088166367bac5f54a732ee5c6ddba00668e2d
+  SwiftShow: 0ddd6bfc324fdac66f9745e42d4bde3583fdcf0b
+  SwiftyAttributes: 6d7386e90ac611b6acac8b59e38f34bfa4621c80
+
+PODFILE CHECKSUM: cb9490692890dc532be1ba5c43af66f5e410a3c1
+
+COCOAPODS: 1.12.1

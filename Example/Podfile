@@ -1,0 +1,12 @@
+use_frameworks!
+
+platform :ios, '11.0'
+
+target 'Example' do
+  pod 'SwiftShow/Presentation', :path => '../'
+  
+  pod 'KeyboardListener'
+  pod 'IQKeyboardManagerSwift'
+  pod 'SwiftBrick'
+  pod 'SwiftyAttributes'
+end
