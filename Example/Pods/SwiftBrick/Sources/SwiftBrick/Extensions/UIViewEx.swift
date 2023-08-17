@@ -33,7 +33,7 @@ public enum GradientPoint{
     }
 }
 
-public extension UIView{
+public extension SwiftBrickWrapper where Wrapped: UIView {
     
     /// 添加背景色,主要是渐变色背景
     /// - Parameters:
@@ -45,7 +45,7 @@ public extension UIView{
                       size: CGSize? = nil,
                       startPoint: CGPoint = GradientPoint.topLeft.point,
                       endPoint: CGPoint = GradientPoint.bottomLeft.point){
-
+        
         guard colors.count >= 1 else {
             return
         }
@@ -53,7 +53,7 @@ public extension UIView{
         removeGradients()
         
         if colors.count < 2 {
-            backgroundColor = colors.first
+            wrapped.backgroundColor = colors.first
         }else{
             
             let gradient: CAGradientLayer = colors.gradient { gradient in
@@ -63,11 +63,11 @@ public extension UIView{
             }
             
             gradient.drawsAsynchronously = true
-            layer.insertSublayer(gradient, at: 0)
+            wrapped.layer.insertSublayer(gradient, at: 0)
             if let s = size{
                 gradient.frame = .init(x: 0, y: 0, width: s.width, height: s.height)
             }else{
-              gradient.frame = self.bounds
+                gradient.frame = wrapped.bounds
             }
         }
     }
@@ -78,18 +78,18 @@ public extension UIView{
         removeGradients()
         
         gradient.drawsAsynchronously = true
-        layer.insertSublayer(gradient, at: 0)
+        wrapped.layer.insertSublayer(gradient, at: 0)
         if let s = size{
             gradient.frame = .init(x: 0, y: 0, width: s.width, height: s.height)
         }else{
-            gradient.frame = self.bounds
+            gradient.frame = wrapped.bounds
         }
         
     }
     
     /// 移除渐变色背景
     func removeGradients() {
-        if let sl = self.layer.sublayers {
+        if let sl = wrapped.layer.sublayers {
             for layer in sl {
                 if layer.isKind(of: CAGradientLayer.self) {
                     layer.removeFromSuperlayer()
@@ -97,12 +97,10 @@ public extension UIView{
             }
         }
     }
-}
-
-public extension UIView {
+    
     //返回该view所在VC,方便埋点查找
     func firstViewController() -> UIViewController? {
-        for view in sequence(first: self.superview, next: { $0?.superview }) {
+        for view in sequence(first: wrapped.superview, next: { $0?.superview }) {
             if let responder = view?.next {
                 if responder.isKind(of: UIViewController.self){
                     return responder as? UIViewController
@@ -115,10 +113,94 @@ public extension UIView {
 
 public extension UIView {
     ///初始化View闭包--方便快速
-    static func inits<T: UIView>(_ builder: ((T) -> Void)? = nil) -> T {
+    static func inits<T: UIView>(builder: ((T) -> Void)? = nil) -> T {
         let view = T()
         view.translatesAutoresizingMaskIntoConstraints = false
         builder?(view)
         return view
     }
 }
+
+public extension UIView {
+    
+    struct AssociatedKeys {
+        static var tapGestureKey: String = "TapGestureKey"
+    }
+    
+    typealias tapGestureClosure = (_ view: UIView) -> Void
+    
+    @objc internal var tapGesture: tapGestureClosure? {
+        get {
+            return objc_getAssociatedObject(self, &AssociatedKeys.tapGestureKey) as? tapGestureClosure
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.tapGestureKey, newValue, .OBJC_ASSOCIATION_COPY)
+        }
+    }
+    
+    @objc func addTapGestureWithCallback(tapGesture closure: tapGestureClosure?){
+        tapGesture = closure
+        isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+        addGestureRecognizer(tap)
+    }
+    
+    
+    @objc func handleTapGesture() {
+        if let closure = tapGesture{
+            closure(self)
+        }
+        
+    }
+    
+}
+
+@propertyWrapper
+public struct UsesAutoLayout<T: UIView> {
+    public var wrappedValue: T {
+        didSet {
+            wrappedValue.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
+    public init(wrappedValue: T) {
+        self.wrappedValue = wrappedValue
+        wrappedValue.translatesAutoresizingMaskIntoConstraints = false
+    }
+}
+
+#if os(iOS)
+import UIKit
+
+public extension UIView {
+
+    var parentController: UIViewController? {
+        if let responder = self.next as? UIViewController {
+            return responder
+        } else if let responder = self.next as? UIView {
+            return responder.parentController
+        } else {
+            return nil
+        }
+    }
+
+}
+#endif
+
+#if os(macOS)
+import AppKit
+
+public extension NSView {
+
+    var parentController: NSViewController? {
+        if let responder = self.nextResponder as? NSViewController {
+            return responder
+        } else if let responder = self.nextResponder as? NSView {
+            return responder.parentController
+        } else {
+            return nil
+        }
+    }
+
+}
+#endif

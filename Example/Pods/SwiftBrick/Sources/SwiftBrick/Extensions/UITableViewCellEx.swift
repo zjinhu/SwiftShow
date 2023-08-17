@@ -8,13 +8,12 @@
 
 import Foundation
 import UIKit
-import SnapKit
 // MARK: ===================================扩展: UITableViewCell添加分割线=========================================
 let TopLineTag         = 19003
 let BottomLineTag      = 19004
 ///UITableView 自定义下划线
-public extension UITableViewCell {
-    
+
+public extension SwiftBrickWrapper where Wrapped: UITableViewCell {
     /// 添加分割线，系统原生样式
     /// - Parameters:
     ///   - tableView: tableView
@@ -46,20 +45,25 @@ public extension UITableViewCell {
             return
         }
         
-        var topLineView  = viewWithTag(TopLineTag)
+        var topLineView  = wrapped.viewWithTag(TopLineTag)
         
         if topLineView == nil {
             topLineView = UIView()
             topLineView?.backgroundColor = color
             topLineView?.tag = TopLineTag
-            addSubview(topLineView!)
-            bringSubviewToFront(topLineView!)
-            topLineView?.snp.makeConstraints({ (make) in
-                make.top.equalToSuperview()
-                make.left.equalToSuperview().offset(headFootLeftMarign)
-                make.right.equalToSuperview().offset(-headFootRightMarign)
-                make.height.equalTo(LineHeight)
-            })
+            topLineView?.translatesAutoresizingMaskIntoConstraints = false
+
+            if let topLineView = topLineView{
+                wrapped.addSubview(topLineView)
+                wrapped.bringSubviewToFront(topLineView)
+                let constraints = [
+                    topLineView.topAnchor.constraint(equalTo: wrapped.topAnchor),
+                    topLineView.leftAnchor.constraint(equalTo: wrapped.leftAnchor, constant: headFootLeftMarign),
+                    topLineView.heightAnchor.constraint(equalToConstant: Define.lineHeight),
+                    topLineView.rightAnchor.constraint(equalTo: wrapped.rightAnchor, constant: -headFootRightMarign)
+                ]
+                NSLayoutConstraint.activate(constraints)
+            }
         }
         
         if indexPath.row == 0 {
@@ -68,36 +72,31 @@ public extension UITableViewCell {
             topLineView?.isHidden = true
         }
         
-        var bottomLineView  = viewWithTag(BottomLineTag)
-        
+        var bottomLineView  = wrapped.viewWithTag(BottomLineTag)
+ 
         if bottomLineView == nil {
             bottomLineView = UIView()
             bottomLineView?.backgroundColor = color
             bottomLineView?.tag = BottomLineTag
-            addSubview(bottomLineView!)
-            bringSubviewToFront(bottomLineView!)
-            bottomLineView?.snp.makeConstraints({ (make) in
-                make.bottom.equalToSuperview()
-                make.left.equalToSuperview().offset(leftMarign)
-                make.right.equalToSuperview().offset(-rightMarign)
-                make.height.equalTo(LineHeight)
-            })
+            bottomLineView?.translatesAutoresizingMaskIntoConstraints = false
+
+            if let bottomLineView = bottomLineView{
+                wrapped.addSubview(bottomLineView)
+                wrapped.bringSubviewToFront(bottomLineView)
+ 
+                bottomLineView.bottomAnchor.constraint(equalTo: wrapped.bottomAnchor).isActive = true
+                bottomLineView.heightAnchor.constraint(equalToConstant: Define.lineHeight).isActive = true
+                bottomLineView.leftAnchor.constraint(equalTo: wrapped.leftAnchor, constant: leftMarign).isActive = true
+                bottomLineView.rightAnchor.constraint(equalTo: wrapped.rightAnchor, constant: -leftMarign).isActive = true
+            }
         }
 
         if indexPath.row == count - 1{
-            bottomLineView?.snp.remakeConstraints({ (make) in
-                make.bottom.equalToSuperview()
-                make.left.equalToSuperview().offset(headFootLeftMarign)
-                make.right.equalToSuperview().offset(-headFootRightMarign)
-                make.height.equalTo(LineHeight)
-            })
+            bottomLineView?.leftAnchor.constraint(equalTo: wrapped.leftAnchor, constant: headFootLeftMarign).isActive = true
+            bottomLineView?.rightAnchor.constraint(equalTo: wrapped.rightAnchor, constant: -headFootRightMarign).isActive = true
         }else{
-            bottomLineView?.snp.remakeConstraints({ (make) in
-                make.bottom.equalToSuperview()
-                make.left.equalToSuperview().offset(leftMarign)
-                make.right.equalToSuperview().offset(-rightMarign)
-                make.height.equalTo(LineHeight)
-            })
+            bottomLineView?.leftAnchor.constraint(equalTo: wrapped.leftAnchor, constant: leftMarign).isActive = true
+            bottomLineView?.rightAnchor.constraint(equalTo: wrapped.rightAnchor, constant: -leftMarign).isActive = true
         }
     }
 
@@ -116,20 +115,26 @@ public extension UITableViewCell {
             color = lineColor
         }
         
-        var lineView  = viewWithTag(TopLineTag)
+        var lineView  = wrapped.viewWithTag(TopLineTag)
         
         if lineView == nil {
             lineView = UIView()
             lineView?.backgroundColor = color
             lineView?.tag = TopLineTag
-            addSubview(lineView!)
-            bringSubviewToFront(lineView!)
-            lineView?.snp.makeConstraints({ (make) in
-                make.top.equalToSuperview()
-                make.left.equalToSuperview().offset(leftMarign)
-                make.right.equalToSuperview().offset(-rightMarign)
-                make.height.equalTo(LineHeight)
-            })
+            wrapped.addSubview(lineView!)
+            wrapped.bringSubviewToFront(lineView!)
+ 
+            if let lineView = lineView{
+                wrapped.addSubview(lineView)
+                wrapped.bringSubviewToFront(lineView)
+                let constraints = [
+                    lineView.topAnchor.constraint(equalTo: wrapped.topAnchor),
+                    lineView.leftAnchor.constraint(equalTo: wrapped.leftAnchor, constant: leftMarign),
+                    lineView.heightAnchor.constraint(equalToConstant: Define.lineHeight),
+                    lineView.rightAnchor.constraint(equalTo: wrapped.rightAnchor, constant: -rightMarign)
+                ]
+                NSLayoutConstraint.activate(constraints)
+            }
         }
         
         if indexPath.row == 0 {
@@ -153,20 +158,25 @@ public extension UITableViewCell {
             color = lineColor
         }
         
-        var lineView  = viewWithTag(BottomLineTag)
+        var lineView  = wrapped.viewWithTag(BottomLineTag)
         
         if lineView == nil {
             lineView = UIView()
             lineView?.backgroundColor = color
             lineView?.tag = BottomLineTag
-            addSubview(lineView!)
-            bringSubviewToFront(lineView!)
-            lineView?.snp.makeConstraints({ (make) in
-                make.bottom.equalToSuperview()
-                make.right.equalToSuperview().offset(-rightMarign)
-                make.left.equalToSuperview().offset(leftMarign)
-                make.height.equalTo(LineHeight)
-            })
+ 
+            if let lineView = lineView{
+                wrapped.addSubview(lineView)
+                wrapped.bringSubviewToFront(lineView)
+                let constraints = [
+                    lineView.bottomAnchor.constraint(equalTo: wrapped.bottomAnchor),
+                    lineView.leftAnchor.constraint(equalTo: wrapped.leftAnchor, constant: leftMarign),
+                    lineView.heightAnchor.constraint(equalToConstant: Define.lineHeight),
+                    lineView.rightAnchor.constraint(equalTo: wrapped.rightAnchor, constant: -rightMarign)
+                ]
+                NSLayoutConstraint.activate(constraints)
+            }
+
         }
 
     }

@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import SnapKit
 // MARK: ===================================VC基类:UICollectionViewController=========================================
-open class JHCollectionViewController: JHViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+open class CollectionViewController: ViewController ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
 
     public var collectionView: UICollectionView?
     public var mainDatas: Array<Any> = []
@@ -40,17 +39,19 @@ open class JHCollectionViewController: JHViewController ,UICollectionViewDelegat
         collectionView?.backgroundColor = .clear
         collectionView?.delegate = self
         collectionView?.dataSource = self
-        
+        collectionView?.translatesAutoresizingMaskIntoConstraints = false
         collectionView?.delaysContentTouches = true
         collectionView?.showsVerticalScrollIndicator = false
         collectionView?.showsHorizontalScrollIndicator = false
         
-        view.addSubview(collectionView!)
-        collectionView?.snp.makeConstraints{ (make) in
-            make.top.equalTo(view.snp.top)
-            make.left.equalTo(view.snp.left)
-            make.right.equalTo(view.snp.right)
-            make.bottom.equalTo(view.snp.bottom)
+        if let collectionView = collectionView{
+            view.addSubview(collectionView)
+            NSLayoutConstraint.activate([
+                collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+                collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
+                collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            ])
         }
 
         collectionView?.contentInsetAdjustmentBehavior = .automatic
@@ -62,7 +63,7 @@ open class JHCollectionViewController: JHViewController ,UICollectionViewDelegat
                 collectionView?.panGestureRecognizer.require(toFail: gesture)
             }
         })
-        collectionView?.registerCell(JHCollectionViewCell.self)
+        collectionView?.ss.registerCell(CollectionViewCell.self)
     }
     
     // MARK: - 数据源判断
@@ -90,7 +91,7 @@ open class JHCollectionViewController: JHViewController ,UICollectionViewDelegat
     }
     
     open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(JHCollectionViewCell.self, indexPath: indexPath)
+        let cell = collectionView.ss.dequeueReusableCell(CollectionViewCell.self, indexPath: indexPath)
         return cell
     }
     

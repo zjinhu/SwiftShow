@@ -8,20 +8,19 @@
 
 import UIKit
 import WebKit
-import SnapKit
 // MARK: ===================================VC基类:UIWebViewController=========================================
-open class JHWebViewController: JHViewController ,WKUIDelegate,WKNavigationDelegate,WKScriptMessageHandler,UIScrollViewDelegate{
-
+open class WebViewController: ViewController ,WKUIDelegate,WKNavigationDelegate,WKScriptMessageHandler,UIScrollViewDelegate{
+    
     lazy var backButton: UIButton = {
         let btn = UIButton()
-        btn.setImage(L.image("nav_ic_back"), for: .normal)
+        btn.setImage(.icon_back, for: .normal)
         btn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         return btn
     }()
     
     lazy var closeButton: UIButton = {
         let btn = UIButton()
-        btn.setImage(L.image("nav_ic_close"), for: .normal)
+        btn.setImage(.icon_close, for: .normal)
         btn.addTarget(self, action: #selector(closeVC), for: .touchUpInside)
         btn.isHidden = true
         return btn
@@ -38,6 +37,8 @@ open class JHWebViewController: JHViewController ,WKUIDelegate,WKNavigationDeleg
         if #available(iOS 13.0, *){
             webView.scrollView.automaticallyAdjustsScrollIndicatorInsets = false
         }
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        
         webView.evaluateJavaScript("navigator.userAgent", completionHandler: { [weak self] (obj: Any?, error: Error?) in
             guard let `self` = self else{return}
             guard let ua = obj as? String else { return }
@@ -52,6 +53,7 @@ open class JHWebViewController: JHViewController ,WKUIDelegate,WKNavigationDeleg
         reloadButton.frame = view.bounds
         reloadButton.setTitle("加载失败,请点击重试", for: .normal)
         reloadButton.addTarget(self, action: #selector(reloadWebView), for: .touchUpInside)
+        reloadButton.translatesAutoresizingMaskIntoConstraints = false
         return reloadButton
     }()
     
@@ -59,17 +61,19 @@ open class JHWebViewController: JHViewController ,WKUIDelegate,WKNavigationDeleg
         let progressView = UIProgressView()
         progressView.trackTintColor = .clear
         progressView.tintColor = .red
+        progressView.translatesAutoresizingMaskIntoConstraints = false
         return progressView
     }()
     
     lazy var config: WKWebViewConfiguration = {
         let preferences = WKPreferences()
-//        preferences.minimumFontSize = 0.0
+        //        preferences.minimumFontSize = 0.0
         preferences.javaScriptCanOpenWindowsAutomatically = true
         
         let processPool = WKProcessPool()
         
         let config = WKWebViewConfiguration()
+        
         if #available(iOS 13.0, *){
             config.defaultWebpagePreferences.preferredContentMode = .mobile
         }
@@ -85,7 +89,7 @@ open class JHWebViewController: JHViewController ,WKUIDelegate,WKNavigationDeleg
         config.processPool = processPool
         config.allowsInlineMediaPlayback = true
         config.allowsAirPlayForMediaPlayback = true
-
+        
         return config
     }()
     
@@ -168,35 +172,33 @@ open class JHWebViewController: JHViewController ,WKUIDelegate,WKNavigationDeleg
     // MARK: - 布局
     override open func viewDidLoad() {
         super.viewDidLoad()
-
-        hideDefaultBackBarButton()
+        
+        self.ss.hideDefaultBackBarButton()
         
         addLeftBarButton(backButton, closeButton)
         
         title = navTitle
         
         view.addSubview(reloadButton)
-        
         view.addSubview(webView)
-        webView.snp.makeConstraints { (make) in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            make.left.equalTo(view.snp.left)
-            make.right.equalTo(view.snp.right)
-            make.bottom.equalTo(view.snp.bottom)
-        }
-
         view.addSubview(loadingProgressView)
-        loadingProgressView.snp.makeConstraints { (make) in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            make.left.equalTo(view.snp.left)
-            make.right.equalTo(view.snp.right)
-            make.height.equalTo(4)
-        }
+        
+        NSLayoutConstraint.activate([
+            webView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            webView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            webView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            
+            loadingProgressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            loadingProgressView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            loadingProgressView.heightAnchor.constraint(equalToConstant: 4),
+            loadingProgressView.rightAnchor.constraint(equalTo: view.rightAnchor),
+        ])
         
         webView.configuration.userContentController.add(WeakScriptMessageDelegate(delegate: self), name: "JumpViewController")
         
         loadRequest()
-
+        
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: [.old, .new], context: nil)
     }
     
@@ -233,7 +235,6 @@ open class JHWebViewController: JHViewController ,WKUIDelegate,WKNavigationDeleg
                 print("")
             }
         }
-        
         decisionHandler(.allow)
     }
     
@@ -258,11 +259,6 @@ open class JHWebViewController: JHViewController ,WKUIDelegate,WKNavigationDeleg
         webView.evaluateJavaScript("navigator.userAgent") { (result, error) in
             debugPrint("\(String(describing: result))")
         }
-
-        if Later_iOS12(), Version() < Version(12, 2, 0), first{
-            webView.reload()
-            first = false
-        }
         
         if webView.canGoBack {
             closeButton.isHidden = false
@@ -275,13 +271,16 @@ open class JHWebViewController: JHViewController ,WKUIDelegate,WKNavigationDeleg
     }
     
     open func webView(_ webView: WKWebView, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
- 
-        if let serverTrust = challenge.protectionSpace.serverTrust {
+        
+        Dispatch.global().run {
+            guard let serverTrust = challenge.protectionSpace.serverTrust else {
+                completionHandler(.cancelAuthenticationChallenge, nil)
+                return
+            }
             let credential = URLCredential(trust: serverTrust)
             completionHandler(.useCredential, credential)
-        }else{
-             completionHandler(.useCredential, nil)
         }
+        
     }
     // MARK: - WKUIDelegate
     
@@ -348,12 +347,10 @@ open class JHWebViewController: JHViewController ,WKUIDelegate,WKNavigationDeleg
             }
             // 当进度为100%时，隐藏progressLayer并将其初始值改为0
             if newValue == 1.0 {
-                let time1 = DispatchTime.now() + 0.4
-                let time2 = time1 + 0.1
-                DispatchQueue.main.asyncAfter(deadline: time1) {
+                Dispatch.main().after(0.4) {
                     self.loadingProgressView.progress = 1
                 }
-                DispatchQueue.main.asyncAfter(deadline: time2) {
+                Dispatch.main().after(0.5) {
                     self.loadingProgressView.isHidden = true
                     self.loadingProgressView.progress = 0
                 }
@@ -362,12 +359,12 @@ open class JHWebViewController: JHViewController ,WKUIDelegate,WKNavigationDeleg
     }
     
     // MARK: - 发起请求
+    @MainActor
     open func loadRequest() {
-        
-        if let re = request {
-            webView.load(re)
-        }else if let url = urlString, let realURL = URL(string: url) {
-            webView.load(URLRequest(url: realURL))
+        if let re = self.request {
+            self.webView.load(re)
+        }else if let url = self.urlString, let realURL = URL(string: url) {
+            self.webView.load(URLRequest(url: realURL))
         }
     }
     
@@ -389,12 +386,13 @@ open class JHWebViewController: JHViewController ,WKUIDelegate,WKNavigationDeleg
                 return
             }
         }
-        if (presentingViewController != nil) {
+        if let _ = presentingViewController{
             dismiss(animated: true, completion: nil)
         }
     }
     
     ///reload按钮点击
+    @MainActor
     @objc func reloadWebView(){
         loadingProgressView.progress = 0
         loadingProgressView.isHidden = false
@@ -411,7 +409,7 @@ open class JHWebViewController: JHViewController ,WKUIDelegate,WKNavigationDeleg
         webView.uiDelegate = nil
         webView.navigationDelegate = nil
         webView.scrollView.delegate = nil
-//        print("JHWebViewController out")
+        //        print("JHWebViewController out")
     }
     
     func cleanAllWebsiteDataStore() {

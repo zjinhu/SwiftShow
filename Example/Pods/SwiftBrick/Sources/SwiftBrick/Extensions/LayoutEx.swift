@@ -8,36 +8,37 @@
 
 import UIKit
 ///方便自适应布局进行等比例宽高 等同于 FitWidth FitHight
-public extension CGFloat {
+public extension SwiftBrickWrapper where Wrapped == CGFloat {
     /// 比例缩放 width
     ///
     /// - Parameter size: origin width
     /// - Returns: 比例缩放后的 width 没有除以2.0
     func scaleWidth() -> CGFloat {
-        return ScreenWidth / 375 * self
+        return Define.screenWidth / 375 * wrapped
     }
     /// 比例缩放 height
     ///
     /// - Parameter size: origin height
     /// - Returns: 比例缩放后的 height 没有除以2.0
     func scaleHeight() -> CGFloat {
-        return ScreenHeight / 667 * self
+        return Define.screenHeight / 667 * wrapped
     }
 }
 ///方便自适应布局进行等比例宽高 等同于 FitWidth FitHight
-public extension Int {
+
+public extension SwiftBrickWrapper where Wrapped == Int {
     /// 比例缩放 width
     ///
     /// - Parameter size: origin width
     /// - Returns: 比例缩放后的 width 没有除以2.0
     func scaleWidth() -> CGFloat {
-        return ScreenWidth / 375 * CGFloat(self)
+        return Define.screenWidth / 375 * CGFloat(wrapped)
     }
     /// 比例缩放 height
     ///
     /// - Parameter size: origin height
     /// - Returns: 比例缩放后的 height 没有除以2.0
     func scaleHeight() -> CGFloat {
-        return ScreenHeight / 667 * CGFloat(self)
+        return Define.screenHeight / 667 * CGFloat(wrapped)
     }
 }

@@ -93,22 +93,52 @@ public extension UITabBar {
         }
     }
     
+    @available(iOS 13.0, *)
+    static func setTitleColor(normal: UIColor, selected: UIColor){
+        let tabAppearance = UITabBarAppearance()
+         //设置颜色
+        tabAppearance.stackedLayoutAppearance.normal.titleTextAttributes = [.foregroundColor: normal]
+        tabAppearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: selected]
+         //统一各种情况下的显示样式
+        setAppearance(tabAppearance)
+    }
     
+    @available(iOS 13.0, *)
+    static func setShadowColor(_ color: UIColor = .clear){
+        let tabAppearance = UITabBarAppearance()
+         //设置颜色
+        tabAppearance.shadowColor = color // UIColor
+         //统一各种情况下的显示样式
+        setAppearance(tabAppearance)
+    }
+    
+    @available(iOS 13.0, *)
+    static func setAppearance(_ appearance: UITabBarAppearance){
+         //统一各种情况下的显示样式
+        if #available(iOS 15.0, *) {
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+        }
+        UITabBar.appearance().standardAppearance = appearance
+    }
+    
+}
+
+public extension SwiftBrickWrapper where Wrapped: UITabBar {
     // MARK:-显示小红点
     func showBadgeOnItemIndex(index:Int){
         // 移除
         removeRedPointOnIndex(index: index, animation: false)
         
         // 小红点背景默认值大小设置
-        if __CGSizeEqualToSize(badgeSize, CGSize.zero) {
-            badgeSize = CGSize(width: 10, height: 10)
+        if __CGSizeEqualToSize(wrapped.badgeSize, CGSize.zero) {
+            wrapped.badgeSize = CGSize(width: 10, height: 10)
         }
         
         
         let badgeView = UIView()
-        badgeView.backgroundColor = badgeColor
-        badgeView.layer.cornerRadius = badgeSize.width / 2
-        badgeView.tag = badgeTag + 1
+        badgeView.backgroundColor = wrapped.badgeColor
+        badgeView.layer.cornerRadius = wrapped.badgeSize.width / 2
+        badgeView.tag = wrapped.badgeTag + 1
         
         let barButtonView = getBarButttonViewWithIndex(index: index)
         
@@ -122,23 +152,23 @@ public extension UITabBar {
         }
         
         // 小红点背景默认值Point设置
-        if __CGPointEqualToPoint(badgePoint, CGPoint.zero) {
+        if __CGPointEqualToPoint(wrapped.badgePoint, CGPoint.zero) {
             let iconViewSize = iconView.frame.size
-            badgeView.frame = CGRect(x: iconViewSize.width - badgeSize.width / 2, y: -badgeSize.width / 2, width: badgeSize.width, height: badgeSize.height)
+            badgeView.frame = CGRect(x: iconViewSize.width - wrapped.badgeSize.width / 2, y: -wrapped.badgeSize.width / 2, width: wrapped.badgeSize.width, height: wrapped.badgeSize.height)
         }else{
-            badgeView.frame = CGRect(x: badgePoint.x, y: badgePoint.y, width: badgeSize.width, height: badgeSize.height)
+            badgeView.frame = CGRect(x: wrapped.badgePoint.x, y: wrapped.badgePoint.y, width: wrapped.badgeSize.width, height: wrapped.badgeSize.height)
         }
         
         // 添加图片到小红点上
         let imageview = UIImageView(frame: badgeView.bounds)
         imageview.clipsToBounds = true
         imageview.contentMode = .scaleAspectFill
-        imageview.image = badgeImage
+        imageview.image = wrapped.badgeImage
         badgeView.addSubview(imageview)
         
-        if badgeValue > 0 {
+        if wrapped.badgeValue > 0 {
             let badgeLabel = UILabel(frame: badgeView.bounds)
-            badgeLabel.text = badgeValue <= 99 ? "\(badgeValue)": "\(99)"
+            badgeLabel.text = wrapped.badgeValue <= 99 ? "\(wrapped.badgeValue)": "\(99)"
             badgeLabel.textAlignment = .center
             badgeLabel.adjustsFontSizeToFitWidth = true
             badgeLabel.minimumScaleFactor = 0.1
@@ -164,7 +194,7 @@ public extension UITabBar {
                 
                 for view1 in swapView.subviews {
                     
-                    if view1.tag == (badgeTag + 1) {
+                    if view1.tag == (wrapped.badgeTag + 1) {
                         
                         if animation {
                             UIView.animate(withDuration: 0.2, animations: {
@@ -190,7 +220,7 @@ public extension UITabBar {
     // 获取barButtonView
     fileprivate func getBarButttonViewWithIndex(index:Int) -> UIView {
         
-        if let itemss = items {
+        if let itemss = wrapped.items {
             let item = itemss[index]
             let barButtonView = item.value(forKey: "view")
             return barButtonView as! UIView

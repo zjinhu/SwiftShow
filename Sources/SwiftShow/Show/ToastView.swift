@@ -9,7 +9,6 @@
 import UIKit
 import SnapKit
 
-
 class ToastView: UIView {
 
     required init?(coder: NSCoder) {
