@@ -1,5 +1,4 @@
 
-
 ![](Image/logo.png)
 
 [![Version](https://img.shields.io/cocoapods/v/SwiftShow.svg?style=flat)](http://cocoapods.org/pods/SwiftShow)
@@ -9,416 +8,364 @@
 ![Swift 4.2+](https://img.shields.io/badge/Swift-4.2%2B-orange.svg)
 [![Swift 5.0](https://img.shields.io/badge/Swift-5.0-green.svg?style=flat)](https://developer.apple.com/swift/)
 
-各种弹出窗口，主要包含Toast，Loading，Alert等HUD，以及各个方向的弹出式窗口。
+A versatile popup/HUD library for iOS providing Toast, Loading, Alert, PopView, and DropDown views.
 
-用法详见demo。
+See the Example project for detailed usage.
 
-## 安装
+## Installation
 
-### cocoapods
+### CocoaPods
 
-1.在 Podfile 中添加 `pod ‘SwiftShow’`
-
-2.执行 `pod install 或 pod update`
-
-3.导入 `import SwiftShow`
+1. Add `pod 'SwiftShow'` to your Podfile
+2. Run `pod install` or `pod update`
+3. Import with `import SwiftShow`
 
 ### Swift Package Manager
 
-从 Xcode 11 开始，集成了 Swift Package Manager，使用起来非常方便。SwiftShow 也支持通过 Swift Package Manager 集成。
+SwiftShow supports SPM. In Xcode:
 
-在 Xcode 的菜单栏中选择 `File > Swift Packages > Add Pacakage Dependency`，然后在搜索栏输入
+`File > Swift Packages > Add Package Dependency`, then enter:
 
-`https://github.com/jackiehu/SwiftShow`，即可完成集成
+`https://github.com/zjinhu/SwiftShow`
 
-### 手动集成
+### Manual Integration
 
-SwiftShow 也支持手动集成，只需把Sources文件夹中的SwiftShow文件夹拖进需要集成的项目即可
+Drag the `SwiftShow` folder from `Sources/SwiftShow` into your project.
 
+## Usage
 
+All popup APIs are centralized in `Show.swift`.
 
-### 使用
+### 1. Toast
 
-基本弹窗API全部都在Show.swift，其中包括多个种类
+|                       |                       |                       |
+| --------------------- | --------------------- | --------------------- |
+| ![](Image/toast1.png) | ![](Image/toast2.png) | ![](Image/toast3.png) |
+| ![](Image/toast4.png) | ![](Image/toast5.png) |                       |
 
-1. Toast
+#### Configuration
 
-   ```
-   
-   ```
+```swift
+public class ShowToastConfig {
+    public var animateDuration = 0.5        // Animation duration, default 0.5s
+    public var showTime: Double = 3.0       // Display duration, default 3.0s
+    public var maxWidth: Float = 200        // Max width, default 200
+    public var maxHeight: Float = 500       // Max height, default 500
+    public var cornerRadius: CGFloat = 5    // Corner radius, default 5
+    public var bgColor: UIColor             // Background color, default black
+    public var shadowColor: CGColor         // Shadow color, default clear
+    public var shadowOpacity: Float = 0.5   // Shadow opacity, default 0.5
+    public var shadowRadius: CGFloat = 5    // Shadow radius, default 5
+    public var imageType: ImageLayoutType   // Image layout, default .left
+    public var padding: Float = 10          // Inner padding, default 10
+    public var offSet: Float = 100          // Offset from center, default 100
+    public var offSetType: ToastOffset      // Position type, default .center
+    public var titleColor: UIColor          // Title color, default white
+    public var titleFont: UIFont            // Title font, default system 15
+    public var subTitleColor: UIColor       // Subtitle color, default light gray
+    public var subTitleFont: UIFont         // Subtitle font, default system 12
+    public var spaceImage: CGFloat = 5      // Image-text spacing, default 5
+    public var spaceText: CGFloat = 5       // Text line spacing, default 5
+}
+```
 
-   |                       |                       |                       |
-   | --------------------- | --------------------- | --------------------- |
-   | ![](Image/toast1.png) | ![](Image/toast2.png) | ![](Image/toast3.png) |
-   | ![](Image/toast4.png) | ![](Image/toast5.png) |                       |
+#### API
 
-   ```swift
-   ///Toast适配器，主要处理Toast样式
-   public class ShowToastConfig {
-       ///执行动画时间 默认0.5
-       public var animateDuration = 0.5
-       ///Toast最大宽度  默认200
-       public var maxWidth : Float = 200
-       ///Toast最大高度 默认500
-       public var maxHeight : Float = 500
-       ///Toast默认停留时间 默认2秒
-       public var showTime : Double = 2.0
-       ///Toast圆角 默认5
-       public var cornerRadius : CGFloat = 5
-       ///Toast图文间距  默认0
-       public var space : Float = 0
-       ///Toast字体  默认15
-       public var textFont : UIFont = UIFont.systemFont(ofSize: 15)
-       ///Toast背景颜色 默认黑色
-       public var bgColor : UIColor = UIColor.blackBGColor
-       ///阴影颜色 默认clearcolor
-       public var shadowColor : CGColor = UIColor.clear.cgColor
-       ///阴影Opacity 默认0.5
-       public var shadowOpacity : Float = 0.5
-       ///阴影Radius 默认5
-       public var shadowRadius : CGFloat = 5
-       /// Toast文字字体颜色 默认白色
-       public var textColor : UIColor = .white
-       ///Toast图文混排样式 默认图片在左
-       public var imageType : ImageButtonType = .imageButtonTypeLeft
-       ///Toast背景与内容之间的内边距 默认10
-       public var padding : Float = 10
-       ///Toast 在屏幕的位置（左右居中调节上下）默认100
-       public var offSet : Float = 100
-       ///Toast 在屏幕的位置 默认中间
-       public var offSetType : ToastOffset = .center
-   }
-   ```
+```swift
+/// Show toast notification
+/// - Parameters:
+///   - title: Title text
+///   - subTitle: Subtitle text (optional)
+///   - image: Image (optional)
+///   - config: Toast configuration closure (optional, uses defaults)
+Show.toast("Success", subTitle: "Operation completed", image: UIImage(named: "check")) { config in
+    config.showTime = 2.0
+    config.offSetType = .top
+    config.offSet = 80
+}
+```
 
-   
+### 2. Loading
 
-   ```swift
-       /// 展示toast
-       /// - Parameters:
-       ///   - text: 文本
-       ///   - image: 图片 （可选参数）
-       ///   - config: toast适配器，不传为默认样式
-       public class func showToast(_ text: String, image: UIImage? = nil, config : ConfigToast? = nil)
-   ```
+| ![](Image/Loading1.png) | ![](Image/Loading2.png) | ![](Image/Loading3.png) |
+| ----------------------- | ----------------------- | ----------------------- |
+| Default style           | With image/text         | With shadow/overlay     |
 
-2. Loading
+#### Configuration
 
-   | ![](Image/Loading1.png) | ![](Image/Loading2.png) | ![](Image/Loading3.png) |
-   | ----------------------- | ----------------------- | ----------------------- |
-   | 默认样式                | 可图文                  | 可添加阴影，遮罩        |
+```swift
+public class ShowLoadingConfig {
+    public var maxWidth: Float = 200          // Max width, default 200
+    public var maxHeight: Float = 200         // Max height, default 200
+    public var cornerRadius: CGFloat = 5      // Corner radius, default 5
+    public var titleFont: UIFont              // Title font, default system 15
+    public var titleColor: UIColor            // Title color, default white
+    public var subTitleFont: UIFont           // Subtitle font, default system 12
+    public var subTitleColor: UIColor         // Subtitle color, default light gray
+    public var enableEvent: Bool = false      // Allow touch through background
+    public var effectStyle: UIBlurEffectStyle // Blur effect style
+    public var tintColor: UIColor             // Container color, default black
+    public var bgColor: UIColor               // Background color, default clear
+    public var maskType: MaskType             // Mask type, default .color
+    public var imagesArray: [UIImage]?        // Image animation frames
+    public var activityColor: UIColor         // Spinner color, default white
+    public var animationTime: Double = 1.0    // Animation duration, default 1.0s
+    public var imageType: ImageLayoutType     // Layout style, default .top
+    public var verticalPadding: Float = 20    // Vertical padding, default 20
+    public var horizontalPadding: Float = 20  // Horizontal padding, default 20
+    public var spaceImage: CGFloat = 5        // Image-text spacing, default 5
+    public var spaceText: CGFloat = 5         // Text spacing, default 5
+}
+```
 
-   ```swift
-   ///Loading适配器
-   public class ShowLoadingConfig {
-       /// 是否背景透传点击 默认false
-       public var enableEvent: Bool = false
-       ///背景蒙版 毛玻璃
-       public var effectStyle = UIBlurEffect.Style.light
-       ///loading最大宽度 默认130
-       public var maxWidth : Float = 130
-       ///loading最大高度 默认130
-       public var maxHeight : Float = 130
-       ///圆角大小 默认5
-       public var cornerRadius : CGFloat = 5
-       ///加载框主体颜色 默认黑色
-       public var tintColor : UIColor = UIColor.blackBGColor
-       ///文字字体大小 默认系统字体15
-       public var textFont : UIFont = UIFont.systemFont(ofSize: 15)
-       ///文字字体颜色 默认白色
-       public var textColor : UIColor = .white
-       ///背景颜色 默认clear
-       public var bgColor : UIColor = .clear
-       ///默认蒙版类型 背景色
-       public var maskType : MaskType = .color
-       ///阴影颜色 默认clearcolor
-       public var shadowColor : CGColor = UIColor.clear.cgColor
-       ///阴影Opacity 默认0.5
-       public var shadowOpacity : Float = 0.5
-       ///阴影Radius 默认5
-       public var shadowRadius : CGFloat = 5
-       ///图片动画类型 所需要的图片数组
-       public var imagesArray : [UIImage]?
-       ///菊花颜色 不传递图片数组的时候默认使用菊花
-       public var activityColor : UIColor = .white
-       ///图片动画时间 默认1.0
-       public var animationTime : Double = 1.0
-       ///loading图文混排样式  默认图片在上
-       public var imageType : ImageButtonType = .imageButtonTypeTop
-       ///loading背景与内容之间的上下边距 默认20
-       public var verticalPadding : Float = 20
-       ///loading背景与内容之间的左右边距 默认20
-       public var horizontalPadding : Float = 20
-       ///loading文字与图片之间的距 默认0
-       public var space : Float = 0
-   }
-   ```
+#### API
 
-   ```swift
-       /// 在当前VC中展示loading
-       /// - Parameters:
-       ///   - text: 文本
-       ///   - config: loading适配器
-       public class func showLoading(_ text : String? = nil, config : ConfigLoading? = nil) 
-       
-       /// 隐藏上层VC中的loading
-       public class func hiddenLoading() 
-       
-       /// 在window中展示loading
-       /// - Parameters:
-       ///   - text: 文本
-       ///   - config: 配置
-       public class func showLoadingOnWindow(_ text : String? = nil, config : ConfigLoading? = nil)
-       
-       /// 隐藏window中loading
-       public class func hiddenLoadingOnWindow() 
-       
-       /// 在指定view中添加loading
-       /// - Parameters:
-       ///   - onView: view
-       ///   - text: 文本
-       ///   - config: 配置
-       public class func showLoadingOnView(_ onView: UIView, text : String? = nil, config : ConfigLoading? = nil)
-       
-       /// 隐藏指定view中loading
-       /// - Parameter onView: view
-       public class func hiddenLoadingOnView(_ onView: UIView)
-   ```
+```swift
+/// Show loading in current view controller
+Show.loading("Loading", subTitle: "Please wait...")
 
-3. Alert
+/// Show loading on window
+Show.loadingOnWindow("Loading...")
 
-   | ![](Image/Alert1.png) | ![](Image/Alert2.png) | ![](Image/Alert3.png) |
-   | --------------------- | --------------------- | --------------------- |
-   | 默认弹窗              | 可修改弹窗遮罩、阴影  | 可使用富文本          |
+/// Show loading on specific view
+Show.loadingOnView(myView, title: "Loading...")
 
-   ```swift
-   ///Alert适配器
-   public class ShowAlertConfig {
-       ///背景蒙版 毛玻璃
-       public var effectStyle = UIBlurEffect.Style.light
-       ///执行动画时间
-       public var animateDuration = 0.5
-       ///alert宽度
-       public var width : Float = 280
-       ///alert最大高度
-       public var maxHeight : Float = 500
-       ///alert按钮高度
-       public var buttonHeight : Float = 50
-       ///alert圆角
-       public var cornerRadius : CGFloat = 5
-       ///alert图文混排样式
-       public var imageType : ImageButtonType = .imageButtonTypeTop
-       ///alert图文间距
-       public var space : Float = 0
-       ///alert标题字体
-       public var titleFont : UIFont = UIFont.systemFont(ofSize: 21)
-       /// alert标题字体颜色
-       public var titleColor : UIColor = UIColor.textColor
-       ///alert信息字体
-       public var textFont : UIFont = UIFont.systemFont(ofSize: 14)
-       /// alert信息字体颜色
-       public var textColor : UIColor = UIColor.textColor
-       ///alert按钮字体
-       public var buttonFont : UIFont = UIFont.systemFont(ofSize: 15)
-       /// alert按钮字体颜色
-       public var leftColor : UIColor = UIColor.textColor
-       public var rightColor : UIColor = UIColor.textColor
-       ///alert主体颜色 默认
-       public var tintColor : UIColor = UIColor.whiteBGColor
-       ///alert背景颜色
-       public var bgColor : UIColor = UIColor.black.withAlphaComponent(0.5)
-       ///alert分割线颜色
-       public var lineColor : UIColor = .lightGray
-       ///默认蒙版类型
-       public var maskType : MaskType = .color
-       ///阴影
-       public var shadowColor : CGColor = UIColor.clear.cgColor
-       public var shadowOpacity : Float = 0.5
-       public var shadowRadius : CGFloat = 5
-   }
-   ```
+/// Hide loading (current VC)
+Show.hideLoading()
 
-   ```swift
-       /// 默认样式Alert
-       /// - Parameters:
-       ///   - title: 标题
-       ///   - message: 信息
-       ///   - leftBtnTitle: 左侧按钮标题
-       ///   - rightBtnTitle: 右侧按钮标题
-       ///   - leftBlock: 左侧按钮回调
-       ///   - rightBlock: 右侧按钮回调
-       public class func showAlert(title: String? = nil,
-                                   message: String?  = nil,
-                                   leftBtnTitle: String? = nil,
-                                   rightBtnTitle: String? = nil,
-                                   leftBlock: LeftCallBack? = nil,
-                                   rightBlock: RightCallback? = nil) 
-                                   
-       /// 富文本样式Alert
-       /// - Parameters:
-       ///   - attributedTitle: 富文本标题
-       ///   - attributedMessage: 富文本信息
-       ///   - leftBtnAttributedTitle: 富文本左侧按钮标题
-       ///   - rightBtnAttributedTitle: 富文本右侧按钮标题
-       ///   - leftBlock: 左侧按钮回调
-       ///   - rightBlock: 右侧按钮回调
-       public class func showAttributedAlert(attributedTitle : NSAttributedString? = nil,
-                                             attributedMessage : NSAttributedString? = nil,
-                                             leftBtnAttributedTitle: NSAttributedString? = nil,
-                                             rightBtnAttributedTitle: NSAttributedString? = nil,
-                                             leftBlock: LeftCallBack? = nil,
-                                             rightBlock: RightCallback? = nil)
-                                             
-                                                 /// 自定义Alert
-       /// - Parameters:
-       ///   - title: 标题
-       ///   - attributedTitle: 富文本标题
-       ///   - titleImage: 顶图
-       ///   - message: 信息
-       ///   - attributedMessage: 富文本信息
-       ///   - leftBtnTitle: 左侧按钮标题
-       ///   - leftBtnAttributedTitle: 富文本左侧按钮标题
-       ///   - rightBtnTitle: 右侧按钮标题
-       ///   - rightBtnAttributedTitle: 富文本右侧按钮标题
-       ///   - leftBlock:  左侧按钮回调
-       ///   - rightBlock: 右侧按钮回调
-       ///   - config: Alert适配器，不传为默认样式
-       public class func showCustomAlert(title: String? = nil,
-                                         attributedTitle : NSAttributedString? = nil,
-                                         titleImage: UIImage? = nil,
-                                         message: String?  = nil,
-                                         attributedMessage : NSAttributedString? = nil,
-                                         leftBtnTitle: String? = nil,
-                                         leftBtnAttributedTitle: NSAttributedString? = nil,
-                                         rightBtnTitle: String? = nil,
-                                         rightBtnAttributedTitle: NSAttributedString? = nil,
-                                         leftBlock: LeftCallBack? = nil,
-                                         rightBlock: RightCallback? = nil,
-                                         config : ConfigAlert? = nil)
-   ```
+/// Hide loading (window)
+Show.hideLoadingOnWindow()
 
-4. pop
+/// Hide loading (specific view)
+Show.hideLoadingOnView(myView)
+```
 
-   | ![](Image/Pop1.gif) | ![](Image/Pop2.gif) |
-   | ------------------- | ------------------- |
-   |                     |                     |
+### 3. Alert
 
-   ```swift
-   public class ShowPopViewConfig {
-       ///背景蒙版 毛玻璃
-       public var effectStyle = UIBlurEffect.Style.light
-       ///点击其他地方是否消失 默认yes
-       public var clickOutHidden = true
-       ///默认蒙版类型
-       public var maskType : MaskType = .color
-       ///背景颜色 默认蒙版
-       public var bgColor : UIColor = UIColor.black.withAlphaComponent(0.3)
-       ///执行动画时间
-       public var animateDuration = 0.3
-       ///动画是否弹性
-       public var animateDamping = true
-       ///动画是否弹性
-       public var isAnimate = true
-       /// 弹出视图样式位置
-       public var showAnimateType : PopViewShowType? = .center
-   }
-   ```
+| ![](Image/Alert1.png) | ![](Image/Alert2.png) | ![](Image/Alert3.png) |
+| --------------------- | --------------------- | --------------------- |
+| Default dialog        | Custom shadow/overlay | Attributed text       |
 
-   ```swift
-       /// 弹出view
-       /// - Parameters:
-       ///   - contentView: 被弹出的View
-       ///   - config: popview适配器
-       ///   - showClosure: 弹出回调
-       ///   - hideClosure: 收起回调
-       public class func showPopView(contentView: UIView,
-                                     config : ConfigPop? = nil,
-                                     showClosure: CallBack? = nil,
-                                     hideClosure: CallBack? = nil)
-                                     
-       /// 收起popview
-       /// - Parameter complete: 完成回调
-       public class func hidenPopView(_ complete : (() -> Void)? = nil )
-   ```
+#### Configuration
 
-5. DropDown
+```swift
+public class ShowAlertConfig {
+    public var animateDuration = 0.5       // Animation duration, default 0.5s
+    public var effectStyle                 // Blur effect style
+    public var width: Float = 280          // Alert width, default 280
+    public var maxHeight: Float = 500      // Max height, default 500
+    public var buttonHeight: Float = 50    // Button height, default 50
+    public var cornerRadius: CGFloat = 5   // Corner radius, default 5
+    public var space: Float = 5            // Image-text spacing, default 5
+    public var tintColor: UIColor          // Container color, default white
+    public var bgColor: UIColor            // Background color, default black 50% alpha
+    public var lineColor: UIColor          // Divider color, default light gray
+    public var maskType: MaskType          // Mask type, default .color
+    public var titleFont: UIFont           // Title font, default system 21
+    public var titleColor: UIColor         // Title color, default text color
+    public var textFont: UIFont            // Message font, default system 14
+    public var textColor: UIColor          // Message color, default text color
+    public var buttonFont: UIFont          // Button font, default system 15
+    public var leftColor: UIColor          // Left button color, default text color
+    public var rightColor: UIColor         // Right button color, default text color
+    public var verticalPadding: Float = 10 // Vertical padding, default 10
+    public var horizontalPadding: Float = 10 // Horizontal padding, default 10
+}
+```
 
-   ![](Image/DropDown.gif)
+#### API
 
-   ```swift
-   public class ShowDropDownConfig {
-       ///背景蒙版 毛玻璃
-       public var effectStyle = UIBlurEffect.Style.light
-       ///点击其他地方是否消失 默认yes
-       public var clickOutHidden = true
-       ///默认蒙版类型
-       public var maskType : MaskType = .color
-       ///背景颜色 默认蒙版
-       public var bgColor : UIColor = UIColor.black.withAlphaComponent(0.3)
-       ///执行动画时间
-       public var animateDuration = 0.3
-       ///动画是否弹性
-       public var animateDamping = true
-       ///动画是否弹性
-       public var isAnimate = true
-       /// 弹出视图位置
-       public var fromY : CGFloat = 88
-   }
-   ```
+```swift
+/// Default style Alert
+Show.alert(title: "Confirm",
+           message: "Are you sure?",
+           leftBtnTitle: "Cancel",
+           rightBtnTitle: "OK",
+           leftBlock: { print("Cancelled") },
+           rightBlock: { print("Confirmed") })
 
-   ```swift
-       /// 从NavBar或VC的view中弹出下拉视图,可以盖住Tabbar，但不遮挡NavBar
-       /// - Parameters:
-       ///   - contentView: 被弹出的view
-       ///   - config: 适配器回调
-       ///   - showClosure: 展示回调
-       ///   - hideClosure: 隐藏回调
-       ///   - willShowClosure: 即将展示回调
-       ///   - willHideClosure: 即将收起回调
-       public class func showCoverTabbarView(contentView: UIView,
-                                             config: ((_ config : ShowDropDownConfig) -> Void)? = nil,
-                                             showClosure: CallBack? = nil,
-                                             hideClosure: CallBack? = nil,
-                                             willShowClosure: CallBack? = nil,
-                                             willHideClosure: CallBack? = nil) 
-                                             
-       /// 当前是否正在展示DropDown
-       /// - Returns: true/false
-       public class func isHaveCoverTabbarView() -> Bool
-       
-       /// 手动隐藏DropDown
-       /// - Parameter complete: 完成回调
-       public class func hidenCoverTabbarView(_ complete : (() -> Void)? = nil )
-   ```
+/// Attributed text Alert
+Show.attributedAlert(attributedTitle: attributedTitle,
+                     attributedMessage: attributedMessage,
+                     leftBtnAttributedTitle: leftAttributed,
+                     rightBtnAttributedTitle: rightAttributed,
+                     leftBlock: { },
+                     rightBlock: { })
 
-6. 通用工具
+/// Custom Alert (with image, attributed text, and config)
+Show.customAlert(title: "Title",
+                 image: UIImage(named: "icon"),
+                 message: "Message",
+                 leftBtnTitle: "Cancel",
+                 rightBtnTitle: "OK",
+                 leftBlock: { },
+                 rightBlock: { }) { config in
+    config.tintColor = .systemBlue
+    config.cornerRadius = 12
+}
 
-   ```swift
-   		/// 获取顶层VC
-       public class func currentViewController() -> UIViewController?
-   ```
+/// Hide Alert
+Show.hideAlert()
+```
 
-## 更多砖块工具加速APP开发
+### 4. PopView
 
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=jackiehu&repo=SwiftBrick&theme=radical&locale=cn)](https://github.com/jackiehu/SwiftBrick)
+| ![](Image/Pop1.gif) | ![](Image/Pop2.gif) |
+| ------------------- | ------------------- |
 
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=jackiehu&repo=SwiftMediator&theme=radical&locale=cn)](https://github.com/jackiehu/SwiftMediator)
+#### Configuration
 
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=jackiehu&repo=SwiftLog&theme=radical&locale=cn)](https://github.com/jackiehu/SwiftLog)
+```swift
+public class ShowPopViewConfig {
+    public var effectStyle                // Blur effect style
+    public var clickOutHidden = true      // Dismiss on tap outside, default true
+    public var maskType: MaskType         // Mask type, default .color
+    public var bgColor: UIColor           // Background color, default black 30% alpha
+    public var animateDuration = 0.3      // Animation duration, default 0.3s
+    public var animateDamping = true      // Enable spring animation, default true
+    public var isAnimate = true           // Enable animation, default true
+    public var showAnimateType: PopViewShowType? = .center // Show direction
+}
+```
 
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=jackiehu&repo=SwiftyForm&theme=radical&locale=cn)](https://github.com/jackiehu/SwiftyForm)
+#### API
 
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=jackiehu&repo=SwiftEmptyData&theme=radical&locale=cn)](https://github.com/jackiehu/SwiftEmptyData)
+```swift
+/// Show pop-up view
+Show.pop(myContentView) { config in
+    config.showAnimateType = .bottom
+    config.animateDamping = true
+} showClosure: {
+    print("Pop shown")
+} hideClosure: {
+    print("Pop hidden")
+}
 
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=jackiehu&repo=SwiftPageView&theme=radical&locale=cn)](https://github.com/jackiehu/SwiftPageView)
+/// Hide pop-up view
+Show.hidePop {
+    print("Pop dismissed")
+}
+```
 
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=jackiehu&repo=JHTabBarController&theme=radical&locale=cn)](https://github.com/jackiehu/JHTabBarController)
+### 5. DropDown
 
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=jackiehu&repo=SwiftMesh&theme=radical&locale=cn)](https://github.com/jackiehu/SwiftMesh)
+![](Image/DropDown.gif)
 
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=jackiehu&repo=SwiftNotification&theme=radical&locale=cn)](https://github.com/jackiehu/SwiftNotification)
+#### Configuration
 
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=jackiehu&repo=SwiftNetSwitch&theme=radical&locale=cn)](https://github.com/jackiehu/SwiftNetSwitch)
+```swift
+public class ShowDropDownConfig {
+    public var effectStyle                // Blur effect style
+    public var clickOutHidden = true      // Dismiss on tap outside, default true
+    public var maskType: MaskType         // Mask type, default .color
+    public var bgColor: UIColor           // Background color, default black 30% alpha
+    public var animateDuration = 0.3      // Animation duration, default 0.3s
+    public var animateDamping = true      // Enable spring animation, default true
+    public var isAnimate = true           // Enable animation, default true
+    public var fromY: CGFloat = 88        // Starting Y position, default 88
+}
+```
 
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=jackiehu&repo=SwiftButton&theme=radical&locale=cn)](https://github.com/jackiehu/SwiftButton)
+#### API
 
-[![ReadMe Card](https://github-readme-stats.vercel.app/api/pin/?username=jackiehu&repo=SwiftDatePicker&theme=radical&locale=cn)](https://github.com/jackiehu/SwiftDatePicker)
+```swift
+/// Show drop-down view (can cover TabBar)
+Show.coverTabbar(myContentView) { config in
+    config.fromY = 100
+} showClosure: {
+    print("DropDown shown")
+} hideClosure: {
+    print("DropDown hidden")
+} willShowClosure: {
+    print("Will show")
+} willHideClosure: {
+    print("Will hide")
+}
+
+/// Check if DropDown is currently showing
+let isVisible = Show.isHaveCoverTabbarView()
+
+/// Hide DropDown
+Show.hideCoverTabbar {
+    print("DropDown dismissed")
+}
+```
+
+### 6. Utility
+
+```swift
+/// Get the top-most view controller
+let topVC = Show.currentViewController()
+```
+
+---
+
+## AI Skills Usage Guide
+
+SwiftShow provides an AI Skills file that enables AI coding assistants to quickly understand and use this library.
+
+### What is the Skills File?
+
+The `.ai/skills/swiftshow.md` file contains comprehensive API reference, configuration options, and usage patterns designed specifically for AI assistants.
+
+### How AI Uses the Skills File
+
+When working on an iOS project that uses SwiftShow, AI assistants will:
+
+1. **Auto-detect** the Skills file in the `.ai/skills/` directory
+2. **Reference** the API signatures and configuration options
+3. **Generate** correct SwiftShow code with proper syntax
+
+### Example AI Prompts
+
+When using AI coding assistants, you can use prompts like:
+
+```
+Add a loading indicator while fetching data
+```
+
+The AI will read the Skills file and generate:
+
+```swift
+Show.loading("Loading", subTitle: "Fetching data...")
+// ... your async code ...
+Show.hideLoading()
+```
+
+```
+Show a success toast after saving
+```
+
+The AI will generate:
+
+```swift
+Show.toast("Success", subTitle: "Data saved", image: UIImage(systemName: "checkmark.circle.fill"))
+```
+
+```
+Show a confirmation alert before deleting
+```
+
+The AI will generate:
+
+```swift
+Show.alert(title: "Delete",
+           message: "Are you sure you want to delete this item?",
+           leftBtnTitle: "Cancel",
+           rightBtnTitle: "Delete",
+           rightBlock: { 
+               // Delete action
+           })
+```
+
+### Skills File Location
+
+```
+.ai/skills/swiftshow.md
+```
+
+This file is automatically discovered by AI coding assistants and provides:
+- Complete API reference with method signatures
+- All configuration properties with defaults
+- Common usage patterns and examples
+- Best practices for each component type

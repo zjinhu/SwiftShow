@@ -6,38 +6,51 @@
 //  Copyright © 2020 iOS. All rights reserved.
 //
 
-
 import Foundation
 import UIKit
-/// 动画上下文
+
+/// Animation context / 动画上下文
 public struct AnimationContext {
     
+    /// Container view / 容器视图
     public let containerView: UIView
     
+    /// Initial frame / 初始frame
     public let initialFrame: CGRect
     
+    /// Final frame / 最终frame
     public let finalFrame: CGRect
     
+    /// Whether this is a presenting animation / 是否为展示动画
     public let isPresenting: Bool
     
+    /// Source view controller / 源视图控制器
     public let fromViewController: UIViewController?
     
+    /// Destination view controller / 目标视图控制器
     public let toViewController: UIViewController?
     
+    /// Source view / 源视图
     public let fromView: UIView?
     
+    /// Destination view / 目标视图
     public let toView: UIView?
     
+    /// Animating view controller / 动画中的视图控制器
     public let animatingViewController: UIViewController?
     
+    /// Animating view / 动画中的视图
     public let animatingView: UIView?
     
 }
 
-/// 转场动画类，可继承此类自定转场动画
+/// Transition animation class, subclass to create custom animations / 转场动画类，可继承此类自定义转场动画
 open class PresentationAnimation: NSObject {
     
+    /// Animation options / 动画选项
     public var options: AnimationOptions
+    
+    /// Starting origin / 起始位置
     public var origin: PresentationOrigin?
     
     public init(options: AnimationOptions = .normal(duration: 0.3), origin: PresentationOrigin? = nil) {
@@ -45,12 +58,12 @@ open class PresentationAnimation: NSObject {
         self.origin = origin
     }
     
-    /// 计算动画view初始Frame
+    /// Calculate initial frame for animated view / 计算动画view初始Frame
     ///
     /// - Parameters:
-    ///   - containerFrame: 容器view的frame
-    ///   - finalFrame: 动画view最终frame
-    /// - Returns: 动画view初始Frame
+    ///   - containerFrame: Container view frame / 容器view的frame
+    ///   - finalFrame: Final frame of the animated view / 动画view最终frame
+    /// - Returns: Initial frame of the animated view / 动画view初始Frame
     open func transformInitialFrame(containerFrame: CGRect, finalFrame: CGRect) -> CGRect {
         guard let origin = origin else { return finalFrame }
         var initialFrame = finalFrame
@@ -71,9 +84,9 @@ open class PresentationAnimation: NSObject {
         return initialFrame
     }
     
-    /// 动画开始前（做动画开始前的准备工作，子类可覆写）
+    /// Before animation (prepare for animation, subclasses can override) / 动画开始前（做动画开始前的准备工作，子类可覆写）
     ///
-    /// - Parameter animationContext: 动画上下文
+    /// - Parameter animationContext: Animation context / 动画上下文
     open func beforeAnimation(animationContext: AnimationContext) {
         var initialFrame = animationContext.finalFrame
         if animationContext.isPresenting {
@@ -82,9 +95,9 @@ open class PresentationAnimation: NSObject {
         animationContext.animatingView?.frame = initialFrame
     }
     
-    /// 动画执行（做动画的具体执行动作，子类可覆写）
+    /// Perform animation (execute the actual animation, subclasses can override) / 动画执行（做动画的具体执行动作，子类可覆写）
     ///
-    /// - Parameter animationContext:  动画上下文
+    /// - Parameter animationContext: Animation context / 动画上下文
     open func performAnimation(animationContext: AnimationContext) {
         var finalFrame = animationContext.finalFrame
         if !animationContext.isPresenting {
@@ -93,9 +106,9 @@ open class PresentationAnimation: NSObject {
         animationContext.animatingView?.frame = finalFrame
     }
     
-    /// 动画完成后（做动画完成的清理工作，子类可覆写）
+    /// After animation (cleanup after animation, subclasses can override) / 动画完成后（做动画完成的清理工作，子类可覆写）
     ///
-    /// - Parameter animationContext: 动画上下文
+    /// - Parameter animationContext: Animation context / 动画上下文
     open func afterAnimation(animationContext: AnimationContext) {
         
     }
@@ -154,6 +167,7 @@ extension PresentationAnimation: UIViewControllerAnimatedTransitioning {
         }
     }
     
+    /// Normal animation / 普通动画
     private func normalAnimate(animationContext: AnimationContext,
                                transitionContext: UIViewControllerContextTransitioning,
                                duration: TimeInterval) {
@@ -166,6 +180,7 @@ extension PresentationAnimation: UIViewControllerAnimatedTransitioning {
         }
     }
     
+    /// Spring animation / 弹簧动画
     private func springAnimate(animationContext: AnimationContext,
                                transitionContext: UIViewControllerContextTransitioning,
                                duration: TimeInterval,
@@ -188,6 +203,7 @@ extension PresentationAnimation: UIViewControllerAnimatedTransitioning {
     
 }
 
+/// Horizontal flip animation / 水平翻转动画
 public class FlipHorizontalAnimation: PresentationAnimation {
     
     public override func performAnimation(animationContext: AnimationContext) {
@@ -215,6 +231,7 @@ public class FlipHorizontalAnimation: PresentationAnimation {
     }
 }
 
+/// Cross zoom animation / 交叉缩放动画
 public class CrossZoomAnimation: PresentationAnimation {
     
     private var scale: CGFloat
@@ -235,6 +252,7 @@ public class CrossZoomAnimation: PresentationAnimation {
         animationContext.animatingView?.transform = animationContext.isPresenting ? .identity : CGAffineTransform(translationX: translate.x, y: translate.y).scaledBy(x: scale, y: scale)
     }
     
+    /// Calculate translation offset / 计算平移偏移量
     private func calculateTranslate(animationContext: AnimationContext) -> CGPoint {
         let finalFrame = animationContext.finalFrame
         let initialFrame = transformInitialFrame(containerFrame: animationContext.containerView.frame, finalFrame: finalFrame)
@@ -244,6 +262,7 @@ public class CrossZoomAnimation: PresentationAnimation {
     
 }
 
+/// Cross dissolve (fade) animation / 交叉溶解（淡入淡出）动画
 public class CrossDissolveAnimation: PresentationAnimation {
     
     public override func beforeAnimation(animationContext: AnimationContext) {

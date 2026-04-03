@@ -6,15 +6,15 @@
 //  Copyright © 2020 iOS. All rights reserved.
 //
 
-
 import Foundation
 import UIKit
-/// pan手势滑动方向
+
+/// Pan gesture swipe direction / pan手势滑动方向
 ///
-/// - bottom: 向下
-/// - top: 向上
-/// - left: 向左
-/// - right: 向右
+/// - down: Downward / 向下
+/// - up: Upward / 向上
+/// - left: Leftward / 向左
+/// - right: Rightward / 向右
 public enum PanDismissDirection {
     
     case down
@@ -23,14 +23,14 @@ public enum PanDismissDirection {
     case right
 }
 
-/// present的起始位置
+/// Starting position for present animation / present的起始位置
 ///
-/// - center: 屏幕中心
-/// - bottomOutOfLine: 屏幕底部以下
-/// - leftOutOfLine: 屏幕左边以外
-/// - rightOutOfLine: 屏幕右边以外
-/// - topOutOfLine: 屏幕上部以上
-/// - custom: 自定义中心点
+/// - center: Screen center / 屏幕中心
+/// - bottomOutOfLine: Below screen bottom / 屏幕底部以下
+/// - leftOutOfLine: Beyond screen left edge / 屏幕左边以外
+/// - rightOutOfLine: Beyond screen right edge / 屏幕右边以外
+/// - topOutOfLine: Above screen top / 屏幕上部以上
+/// - custom: Custom center point / 自定义中心点
 public enum PresentationOrigin: Equatable {
     
     case center
@@ -40,7 +40,7 @@ public enum PresentationOrigin: Equatable {
     case topOutOfLine
     case custom(center: CGPoint)
     
-    // MARK: -  Equatable
+    // MARK: - Equatable
     public static func == (lhs: PresentationOrigin, rhs: PresentationOrigin) -> Bool {
         switch (lhs, rhs) {
         case (.center, .center):
@@ -61,14 +61,14 @@ public enum PresentationOrigin: Equatable {
     }
 }
 
-/// present的最终的位置
+/// Final destination for present animation / present的最终位置
 ///
-/// - center: 屏幕中心
-/// - bottomBaseline: 基于屏幕底部
-/// - leftBaseline: 基于屏幕左边
-/// - rightBaseline: 基于屏幕右边
-/// - topBaseline: 基于屏幕上部
-/// - custom: 自定义中心点
+/// - center: Screen center / 屏幕中心
+/// - bottomBaseline: Based on screen bottom / 基于屏幕底部
+/// - leftBaseline: Based on screen left edge / 基于屏幕左边
+/// - rightBaseline: Based on screen right edge / 基于屏幕右边
+/// - topBaseline: Based on screen top / 基于屏幕上部
+/// - custom: Custom center point / 自定义中心点
 public enum PresentationDestination: Equatable {
     
     case center
@@ -78,7 +78,7 @@ public enum PresentationDestination: Equatable {
     case topBaseline
     case custom(center: CGPoint)
     
-    /// pan手势方向
+    /// Pan gesture direction / pan手势方向
     var panDirection: PanDismissDirection {
         switch self {
         case .center, .bottomBaseline, .custom:
@@ -92,7 +92,7 @@ public enum PresentationDestination: Equatable {
         }
     }
     
-    /// 默认的起始位置
+    /// Default starting position / 默认的起始位置
     var defaultOrigin: PresentationOrigin {
         switch self {
         case .center:
@@ -108,7 +108,7 @@ public enum PresentationDestination: Equatable {
         }
     }
     
-    // MARK: -  Equatable
+    // MARK: - Equatable
     public static func == (lhs: PresentationDestination, rhs: PresentationDestination) -> Bool {
         switch (lhs, rhs) {
         case (.center, .center):
@@ -129,13 +129,13 @@ public enum PresentationDestination: Equatable {
     }
 }
 
-/// 转场动画类型
+/// Transition animation type / 转场动画类型
 ///
-/// - translation: 平移
-/// - crossDissolve: 淡入淡出
-/// - crossZoom: 缩放
-/// - flipHorizontal: 水平翻转
-/// - custom: 自定义动画
+/// - translation: Translation / 平移
+/// - crossDissolve: Fade in/out / 淡入淡出
+/// - crossZoom: Zoom / 缩放
+/// - flipHorizontal: Horizontal flip / 水平翻转
+/// - custom: Custom animation / 自定义动画
 public enum TransitionType: Equatable {
     
     case translation(origin: PresentationOrigin)
@@ -159,7 +159,7 @@ public enum TransitionType: Equatable {
         }
     }
     
-    // MARK: -  Equatable
+    // MARK: - Equatable
     public static func == (lhs: TransitionType, rhs: TransitionType) -> Bool {
         switch (lhs, rhs) {
         case (.translation(let lhsOrigin), .translation(let rhsOrigin)):
@@ -178,10 +178,10 @@ public enum TransitionType: Equatable {
     }
 }
 
-/// 动画选项设置
+/// Animation options / 动画选项设置
 ///
-/// - normal: 正常类型
-/// - spring: 弹簧类型
+/// - normal: Normal animation / 正常动画
+/// - spring: Spring animation / 弹簧动画
 public enum AnimationOptions {
     
     case normal(duration: TimeInterval)
@@ -197,10 +197,10 @@ public enum AnimationOptions {
     }
 }
 
-/// 键盘出现的平移方式
+/// Keyboard appearance translation type / 键盘出现的平移方式
 ///
-/// - unabgeschirmt: 不遮挡PresentedView，compress: 键盘是否贴近PresentedView
-/// - compressInputView: 贴近输入框
+/// - unabgeschirmt: Do not block presentedView, compress: whether to keep PresentedView close to the keyboard / 不遮挡PresentedView，compress: 键盘是否贴近PresentedView
+/// - compressInputView: Close to the input view / 贴近输入框
 public enum KeyboardTranslationType {
     
     case unabgeschirmt(compress: Bool)

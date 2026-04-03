@@ -1,6 +1,0 @@
-framework module SwiftyAttributes {
-  umbrella header "SwiftyAttributes-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -9,20 +9,28 @@
 import UIKit
 import SnapKit
 
+/// Loading HUD view / 加载指示器视图
 class LoadingView: UIView {
  
+    /// Initialize loading view / 初始化加载视图
+    /// - Parameters:
+    ///   - title: Title text / 标题文本
+    ///   - subTitle: Subtitle text / 副标题文本
+    ///   - config: Loading configuration / 加载配置
     init(title: String? = nil,
          subTitle: String? = nil, 
          config : ShowLoadingConfig) {
  
         super.init(frame: CGRect.zero)
         
+        // Blur effect background view / 毛玻璃效果背景视图
         let effectView = UIVisualEffectView(effect: UIBlurEffect(style: config.effectStyle))
         addSubview(effectView)
         effectView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
         
+        // Apply mask type / 应用遮罩类型
         switch config.maskType {
         case .effect:
             effectView.isHidden = false
@@ -32,6 +40,7 @@ class LoadingView: UIView {
             backgroundColor = config.bgColor
         }
         
+        // Container view for loading content / 加载内容容器视图
         let containerView = UIView.init()
         addSubview(containerView)
         
@@ -47,6 +56,7 @@ class LoadingView: UIView {
             make.center.equalToSuperview()
         }
 
+        // Common view with title/subtitle/image / 通用图文视图
         let loadingView = CommonView(title: title,
                               subtitle: subTitle,
                               image: UIImage(),
@@ -70,6 +80,7 @@ class LoadingView: UIView {
             make.width.lessThanOrEqualTo(config.maxWidth)
         }
         
+        // Image animation or activity indicator / 图片动画或菊花指示器
         if let array = config.imagesArray{
             guard let image = array.first else {
                 return
@@ -80,6 +91,7 @@ class LoadingView: UIView {
             loadingView.imageView.animationRepeatCount = 0
             loadingView.imageView.startAnimating()
         }else{
+            // Default activity indicator (spinner) / 默认菊花指示器
             let activityIndicatorView = UIActivityIndicatorView.init(style: .whiteLarge)
             activityIndicatorView.color = config.activityColor
             let transform = CGAffineTransform.init(scaleX: 1.2, y: 1.2)

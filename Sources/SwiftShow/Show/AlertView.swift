@@ -9,25 +9,35 @@
 import UIKit
 import SnapKit
 
+/// Left button callback / 左侧按钮回调
 public typealias LeftCallBack = () -> Void
+/// Right button callback / 右侧按钮回调
 public typealias RightCallback = () -> Void
+/// Dismiss callback / 消失回调
 public typealias DismissCallback = () -> Void
 
+/// Alert dialog view / 弹窗视图
 class AlertView: UIView {
 
+    /// Alert configuration / 弹窗配置
     private var alertConfig : ShowAlertConfig
 
+    /// Left button callback / 左侧按钮回调
     var leftBlock : LeftCallBack?
+    /// Right button callback / 右侧按钮回调
     var rightBlock : RightCallback?
+    /// Dismiss callback / 消失回调
     var dismissBlock : DismissCallback?
 
     
+    /// Image view / 图片视图
     lazy var imageView: UIImageView = {
         let vi = UIImageView()
         vi.contentMode = .scaleAspectFit
         return vi
     }()
     
+    /// Title label / 标题标签
     lazy var titleLabel: UILabel = {
         let lab = UILabel()
         lab.textColor = alertConfig.titleColor
@@ -37,6 +47,7 @@ class AlertView: UIView {
         return lab
     }()
     
+    /// Message label / 信息标签
     private lazy var messageLabel : UILabel = {
         let messageLabel = UILabel.init()
         messageLabel.backgroundColor = .clear
@@ -47,6 +58,7 @@ class AlertView: UIView {
         return messageLabel
     }()
     
+    /// Left button / 左侧按钮
     private lazy var leftBtn : UIButton = {
         let leftBtn = UIButton.init(type: .custom)
         leftBtn.titleLabel?.font = alertConfig.buttonFont
@@ -55,6 +67,7 @@ class AlertView: UIView {
         return leftBtn
     }()
     
+    /// Right button / 右侧按钮
     private lazy var rightBtn : UIButton = {
         let rightBtn = UIButton.init(type: .custom)
          rightBtn.titleLabel?.font = alertConfig.buttonFont
@@ -63,6 +76,7 @@ class AlertView: UIView {
         return rightBtn
     }()
 
+    /// Initialize alert view / 初始化弹窗视图
     init(title: String? = nil,
          attributedTitle : NSAttributedString? = nil,
          image: UIImage? = nil,
@@ -78,12 +92,14 @@ class AlertView: UIView {
         
         super.init(frame: CGRect.zero)
         
+        // Blur effect background / 毛玻璃效果背景
         let effectView = UIVisualEffectView(effect: UIBlurEffect(style: alertConfig.effectStyle))
         addSubview(effectView)
         effectView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
         
+        // Apply mask type / 应用遮罩类型
         switch alertConfig.maskType {
         case .effect:
             effectView.isHidden = false
@@ -93,6 +109,7 @@ class AlertView: UIView {
             backgroundColor = alertConfig.bgColor
         }
         
+        // Container view for alert content / 弹窗内容容器
         let containerView = UIView.init() 
         addSubview(containerView)
         containerView.backgroundColor = alertConfig.tintColor
@@ -108,8 +125,8 @@ class AlertView: UIView {
             make.width.equalTo(alertConfig.width)
             make.height.lessThanOrEqualTo(alertConfig.maxHeight)
         }
-        
  
+        // Image view / 图片视图
         imageView.image = image
         containerView.addSubview(imageView)
         imageView.snp.makeConstraints { (make) in
@@ -117,6 +134,7 @@ class AlertView: UIView {
             make.left.right.equalToSuperview()
         }
         
+        // Title label / 标题标签
         if let att = attributedTitle{
             titleLabel.attributedText = att
         }else{
@@ -136,6 +154,7 @@ class AlertView: UIView {
         titleLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         
 
+        // Message label / 信息标签
         if let att = attributedMessage{
             messageLabel.attributedText = att
         }else{
@@ -149,6 +168,7 @@ class AlertView: UIView {
          }
         messageLabel.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         
+        // Horizontal divider line / 水平分割线
         let lineView = UIView.init()
         lineView.backgroundColor = alertConfig.lineColor
         containerView.addSubview(lineView)
@@ -158,6 +178,7 @@ class AlertView: UIView {
             make.height.equalTo(1/UIScreen.main.scale)
         }
         
+        // Left button setup / 左侧按钮设置
         if let att = leftBtnAttributedTitle{
             leftBtn.setAttributedTitle(att, for: .normal)
         }else{
@@ -171,6 +192,7 @@ class AlertView: UIView {
             make.height.equalTo(alertConfig.buttonHeight)
         }
         
+        // Right button setup / 右侧按钮设置
         if let att = rightBtnAttributedTitle{
             rightBtn.setAttributedTitle(att, for: .normal)
         }else{
@@ -185,6 +207,7 @@ class AlertView: UIView {
             make.bottom.equalToSuperview()
         }
         
+        // Vertical divider line between buttons / 按钮之间的垂直分割线
         let vLineView = UIView.init()
         vLineView.backgroundColor = alertConfig.lineColor
         containerView.addSubview(vLineView)
@@ -195,6 +218,7 @@ class AlertView: UIView {
             make.width.equalTo(1/UIScreen.main.scale)
         }
         
+        // Hide left button and divider if no left title / 如果没有左侧标题则隐藏左侧按钮和分割线
         if leftBtnTitle != nil || leftBtnAttributedTitle != nil  {
             leftBtn.isHidden = false
             vLineView.isHidden = false
@@ -209,6 +233,7 @@ class AlertView: UIView {
     }
 
     
+    /// Left button tapped / 左侧按钮点击
     @objc
     func leftClick() {
         dismiss()
@@ -217,6 +242,8 @@ class AlertView: UIView {
         }
         block()
     }
+    
+    /// Right button tapped / 右侧按钮点击
     @objc
     func rightClick() {
         dismiss()
@@ -225,6 +252,8 @@ class AlertView: UIView {
         }
         block()
     }
+    
+    /// Dismiss alert / 消失弹窗
     @objc
     func dismiss() {
         guard let block = dismissBlock else {

@@ -9,21 +9,34 @@
 import UIKit
 import SnapKit
 
+/// Pop-up view / 弹出视图
 public class PopView: UIView {
 
+    /// PopView configuration / PopView配置
     private var popViewConfig : ShowPopViewConfig
     
+    /// Background touch control / 背景点击控件
     private lazy var backCtl: UIControl = {
         let backCtl = UIControl()
         backCtl.addTarget(self, action: #selector(backClick), for: .touchUpInside)
         return backCtl
     }()
     
+    /// Content view / 内容视图
     private weak var contentVie : UIView?
+    
+    /// Callback to hide pop / 隐藏pop的回调
     typealias HiddenPop = () -> Void
     private var hiddenPop : HiddenPop?
+    
+    /// Content size / 内容尺寸
     private var contentSize = CGSize.zero
     
+    /// Initialize pop view / 初始化弹出视图
+    /// - Parameters:
+    ///   - contentView: Content view to present / 要展示的内容视图
+    ///   - config: PopView configuration / PopView配置
+    ///   - hidenHandle: Callback when hidden / 隐藏时的回调
     init(contentView: UIView,
          config : ShowPopViewConfig,
          hidenHandle : HiddenPop? = nil) {
@@ -37,12 +50,14 @@ public class PopView: UIView {
         contentSize = contentView.bounds.size
         hiddenPop = hidenHandle
         
+        // Blur effect background / 毛玻璃效果背景
         let effectView = UIVisualEffectView(effect: UIBlurEffect(style: popViewConfig.effectStyle))
         addSubview(effectView)
         effectView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
         
+        // Apply mask type / 应用遮罩类型
         switch popViewConfig.maskType {
         case .effect:
             effectView.isHidden = false
@@ -59,6 +74,7 @@ public class PopView: UIView {
         
         addSubview(contentView)
         
+        // Set initial position based on animation type / 根据动画类型设置初始位置
         switch popViewConfig.showAnimateType {
         case .top:
             contentView.snp.makeConstraints { (make) in
@@ -104,12 +120,14 @@ public class PopView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// Background tapped / 背景被点击
     @objc func backClick(){
         if popViewConfig.clickOutHidden {
           hiddenPop?()
         } 
     }
     
+    /// Show animation / 展示动画
     func showAnimate(){
         
         switch popViewConfig.showAnimateType {
@@ -138,6 +156,7 @@ public class PopView: UIView {
             debugPrint("")
         }
         
+        // Apply spring or normal animation / 应用弹性或普通动画
         if popViewConfig.animateDamping {
             UIView.animate(withDuration: popViewConfig.animateDuration, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1.0, options: [], animations: {
                 self.layoutIfNeeded()
@@ -151,6 +170,7 @@ public class PopView: UIView {
         }
      }
     
+    /// Hide animation / 隐藏动画
     func hideAnimate(_ block : HiddenPop?){
         
         switch popViewConfig.showAnimateType {
@@ -189,4 +209,3 @@ public class PopView: UIView {
     }
     
 }
-

@@ -6,16 +6,17 @@
 //  Copyright © 2020 iOS. All rights reserved.
 //
 
-
 import Foundation
 import UIKit
+
+// MARK: - UIPresentationController subclass, overrides presentation-related properties and methods
 // MARK: - UIPresentationController子类，重写present相关属性和方法
 public final class PresentationController: UIPresentationController {
     
-    /// present配置
+    /// Presentation configuration / present配置
     private let component: PresentedViewComponent
     
-    /// 背景蒙层
+    /// Background overlay / 背景蒙层
     private lazy var backgroundView: UIView = {
         let containerbounds = containerView?.bounds ?? UIScreen.main.bounds
         let backgroundView = UIView(frame: containerbounds)
@@ -28,30 +29,31 @@ public final class PresentationController: UIPresentationController {
         return backgroundView
     }()
     
-    /// pan的起始点
+    /// Pan gesture starting point / pan的起始点
     private var panStart: CGPoint = .zero
     
-    /// pan手势方向
+    /// Pan gesture direction / pan手势方向
     private var panDirection: PanDismissDirection {
         return component.panDismissDirection ?? component.destination.panDirection
     }
     
-    /// 当前输入view
+    /// Current input view / 当前输入view
     private var textInputView: UIView?
     
-    /// 键盘frame
+    /// Keyboard frame / 键盘frame
     private var keyboardFrame: CGRect?
     
-    /// 键盘动画时间
+    /// Keyboard animation duration / 键盘动画时间
     private var keyboardAnimationDuration: TimeInterval?
     
-    // MARK: -  override
+    // MARK: - override
     
     public override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
         component = (presentedViewController as? PresentedViewType)?.presentedViewComponent ?? PresentedViewComponent(contentSize: CGSize(width: 240, height: 200))
         super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
     }
     
+    /// Returns the frame of the presented view in the container / 返回被展示视图在容器中的frame
     public override var frameOfPresentedViewInContainerView: CGRect {
         let containerbounds = containerView?.bounds ?? UIScreen.main.bounds
         let containerWidth = containerbounds.width
@@ -73,24 +75,24 @@ public final class PresentationController: UIPresentationController {
         }
     }
     
-    /// 将要弹出时添加背景按钮
+    /// Add background view before presentation / 将要弹出时添加背景按钮
     public override func presentationTransitionWillBegin() {
-        /// 注册键盘通知
+        /// Register keyboard notifications / 注册键盘通知
         registerObservers()
-        /// 背景动画
+        /// Background animation / 背景动画
         guard let containerView = containerView else { return }
         containerView.addSubview(backgroundView)
         guard let coordinator = presentedViewController.transitionCoordinator else {
             backgroundView.alpha = 1.0
             return
         }
-        /// 动画
+        /// Animation / 动画
         coordinator.animate(alongsideTransition: { context in
             self.backgroundView.alpha = 1.0
         }, completion: nil)
     }
     
-    /// 已经弹出视图
+    /// Presentation did end / 已经弹出视图
     public override func presentationTransitionDidEnd(_ completed: Bool) {
         if component.canPanDismiss {
             let panGuesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(gesture:)))
@@ -98,10 +100,11 @@ public final class PresentationController: UIPresentationController {
         }
     }
     
+    /// Dismissal will begin / 将要消失时
     public override func dismissalTransitionWillBegin() {
-        /// 移除键盘通知
+        /// Remove keyboard notifications / 移除键盘通知
         removeObservers()
-        /// 背景动画
+        /// Background animation / 背景动画
         guard let coordinator = presentedViewController.transitionCoordinator else {
             backgroundView.alpha = 0.0
             return
@@ -111,6 +114,7 @@ public final class PresentationController: UIPresentationController {
         }, completion: nil)
     }
     
+    /// Dismissal did end / 已经消失
     public override func dismissalTransitionDidEnd(_ completed: Bool) {
         if completed {
             backgroundView.removeFromSuperview()
@@ -119,13 +123,15 @@ public final class PresentationController: UIPresentationController {
 
 }
 
-// MARK: -  Handle Gestures
+// MARK: - Handle Gestures
 extension PresentationController {
     
+    /// Handle background view tap / 处理背景视图点击
     @objc private func backgroundViewDidTapped() {
         presentedViewController.dismiss(animated: true, completion: nil)
     }
     
+    /// Handle pan gesture / 处理pan手势
     @objc private func handlePanGesture(gesture: UIPanGestureRecognizer) {
         guard component.canPanDismiss else { return }
         let offset = gesture.translation(in: presentedView)
@@ -180,56 +186,63 @@ extension PresentationController {
     
 }
 
-// MARK: -  Keyboard
+// MARK: - Keyboard
 extension PresentationController {
     
+    /// Register keyboard and text input notifications / 注册键盘和文本输入通知
     private func registerObservers() {
-        /// 注册键盘通知
+        /// Register keyboard notifications / 注册键盘通知
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIApplication.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(notification:)), name: UIApplication.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIApplication.keyboardWillHideNotification, object: nil)
-        /// 注册输入框通知
+        /// Register text input notifications / 注册输入框通知
         NotificationCenter.default.addObserver(self, selector: #selector(textInputViewDidBeginEditing(notification:)), name: UITextField.textDidBeginEditingNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(textInputViewDidBeginEditing(notification:)), name: UITextView.textDidBeginEditingNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(textInputViewDidEndEditing(notification:)), name: UITextField.textDidEndEditingNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(textInputViewDidEndEditing(notification:)), name: UITextView.textDidEndEditingNotification, object: nil)
     }
     
+    /// Remove keyboard and text input notifications / 移除键盘和文本输入通知
     private func removeObservers() {
-        /// 移除键盘通知
+        /// Remove keyboard notifications / 移除键盘通知
         NotificationCenter.default.removeObserver(self, name: UIApplication.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIApplication.keyboardWillChangeFrameNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIApplication.keyboardWillHideNotification, object: nil)
-        /// 移除输入框通知
+        /// Remove text input notifications / 移除输入框通知
         NotificationCenter.default.removeObserver(self, name: UITextField.textDidBeginEditingNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UITextView.textDidBeginEditingNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UITextField.textDidEndEditingNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UITextView.textDidEndEditingNotification, object: nil)
     }
     
+    /// Keyboard will show / 键盘将要出现
     @objc private func keyboardWillShow(notification: Notification) {
         keyboardFrame = notification.keyboardEndFrame
         keyboardAnimationDuration = notification.keyboardAnimationDuration
         handleKeyboardAdjustAnimation()
     }
     
+    /// Keyboard will hide / 键盘将要消失
     @objc private func keyboardWillHide(notification: Notification) {
         keyboardFrame = notification.keyboardEndFrame
         keyboardAnimationDuration = notification.keyboardAnimationDuration
         handleKeyboardAdjustAnimation()
     }
     
+    /// Keyboard frame will change / 键盘frame将要改变
     @objc private func keyboardWillChangeFrame(notification: Notification) {
         keyboardFrame = notification.keyboardEndFrame
         keyboardAnimationDuration = notification.keyboardAnimationDuration
         handleKeyboardAdjustAnimation()
     }
     
+    /// Text input view began editing / 文本输入视图开始编辑
     @objc private func textInputViewDidBeginEditing(notification: NSNotification) {
         textInputView = notification.object as? UIView
         handleKeyboardAdjustAnimation()
     }
     
+    /// Text input view ended editing / 文本输入视图结束编辑
     @objc private func textInputViewDidEndEditing(notification: NSNotification) {
         let inputView = notification.object as? UIView
         if textInputView == inputView {
@@ -238,6 +251,7 @@ extension PresentationController {
         handleKeyboardAdjustAnimation()
     }
     
+    /// Translate frame based on keyboard position / 基于键盘位置转换frame
     private func translateFrame(keyboardFrame: CGRect, presentedViewFrame: CGRect, inputViewFrame: CGRect) -> CGRect {
         var newFrame = presentedViewFrame
         let keyboardTop = UIScreen.main.bounds.height - keyboardFrame.size.height
@@ -256,6 +270,7 @@ extension PresentationController {
         return newFrame
     }
  
+    /// Handle keyboard adjustment animation / 处理键盘调整动画
     private func handleKeyboardAdjustAnimation() {
         guard let keyboardFrame = keyboardFrame,
             let keyboardAnimationDuration = keyboardAnimationDuration else { return }
@@ -284,12 +299,12 @@ extension PresentationController {
 
 extension Notification {
     
-    /// 键盘frame
+    /// Keyboard end frame / 键盘frame
     public var keyboardEndFrame: CGRect? {
         return (userInfo?[UIApplication.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
     }
     
-    /// 键盘动画时间
+    /// Keyboard animation duration / 键盘动画时间
     public var keyboardAnimationDuration: TimeInterval? {
         return (userInfo?[UIApplication.keyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue
     }

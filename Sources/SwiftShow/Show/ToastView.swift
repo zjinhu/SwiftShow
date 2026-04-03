@@ -9,12 +9,19 @@
 import UIKit
 import SnapKit
 
+/// Toast notification view / Toast通知视图
 class ToastView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// Initialize toast view / 初始化Toast视图
+    /// - Parameters:
+    ///   - title: Title text / 标题文本
+    ///   - subTitle: Subtitle text / 副标题文本
+    ///   - image: Image (optional) / 图片（可选）
+    ///   - config: Toast configuration / Toast配置
     init(title: String,
          subTitle: String? = nil,
          image: UIImage? = nil,
@@ -22,6 +29,7 @@ class ToastView: UIView {
 
         super.init(frame: CGRect.zero)
         
+        // Container view for toast content / Toast内容容器
         let containerView = UIView()
         addSubview(containerView)
         containerView.backgroundColor = config.bgColor
@@ -35,6 +43,8 @@ class ToastView: UIView {
         containerView.snp.makeConstraints { (make) in
             make.top.left.right.bottom.equalToSuperview()
         }
+        
+        // Common view with title/subtitle/image / 通用图文视图
         let view = CommonView(title: title,
                               subtitle: subTitle,
                               image: image,
